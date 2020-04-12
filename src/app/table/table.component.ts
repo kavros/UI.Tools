@@ -12,7 +12,7 @@ export interface Product {
   status: string;
 }
 
-export class ButtonStatus {
+export class Button {
   public isVisible: boolean;
   public isDisabled: boolean;
 }
@@ -23,37 +23,36 @@ enum State {
   PRINT_LABELS = 3
 }
 
-/*const ELEMENT_DATA: Product[] = [
-  { name: 'Ντοματες', defaultProfit: '10', purchasePrice: 1.5, kefalaioPrice: 1.20, newPrice: 1.65, profitInEuro: 0.15, status: '^'},
-  { name: 'Πατάτες', defaultProfit: '10', purchasePrice: 1.1, kefalaioPrice: 1.80, newPrice: 1.21, profitInEuro: 0.11, status: '|!|'}
-];*/
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
+
 export class TableComponent implements OnInit {
   @Input() ELEMENT_DATA: Product[];
   displayedColumns: string[] =
     ['product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro'];
-
   @Input() currentState: State;
   @Input() dataSource: MatTableDataSource<Product>;
   selection = new SelectionModel<Product>(true, []);
   printSelection: Product[];
   updateSelection: Product[];
-  private print = new ButtonStatus();
-  private updateKefalaio = new ButtonStatus();
-
+  private print = new Button();
+  private updateKefalaio = new Button();
+  private profitColumnColor: string;
 
   ngOnInit(): void {
     this.printSelection = [];
     this.updateSelection = [];
-    if (this.currentState === 1) {
+    if (this.currentState === State.UPDATE_PROFITS) {
+      this.profitColumnColor = 'red';
       this.setUpdateProfitsState();
-    } else if(this.currentState === 2) {
+    } else if (this.currentState === State.UPDATE_PRICES) {
+      this.profitColumnColor = 'black';
       this.setUpdatePricesState();
-    } else if(this.currentState === 3) {
+    } else if (this.currentState === State.PRINT_LABELS) {
+      this.profitColumnColor = 'black';
       this.setPrintLabelsState();
     }
   }
@@ -73,15 +72,20 @@ export class TableComponent implements OnInit {
 
   addOrRemoveFromUpdateSelection(product: Product) {
     this.addOrRemove(this.updateSelection, product);
-    if (this.updateSelection.length > 0) {
-      this.updateKefalaio.isDisabled = false;
-    } else {
-      this.updateKefalaio.isDisabled = true;
-    }
+    this.enableOrDisableButton(this.updateSelection.length, this.updateKefalaio);
   }
 
   addOrRemoveFromPrintSelection(product: Product) {
     this.addOrRemove(this.printSelection, product);
+    this.enableOrDisableButton(this.printSelection.length, this.print);
+  }
+
+  private enableOrDisableButton( listLength: number, button: Button ){
+    if (listLength > 0) {
+      button.isDisabled = false;
+    } else {
+      button.isDisabled = true;
+    }
   }
 
   private addOrRemove(products: Product[], product: Product) {
@@ -95,7 +99,7 @@ export class TableComponent implements OnInit {
   }
 
   updateProfit(el: Product, profit: string) {
-    if (profit == null) { return; }
+    if (profit == null || this.currentState !== State.UPDATE_PROFITS) { return; }
     el.profitInEuro = Number(profit);
     el.newPrice = el.purchasePrice + el.profitInEuro;
     //TODO: update Status
@@ -112,20 +116,29 @@ export class TableComponent implements OnInit {
     this.updateKefalaio.isVisible = true;
     this.updateKefalaio.isDisabled = true;
     this.displayedColumns =
-        ['product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro', 'status', 'update'];
+        [ 'status', 'product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro', 'update'];
   }
 
   setPrintLabelsState() {
     this.hideAllButtons();
     this.print.isVisible = true;
+    this.print.isDisabled = true;
     this.displayedColumns =
-      ['product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro', 'status', 'print'];
+      ['product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro', 'print'];
   }
 
   setUpdateProfitsState() {
     this.hideAllButtons();
     this.displayedColumns =
       ['product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro'];
+  }
+
+  updateDatabase() {
+    console.log(this.updateSelection);
+  }
+
+  printLabels() {
+    console.log(this.printSelection);
   }
 }
 

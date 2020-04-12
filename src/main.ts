@@ -13,7 +13,8 @@ import {TableComponent} from './app/table/table.component';
 import { InlineEditComponent } from './app/inline-edit/inline-edit.component';
 import { SatPopoverModule } from '@ncstate/sat-popover';
 import { HeaderComponent } from './app/header/header.component';
-import { StepperOverviewExample } from './app/stepper/stepper-overview-example';
+import { StepperComponent } from './app/stepper/stepper.component';
+import { CardFancyExample } from './app/card-fancy/card-fancy-example';
 
 // Default MatFormField appearance to 'fill' as that is the new recommended approach and the
 // `legacy` and `standard` appearances are scheduled for deprecation in version 10.
@@ -30,16 +31,17 @@ import { StepperOverviewExample } from './app/stepper/stepper-overview-example';
     SatPopoverModule
   ],
   entryComponents: [
-    StepperOverviewExample,
+    StepperComponent,
   ],
   declarations: [
     InlineEditComponent,
     HeaderComponent,
-    StepperOverviewExample,
-    TableComponent
+    StepperComponent,
+    TableComponent,
+    CardFancyExample
   ],
   bootstrap: [
-    StepperOverviewExample
+    StepperComponent
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },

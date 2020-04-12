@@ -1,11 +1,23 @@
+:host {
+    width: 100%;
+}
+
 table {
-    width: 90%;
-    float: right;
+    width: 100%;
 }
 
 .clickable{
     cursor: pointer;
 }
 
-.mat-header-cell {    text-align: center;    }
-.mat-cell {    text-align: center;    }
+.mat-header-cell {
+    text-align: center; 
+}
+
+.mat-cell {   
+    text-align: center;
+}
+
+.auto-height-class .mat-list-item {
+    height: auto;       
+}

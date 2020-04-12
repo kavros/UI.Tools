@@ -1,0 +1,70 @@
+<mat-horizontal-stepper #stepper>
+  <mat-step> 
+      <ng-template matStepLabel>Φόρτωσε το αρχείο</ng-template>     
+      <input type="file"  />
+      <div>
+          <button mat-button matStepperNext>Next</button>
+      </div>  
+  </mat-step>
+  <mat-step>    
+    <ng-template matStepLabel>Καθόρισε το κέρδος</ng-template>     
+      
+    <app-table #table1 
+      [dataSource]="dataSource"
+      [currentState]="1" >loading</app-table>
+
+    <div style="float: right;">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>      
+  </mat-step>
+
+  <mat-step >    
+    <ng-template matStepLabel>Ενημέρωσε τις τιμές</ng-template>
+
+    <app-table #table2 
+      [dataSource]="dataSource"
+      [currentState]="2" >loading</app-table>      
+  
+    <div style="float: right;">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>  
+  </mat-step>
+
+<mat-step >    
+
+    <ng-template matStepLabel>Εκτύπωσε τις ταμπέλες</ng-template>
+          
+    <app-table #table3 
+      [dataSource]="dataSource"
+      [currentState]="3" >loading</app-table>      
+    <div style="float: right;">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>    
+
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Τέλος.</ng-template>    
+    <!--<card-fancy-example>loading</card-fancy-example>-->
+
+    <ul>
+      <li> 
+        Κατάλογος με τις τρεις τελευταιές τιμές για καθε προιόν.
+        (<a href> Εκτύπωση,  </a>
+        <a href> Ανοιγμα </a>)
+      </li>
+      <li>Κατάλογος με τις νέες τιμές.
+          (<a href> Εκτύπωση,  </a>
+          <a href> Ανοιγμα </a>)
+      </li>      
+    </ul> 
+   
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

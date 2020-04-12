@@ -1,0 +1,14 @@
+.example-card {
+  max-width: 400px;
+}
+
+.catalog-image {
+  background-image: url('../../assets/images/catalog.png');
+  background-size: cover;
+}
+
+
+.history-image {
+  background-image: url('../../assets/images/history.jpg');
+  background-size: cover;
+}

@@ -13,3 +13,9 @@ body {
   float: right;
   margin: 8px;
 }
+
+/*align print and update buttons*/
+.auto-height-class .example-button-row .mat-list-item .mat-list-item-content {
+  justify-content: flex-end;
+}
+
