@@ -1,0 +1,11 @@
+table {
+    width: 90%;
+    float: right;
+}
+
+.clickable{
+    cursor: pointer;
+}
+
+.mat-header-cell {    text-align: center;    }
+.mat-cell {    text-align: center;    }

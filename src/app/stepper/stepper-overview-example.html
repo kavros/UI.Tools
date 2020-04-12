@@ -1,0 +1,53 @@
+<mat-horizontal-stepper #stepper>
+  <mat-step> 
+      <ng-template matStepLabel>Φόρτωσε το αρχείο</ng-template>     
+      <div>
+          <button mat-button matStepperNext>Next</button>
+      </div>  
+  </mat-step>
+  <mat-step>    
+      <ng-template matStepLabel>Καθόρισε το κέρδος</ng-template>     
+      <app-table #table1 
+      [dataSource]="dataSource"
+      [currentState]="1" >loading</app-table>
+      
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+  </mat-step>
+  <mat-step >    
+    <ng-template matStepLabel>Ενημέρωσε τις τιμές</ng-template>
+    <app-table #table2 
+    [dataSource]="dataSource"
+    [currentState]="2" >loading</app-table>      
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>    
+  </mat-step>
+
+  <mat-step >    
+      <ng-template matStepLabel>Εκτύπωσε τις ταμπέλες</ng-template>
+      <app-table #table3 [dataSource]="dataSource"
+      [currentState]="3" >loading</app-table>      
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>    
+    </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+
+
+<!-- Copyright 2019 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

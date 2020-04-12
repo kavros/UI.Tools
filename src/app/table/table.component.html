@@ -1,0 +1,111 @@
+
+<mat-list  >
+  <mat-list-item >
+    <div class="example-button-row" style="float: right;">
+      <button mat-raised-button color="primary"  *ngIf="updateKefalaio.isVisible"
+          [disabled]="updateKefalaio.isDisabled">Ενημέρωση
+        </button>  
+      <button mat-raised-button color="primary"  *ngIf="print.isVisible"
+          [disabled]="print.isDisabled">Εκτύπωση
+      </button>
+    </div>
+  </mat-list-item>
+<mat-divider></mat-divider>
+</mat-list>
+
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="print">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="($event ? selection.toggle(row) : null);addOrRemoveFromPrintSelection(row)"
+                        [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="update">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="($event ? selection.toggle(row) : null);addOrRemoveFromUpdateSelection(row)"
+                        [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="product">
+        <th mat-header-cell *matHeaderCellDef> ΄Ονομα </th>
+        <td mat-cell *matCellDef="let element"
+        (click)="debug()" > {{element.name}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="defaultProfit">
+        <th mat-header-cell *matHeaderCellDef> Ποσοστό κέρδους (%) </th>
+        <td mat-cell *matCellDef="let element"> {{element.defaultProfit}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="purchasePrice">
+        <th mat-header-cell *matHeaderCellDef> Τιμή αγοράς </th>
+        <td mat-cell *matCellDef="let element"> {{element.purchasePrice}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="newPrice">
+        <th mat-header-cell *matHeaderCellDef> Νέα τιμή </th>
+        <td mat-cell *matCellDef="let element" > {{element.newPrice}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="profitInEuro">
+        <th mat-header-cell *matHeaderCellDef> Κέρδος (€) </th>
+        <td mat-cell *matCellDef="let element" 
+          [satPopoverAnchorFor]="p"
+          [style.color]="'red'"
+          (click)="p.open()"> 
+          <div class="clickable"> {{element.profitInEuro}}</div>
+          
+          <sat-popover #p
+                  hasBackdrop
+                  xAlign="start"
+                  yAlign="start"
+                  (closed)="updateProfit(element, $event)">
+                <inline-edit [value]="element.profitInEuro"></inline-edit>
+          </sat-popover>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="kefalaioPrice">
+        <th mat-header-cell *matHeaderCellDef> Τιμή Πώλησης</th>
+        <td mat-cell *matCellDef="let element"> {{element.kefalaioPrice}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Ενέργεια </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          (click)="selection.toggle(row)">
+      </tr>
+  </table>
+
+
+
+
+<!--<div class="example-button-row" >
+  <button mat-raised-button color="primary"  *ngIf="prev.isVisible"
+    [disabled]="prev.isDisabled"
+    (click)="prevStep()">Προηγούμενο
+  </button>  
+  <button mat-raised-button color="primary"  *ngIf="next.isVisible"
+        [disabled]="next.isDisabled"
+        (click)="nextStep()">Επόμενο
+  </button>  
+</div>
+-->
+
+
+
+
