@@ -99,7 +99,8 @@ export class TableComponent implements OnInit {
   }
 
   updateProfit(el: Product, profit: string) {
-    if (profit == null || this.currentState !== State.UPDATE_PROFITS) { return; }
+    console.log(this.currentState)    
+    if (profit == null ) { return; }
     el.profitInEuro = Number(profit);
     el.newPrice = el.purchasePrice + el.profitInEuro;
     //TODO: update Status

@@ -63,7 +63,7 @@
         <td mat-cell *matCellDef="let element" 
           [satPopoverAnchorFor]="p"
           [style.color]="profitColumnColor"
-          (click)="p.open()"> 
+          (click)="(currentState === 1 ? p.open() : null)"> 
           <div class="clickable"> {{element.profitInEuro}}</div>
           
           <sat-popover #p

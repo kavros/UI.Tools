@@ -12,13 +12,10 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {TableComponent} from './app/table/table.component';
 import { InlineEditComponent } from './app/inline-edit/inline-edit.component';
 import { SatPopoverModule } from '@ncstate/sat-popover';
-import { HeaderComponent } from './app/header/header.component';
 import { StepperComponent } from './app/stepper/stepper.component';
 import { CardFancyExample } from './app/card-fancy/card-fancy-example';
+import {  MatToolbarModule } from '@angular/material/toolbar';
 
-// Default MatFormField appearance to 'fill' as that is the new recommended approach and the
-// `legacy` and `standard` appearances are scheduled for deprecation in version 10.
-// This makes the examples that use MatFormField render the same in StackBlitz as on the docs site.
 @NgModule({
   imports: [
     BrowserModule,
@@ -28,17 +25,17 @@ import { CardFancyExample } from './app/card-fancy/card-fancy-example';
     DemoMaterialModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    SatPopoverModule
+    SatPopoverModule,
+    MatToolbarModule
   ],
   entryComponents: [
     StepperComponent,
   ],
   declarations: [
     InlineEditComponent,
-    HeaderComponent,
     StepperComponent,
     TableComponent,
-    CardFancyExample
+    CardFancyExample,
   ],
   bootstrap: [
     StepperComponent
