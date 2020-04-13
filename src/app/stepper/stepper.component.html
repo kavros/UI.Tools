@@ -3,8 +3,8 @@
       <ng-template matStepLabel>Φόρτωσε το αρχείο</ng-template>     
       <!--<input type="file"  />-->
       <upload-file>loading</upload-file>
-      <div>
-          <button mat-button matStepperNext>Next</button>
+      <div style="float: right;">
+          <button mat-button matStepperNext>Επόμενο</button>
       </div>  
   </mat-step>
   <mat-step>    
@@ -15,8 +15,8 @@
       [currentState]="1" >loading</app-table>
 
     <div style="float: right;">
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
+      <button mat-button matStepperPrevious>Προηγούμενο</button>
+      <button mat-button matStepperNext>Επόμενο</button>
     </div>      
   </mat-step>
 
@@ -28,8 +28,8 @@
       [currentState]="2" >loading</app-table>      
   
     <div style="float: right;">
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
+      <button mat-button matStepperPrevious>Προηγούμενο</button>
+      <button mat-button matStepperNext>Επόμενο</button>
     </div>  
   </mat-step>
 
@@ -41,8 +41,8 @@
       [dataSource]="dataSource"
       [currentState]="3" >loading</app-table>      
     <div style="float: right;">
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
+      <button mat-button matStepperPrevious>Προηγούμενο</button>
+      <button mat-button matStepperNext>Επόμενο</button>
     </div>    
 
   </mat-step>
@@ -64,8 +64,8 @@
     </ul> 
    
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button matStepperPrevious>Προηγούμενο</button>
+      <button mat-button (click)="stepper.reset()">Αρχή</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>
