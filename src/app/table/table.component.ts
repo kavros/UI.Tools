@@ -105,14 +105,13 @@ export class TableComponent implements OnInit {
   }
 
   updateProfit(el: Product, profit: string) {
-    console.log(this.currentState)    
+    console.log(this.currentState);
     if (profit == null ) { return; }
     el.profitInEuro = Number(profit);
     el.newPrice = el.purchasePrice + el.profitInEuro;
     //TODO: update Status
     
   }
-
 
   setUpdatePricesState() {
     this.hideAllButtons();

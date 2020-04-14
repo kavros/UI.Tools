@@ -7,15 +7,15 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['inline-edit.component.scss'],
   template: `
     <form (ngSubmit)="onSubmit()">
-      <div class="mat-subheading-2">Επιθυμυτό κέρδος:</div>
+      <div class="mat-subheading-2">επιθυμητό κέρδος:</div>
       <mat-form-field>
         <input matInput maxLength="140" name="comment" [(ngModel)]="comment">
         <mat-hint align="end">{{comment?.length || 0}}/140</mat-hint>
       </mat-form-field>
 
       <div class="actions">
-        <button mat-button type="button" color="primary" (click)="onCancel()">CANCEL</button>
-        <button mat-button type="submit" color="primary">SAVE</button>
+        <button mat-button type="button" color="primary" (click)="onCancel()">Άκυρο</button>
+        <button mat-button type="submit" color="primary">Οκ</button>
       </div>
     </form>
   `
