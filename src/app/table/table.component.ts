@@ -2,6 +2,12 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
+export interface IconStatus {
+  name: string;
+  color: string;
+  label: string;
+}
+
 export interface Product {
   name: string;
   defaultProfit: string;
@@ -9,7 +15,7 @@ export interface Product {
   kefalaioPrice: number;
   newPrice: number;
   profitInEuro: number;
-  status: string;
+  status: IconStatus;
 }
 
 export class Button {
@@ -104,11 +110,7 @@ export class TableComponent implements OnInit {
     el.profitInEuro = Number(profit);
     el.newPrice = el.purchasePrice + el.profitInEuro;
     //TODO: update Status
-    if (el.newPrice > el.kefalaioPrice) {
-      el.status = '^';
-    } else if (el.newPrice > el.kefalaioPrice) {
-      el.status = '|!|';
-    }
+    
   }
 
 
@@ -117,7 +119,7 @@ export class TableComponent implements OnInit {
     this.updateKefalaio.isVisible = true;
     this.updateKefalaio.isDisabled = true;
     this.displayedColumns =
-        [ 'status', 'product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro', 'update'];
+        [  'product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro', 'status', 'update'];
   }
 
   setPrintLabelsState() {

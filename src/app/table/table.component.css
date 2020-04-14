@@ -21,3 +21,8 @@ table {
 .auto-height-class .mat-list-item {
     height: auto;       
 }
+
+
+.mat-icon .update {
+        color: red;
+}
