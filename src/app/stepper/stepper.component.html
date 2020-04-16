@@ -7,18 +7,6 @@
           <button mat-button matStepperNext>Επόμενο</button>
       </div>  
   </mat-step>
-  <mat-step>    
-    <ng-template matStepLabel>Καθόρισε το κέρδος</ng-template>     
-      
-    <app-table #table1 
-      [dataSource]="dataSource"
-      [currentState]="1" >loading</app-table>
-
-    <div style="float: right;">
-      <button mat-button matStepperPrevious>Προηγούμενο</button>
-      <button mat-button matStepperNext>Επόμενο</button>
-    </div>      
-  </mat-step>
 
   <mat-step >    
     <ng-template matStepLabel>Ενημέρωσε τις τιμές</ng-template>

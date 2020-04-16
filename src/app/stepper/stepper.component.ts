@@ -33,7 +33,7 @@ export class StepperComponent implements OnInit {
     name: 'trending_flat',
     color: 'green',
     label: 'Σταθερή'
-  } as IconStatus; 
+  } as IconStatus;
 
   private  a = {
       value: 35,
@@ -48,6 +48,11 @@ export class StepperComponent implements OnInit {
     },
     {
       name: 'Πατάτες', defaultProfit: { value: 10, class: 'line-through'}, purchasePrice: 1.1,
+      kefalaioPrice: 1.80, newPrice: 1.74, profitInEuro: 0.5,
+      status: this.decreasePriceIcon/*lens*/
+    },
+    {
+      name: 'Φράουλες', defaultProfit: { value: 10, class: 'line-through'}, purchasePrice: 1.1,
       kefalaioPrice: 1.80, newPrice: 1.74, profitInEuro: 0.5,
       status: this.decreasePriceIcon/*lens*/
     },

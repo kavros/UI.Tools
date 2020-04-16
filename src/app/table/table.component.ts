@@ -29,7 +29,6 @@ export class Button {
 }
 
 enum State {
-  UPDATE_PROFITS = 1,
   UPDATE_PRICES = 2,
   PRINT_LABELS = 3
 }
@@ -56,10 +55,7 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
     this.printSelection = [];
     this.updateSelection = [];
-    if (this.currentState === State.UPDATE_PROFITS) {
-      this.profitColumnColor = 'red';
-      this.setUpdateProfitsState();
-    } else if (this.currentState === State.UPDATE_PRICES) {
+    if (this.currentState === State.UPDATE_PRICES) {
       this.profitColumnColor = 'black';
       this.setUpdatePricesState();
     } else if (this.currentState === State.PRINT_LABELS) {
@@ -115,7 +111,6 @@ export class TableComponent implements OnInit {
     el.profitInEuro = Number(profit);
     el.newPrice = el.purchasePrice + el.profitInEuro;
     //TODO: update Status
-    
   }
 
   setUpdatePricesState() {

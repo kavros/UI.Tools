@@ -7,8 +7,9 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['inline-edit.component.scss'],
   template: `
     <form (ngSubmit)="onSubmit()">
-      <div class="mat-subheading-2">{{title}}</div>
+      <div >{{title}}</div>
       <mat-form-field>
+        <mat-label>Νέα τιμή</mat-label>
         <input matInput maxLength="140" name="comment" [(ngModel)]="comment">
         <mat-hint align="end">{{comment?.length || 0}}/140</mat-hint>
       </mat-form-field>
@@ -34,7 +35,7 @@ export class InlineEditComponent implements OnInit {
   constructor(@Optional() @Host() public popover: SatPopover) { }
 
   ngOnInit() {
-    this.title = 'επιθυμητό κέρδος:';
+    this.title = 'Οι τρεις τελευταιες τιμές είναι 1.2, 1,3, 1,3';
     if (this.popover) {
       this.popover.closed.pipe(filter(val => val == null))
         .subscribe(() => this.comment = this.value || '');
