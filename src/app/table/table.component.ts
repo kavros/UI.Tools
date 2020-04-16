@@ -8,9 +8,14 @@ export interface IconStatus {
   label: string;
 }
 
+export interface Profit {
+  value: number;
+  class: string;
+}
+
 export interface Product {
   name: string;
-  defaultProfit: string;
+  defaultProfit: Profit;
   purchasePrice: number;
   kefalaioPrice: number;
   newPrice: number;

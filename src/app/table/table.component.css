@@ -26,3 +26,7 @@ table {
 .mat-icon .update {
         color: red;
 }
+
+.line-through {
+    text-decoration: line-through;
+}

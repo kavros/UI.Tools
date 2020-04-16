@@ -7,7 +7,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['inline-edit.component.scss'],
   template: `
     <form (ngSubmit)="onSubmit()">
-      <div class="mat-subheading-2">επιθυμητό κέρδος:</div>
+      <div class="mat-subheading-2">{{title}}</div>
       <mat-form-field>
         <input matInput maxLength="140" name="comment" [(ngModel)]="comment">
         <mat-hint align="end">{{comment?.length || 0}}/140</mat-hint>
@@ -21,22 +21,20 @@ import { filter } from 'rxjs/operators';
   `
 })
 export class InlineEditComponent implements OnInit {
-
-  /** Overrides the comment and provides a reset value when changes are cancelled. */
+  private _value = '';
   @Input()
   get value(): string { return this._value; }
   set value(x: string) {
     this.comment = this._value = x;
   }
-  private _value = '';
-
-  /** Form model for the input. */
+  @Input() title: string;
+  
   comment = '';
 
   constructor(@Optional() @Host() public popover: SatPopover) { }
 
   ngOnInit() {
-    // subscribe to cancellations and reset form value
+    this.title = 'επιθυμητό κέρδος:';
     if (this.popover) {
       this.popover.closed.pipe(filter(val => val == null))
         .subscribe(() => this.comment = this.value || '');
