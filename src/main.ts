@@ -13,7 +13,6 @@ import {TableComponent} from './app/table/table.component';
 import { InlineEditComponent } from './app/inline-edit/inline-edit.component';
 import { SatPopoverModule } from '@ncstate/sat-popover';
 import { StepperComponent } from './app/stepper/stepper.component';
-import { CardFancyExample } from './app/card-fancy/card-fancy-example';
 import {  MatToolbarModule } from '@angular/material/toolbar';
 import { UploadFileComponent } from './app/uploadFile/upload-file.component';
 import { ProgressComponent } from './app/uploadFile/progress/progress.component';
@@ -38,7 +37,6 @@ import { DndDirective } from './app/uploadFile/dnd.directive';
     InlineEditComponent,
     StepperComponent,
     TableComponent,
-    CardFancyExample,
     UploadFileComponent,
     ProgressComponent,
     DndDirective
