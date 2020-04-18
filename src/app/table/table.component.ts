@@ -1,36 +1,12 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-
-export interface IconStatus {
-  name: string;
-  color: string;
-  label: string;
-}
-
-export interface Profit {
-  value: number;
-  class: string;
-}
-
-export interface Product {
-  name: string;
-  defaultProfit: Profit;
-  purchasePrice: number;
-  kefalaioPrice: number;
-  newPrice: number;
-  profitInEuro: number;
-  status: IconStatus;
-}
+import { Product } from 'src/data/interfaces/product.interface';
+import { StepperState } from '../stepper/enums/stepper-state';
 
 export class Button {
   public isVisible: boolean;
   public isDisabled: boolean;
-}
-
-enum State {
-  UPDATE_PRICES = 2,
-  PRINT_LABELS = 3
 }
 
 @Component({
@@ -43,23 +19,20 @@ export class TableComponent implements OnInit {
   @Input() ELEMENT_DATA: Product[];
   displayedColumns: string[] =
     ['product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro'];
-  @Input() currentState: State;
+  @Input() currentState: StepperState;
   @Input() dataSource: MatTableDataSource<Product>;
   selection = new SelectionModel<Product>(true, []);
   printSelection: Product[];
   updateSelection: Product[];
   private print = new Button();
   private updateKefalaio = new Button();
-  private profitColumnColor: string;
 
   ngOnInit(): void {
     this.printSelection = [];
     this.updateSelection = [];
-    if (this.currentState === State.UPDATE_PRICES) {
-      this.profitColumnColor = 'black';
+    if (this.currentState === StepperState.UPDATE_PRICES) {
       this.setUpdatePricesState();
-    } else if (this.currentState === State.PRINT_LABELS) {
-      this.profitColumnColor = 'black';
+    } else if (this.currentState === StepperState.PRINT_LABELS) {
       this.setPrintLabelsState();
     }
   }

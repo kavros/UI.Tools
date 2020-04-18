@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { TableComponent, Product, IconStatus, Profit } from '../table/table.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { Product } from 'src/data/interfaces/product.interface';
+import { MockTableData } from 'src/data/mock-table-data';
+
 
 @Component({
   selector: 'app-stepper-component',
@@ -11,59 +13,10 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export class StepperComponent implements OnInit {
   isLinear = false;
-  @ViewChild(TableComponent) table1: TableComponent;
-  @ViewChild(TableComponent) table2: TableComponent;
-  @ViewChild(TableComponent) table3: TableComponent;
-
+  mockData = new MockTableData();
   dataSource: MatTableDataSource<Product>;
-  private raisePriceIcon = {
-    name: 'trending_up',
-    color: 'red',
-    label: 'Αύξηση'
-
-  } as IconStatus;
-
-  private decreasePriceIcon = {
-    name: 'trending_down',
-    color: 'orange',
-    label: 'Μείωση'
-  } as IconStatus;
-
-  private noActionIcon = {
-    name: 'trending_flat',
-    color: 'green',
-    label: 'Σταθερή'
-  } as IconStatus;
-
-  private  a = {
-      value: 35,
-      class: 'line-through'
-  } as Profit;
-
-  data: Product[] =  [
-    {
-      name: 'Ντοματες', defaultProfit: { value: 35, class: ''},
-      purchasePrice: 1.5, kefalaioPrice: 1.20, newPrice: 2.28, profitInEuro: 0.59,
-      status: this.raisePriceIcon
-    },
-    {
-      name: 'Πατάτες', defaultProfit: { value: 10, class: 'line-through'}, purchasePrice: 1.1,
-      kefalaioPrice: 1.80, newPrice: 1.74, profitInEuro: 0.5,
-      status: this.decreasePriceIcon/*lens*/
-    },
-    {
-      name: 'Φράουλες', defaultProfit: { value: 10, class: 'line-through'}, purchasePrice: 1.1,
-      kefalaioPrice: 1.80, newPrice: 1.74, profitInEuro: 0.5,
-      status: this.decreasePriceIcon/*lens*/
-    },
-    {
-      name: 'Μήλα', defaultProfit: { value: 10, class: 'line-through'}, purchasePrice: 1.12,
-      kefalaioPrice: 1.76, newPrice: 1.76, profitInEuro: 0.5,
-      status: this.noActionIcon
-    }
-  ];
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource<Product>(this.data);
+    this.dataSource = new MatTableDataSource<Product>(this.mockData.data);
   }
 }
