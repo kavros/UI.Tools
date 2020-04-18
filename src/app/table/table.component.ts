@@ -72,11 +72,6 @@ export class TableComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name}`;
   }
 
-  debug() {
-    console.log(this.updateSelection);
-    this.displayedColumns = ['product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro', 'status', 'update'];
-  }
-
   addOrRemoveFromUpdateSelection(product: Product) {
     this.addOrRemove(this.updateSelection, product);
     this.enableOrDisableButton(this.updateSelection.length, this.updateKefalaio);
@@ -105,11 +100,9 @@ export class TableComponent implements OnInit {
     }
   }
 
-  updateProfit(el: Product, profit: string) {
-    console.log(this.currentState);
-    if (profit == null ) { return; }
-    el.profitInEuro = Number(profit);
-    el.newPrice = el.purchasePrice + el.profitInEuro;
+  updateNewPrice(el: Product, newPrice: string) {
+    if (newPrice == null ) { return; }
+    el.newPrice = Number(newPrice);
     //TODO: update Status
   }
 
@@ -118,7 +111,11 @@ export class TableComponent implements OnInit {
     this.updateKefalaio.isVisible = true;
     this.updateKefalaio.isDisabled = true;
     this.displayedColumns =
-        [  'product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro', 'status', 'update'];
+      [
+        'product', 'defaultProfit', 'purchasePrice',
+        'kefalaioPrice', 'newPrice', 'profitInEuro',
+         'status', 'update'
+      ];
   }
 
   setPrintLabelsState() {
@@ -126,13 +123,10 @@ export class TableComponent implements OnInit {
     this.print.isVisible = true;
     this.print.isDisabled = true;
     this.displayedColumns =
-      ['product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro', 'print'];
-  }
-
-  setUpdateProfitsState() {
-    this.hideAllButtons();
-    this.displayedColumns =
-      ['product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro'];
+      [
+        'print', 'status', 'product', 'defaultProfit', 'purchasePrice',
+        'kefalaioPrice', 'newPrice', 'profitInEuro'
+      ];
   }
 
   updateDatabase() {
