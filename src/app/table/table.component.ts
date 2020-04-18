@@ -3,6 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/data/interfaces/product.interface';
 import { StepperState } from '../stepper/enums/stepper-state';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 export class Button {
   public isVisible: boolean;
@@ -26,6 +28,8 @@ export class TableComponent implements OnInit {
   updateSelection: Product[];
   private print = new Button();
   private updateKefalaio = new Button();
+
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.printSelection = [];
@@ -76,14 +80,15 @@ export class TableComponent implements OnInit {
   updateNewPrice(el: Product, newPrice: string) {
     if (newPrice == null ) { return; }
     el.newPrice = Number(newPrice);
-    //TODO: update Status
+    el.profitInEuro = el.newPrice - (el.purchasePrice * 1.13);
+    //TODO: update Status, round number
   }
 
   updateProfit(el: Product, profit: string) {
     if (profit == null ) { return; }
     el.profitInEuro = Number(profit);
     el.newPrice = (el.purchasePrice * 1.13) + el.profitInEuro;
-    //TODO: update Status
+    //TODO: update Status, round number
   }
   setUpdatePricesState() {
     this.hideAllButtons();
@@ -114,6 +119,15 @@ export class TableComponent implements OnInit {
 
   printLabels() {
     console.log(this.printSelection);
+  }
+
+  openDialog() {
+    console.log("open dialog");
+    this.dialog.open(DialogComponent, {
+      width: '250px',
+      data: {title: 'title', content: 'content'}
+    });
+
   }
 }
 

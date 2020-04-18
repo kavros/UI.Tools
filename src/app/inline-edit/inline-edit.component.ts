@@ -30,19 +30,11 @@ export class InlineEditComponent implements OnInit {
   }
   @Input() title;
   @Input() inputTitle;
-  /*@Input()
-  get title(): string{ return this.title; }
-  set title(b: string) {
-    this.title = b;
-  }*/
-
-
   comment = '';
-  
+
   constructor(@Optional() @Host() public popover: SatPopover) { }
 
   ngOnInit() {
-    //this.title = 'Οι τρεις τελευταιες τιμές είναι 1.2, 1,3, 1,3';
     if (this.popover) {
       this.popover.closed.pipe(filter(val => val == null))
         .subscribe(() => this.comment = this.value || '');

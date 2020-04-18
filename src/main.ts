@@ -17,6 +17,8 @@ import {  MatToolbarModule } from '@angular/material/toolbar';
 import { UploadFileComponent } from './app/uploadFile/upload-file.component';
 import { ProgressComponent } from './app/uploadFile/progress/progress.component';
 import { DndDirective } from './app/uploadFile/dnd.directive';
+import { DialogComponent } from './app/dialog/dialog.component';
+
 
 @NgModule({
   imports: [
@@ -39,7 +41,8 @@ import { DndDirective } from './app/uploadFile/dnd.directive';
     TableComponent,
     UploadFileComponent,
     ProgressComponent,
-    DndDirective
+    DndDirective,
+    DialogComponent
   ],
   bootstrap: [
     StepperComponent
