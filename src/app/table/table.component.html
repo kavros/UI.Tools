@@ -59,7 +59,25 @@
     
       <ng-container matColumnDef="profitInEuro">
         <th mat-header-cell *matHeaderCellDef> Κέρδος (€) </th>
-        <td mat-cell *matCellDef="let element"> {{element.profitInEuro}} </td>
+        <td mat-cell 
+          *matCellDef="let element"
+          [satPopoverAnchorFor]="p"
+          (click)="(currentState === 2 ? p.open() : null)"
+          > {{element.profitInEuro}}
+
+          <sat-popover #p
+            hasBackdrop
+            xAlign="start"
+            yAlign="start"
+            (closed)="updateProfit(element, $event)">
+          <inline-edit 
+            [value]="element.profitInEuro" 
+            [title] = "'Δώστε το επιθυμητό κέρδος'"
+            [inputTitle] = "'Κέρδος (€)'"
+          ></inline-edit>
+        </sat-popover>
+        </td>
+        
       </ng-container>
 
       <ng-container matColumnDef="kefalaioPrice">
@@ -86,7 +104,8 @@
                   (closed)="updateNewPrice(element, $event)">
                 <inline-edit 
                 [value]="element.newPrice" 
-                [title] = "'a'"
+                [title] = "'Οι τελευταίες 3 τιμες ειναι: 1.2, 1.3, 1.4'"
+                [inputTitle] = "'Νέα τιμή'"
                 ></inline-edit>
           </sat-popover>
           

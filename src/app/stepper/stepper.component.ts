@@ -10,7 +10,6 @@ import { MockTableData } from 'src/data/mock-table-data';
   styleUrls: ['stepper.component.css'],
 })
 
-
 export class StepperComponent implements OnInit {
   isLinear = false;
   mockData = new MockTableData();

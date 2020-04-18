@@ -79,6 +79,12 @@ export class TableComponent implements OnInit {
     //TODO: update Status
   }
 
+  updateProfit(el: Product, profit: string) {
+    if (profit == null ) { return; }
+    el.profitInEuro = Number(profit);
+    el.newPrice = (el.purchasePrice * 1.13) + el.profitInEuro;
+    //TODO: update Status
+  }
   setUpdatePricesState() {
     this.hideAllButtons();
     this.updateKefalaio.isVisible = true;

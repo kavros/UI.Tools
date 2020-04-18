@@ -9,7 +9,7 @@ import { filter } from 'rxjs/operators';
     <form (ngSubmit)="onSubmit()">
       <div >{{title}}</div>
       <mat-form-field>
-        <mat-label>Νέα τιμή</mat-label>
+        <mat-label>{{inputTitle}}</mat-label>
         <input matInput maxLength="140" name="comment" [(ngModel)]="comment">
         <mat-hint align="end">{{comment?.length || 0}}/140</mat-hint>
       </mat-form-field>
@@ -28,7 +28,8 @@ export class InlineEditComponent implements OnInit {
   set value(x: string) {
     this.comment = this._value = x;
   }
-
+  @Input() title;
+  @Input() inputTitle;
   /*@Input()
   get title(): string{ return this.title; }
   set title(b: string) {
