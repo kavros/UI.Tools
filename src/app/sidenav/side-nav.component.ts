@@ -8,7 +8,7 @@ import {Component} from '@angular/core';
 })
 
 export class SideNavComponent {
-  isMainPageVisible = false;
+  isMainPageVisible = true;
 
 
   showMainPage() {

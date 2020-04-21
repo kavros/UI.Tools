@@ -2,7 +2,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/data/interfaces/product.interface';
-import { StepperState } from '../stepper/enums/stepper-state';
+import { TableState } from './enums/table-state';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -21,7 +21,7 @@ export class TableComponent implements OnInit {
   @Input() ELEMENT_DATA: Product[];
   displayedColumns: string[] =
     ['product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro'];
-  @Input() currentState: StepperState;
+  @Input() currentState: TableState;
   @Input() dataSource: MatTableDataSource<Product>;
   selection = new SelectionModel<Product>(true, []);
   printSelection: Product[];
@@ -34,9 +34,9 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
     this.printSelection = [];
     this.updateSelection = [];
-    if (this.currentState === StepperState.UPDATE_PRICES) {
+    if (this.currentState === TableState.UPDATE_PRICES) {
       this.setUpdatePricesState();
-    } else if (this.currentState === StepperState.PRINT_LABELS) {
+    } else if (this.currentState === TableState.PRINT_LABELS) {
       this.setPrintLabelsState();
     }
   }
