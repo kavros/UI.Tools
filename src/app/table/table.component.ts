@@ -108,8 +108,9 @@ export class TableComponent implements OnInit {
     this.print.isDisabled = true;
     this.displayedColumns =
       [
-        'print', 'status', 'product', 'defaultProfit', 'purchasePrice',
-        'kefalaioPrice', 'newPrice', 'profitInEuro'
+        'product',
+        'kefalaioPrice', 'newPrice',
+        'status', 'print'
       ];
   }
 

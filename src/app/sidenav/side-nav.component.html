@@ -1,0 +1,36 @@
+
+<mat-sidenav-container class="example-container" >
+  <mat-sidenav opened mode="side">
+  
+    
+  <mat-expansion-panel>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Λαχανικά
+      </mat-panel-title>
+      
+    </mat-expansion-panel-header>
+    <mat-list>            
+      <mat-list-item 
+        class="clickable" 
+        (click)="showMainPage()">
+          <mat-icon matListIcon>home</mat-icon>
+          Αρχή
+      </mat-list-item>
+      <mat-list-item class="clickable"
+         (click)="showSettings()">
+        <mat-icon matListIcon>settings</mat-icon>
+        Ρυθμίσεις
+      </mat-list-item>
+    </mat-list>
+
+  </mat-expansion-panel>
+
+
+  </mat-sidenav>
+  
+  <app-stepper-component *ngIf="isMainPageVisible" >loading</app-stepper-component>
+  
+</mat-sidenav-container>
+

@@ -95,8 +95,8 @@
               [ngStyle]="{color: element.status.color }"
               [satPopoverAnchorFor]="p"
               (click)="(currentState === 2 ? p.open() : null)">
-              <div class="clickable">  {{element.status.name}} </div>
-          </mat-icon> 
+              <div class="clickable"> <sup> {{element.status.name}}   </sup> </div>                
+          </mat-icon> <sup>{{element.status.counter}}</sup>
           
           <sat-popover #p
                   hasBackdrop

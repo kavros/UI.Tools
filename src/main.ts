@@ -7,7 +7,6 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DemoMaterialModule} from './app/table/material-module';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {TableComponent} from './app/table/table.component';
 import { InlineEditComponent } from './app/inline-edit/inline-edit.component';
@@ -18,6 +17,9 @@ import { UploadFileComponent } from './app/uploadFile/upload-file.component';
 import { ProgressComponent } from './app/uploadFile/progress/progress.component';
 import { DndDirective } from './app/uploadFile/dnd.directive';
 import { DialogComponent } from './app/dialog/dialog.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { DemoMaterialModule } from './material-module';
+import { SideNavComponent } from './app/sidenav/side-nav.component';
 
 
 @NgModule({
@@ -30,10 +32,12 @@ import { DialogComponent } from './app/dialog/dialog.component';
     MatNativeDateModule,
     ReactiveFormsModule,
     SatPopoverModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSidenavModule
   ],
   entryComponents: [
     StepperComponent,
+    SideNavComponent
   ],
   declarations: [
     InlineEditComponent,
@@ -42,10 +46,11 @@ import { DialogComponent } from './app/dialog/dialog.component';
     UploadFileComponent,
     ProgressComponent,
     DndDirective,
-    DialogComponent
+    DialogComponent,
+    SideNavComponent
   ],
   bootstrap: [
-    StepperComponent
+    SideNavComponent
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },

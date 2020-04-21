@@ -6,19 +6,22 @@ export class MockTableData {
 raisePriceIcon = {
     name: 'trending_up',
     color: 'red',
-    label: 'Αύξηση'
+    label: 'Αύξηση',
+    counter: 1
 } as IconStatus;
 
 decreasePriceIcon = {
     name: 'trending_down',
     color: 'orange',
-    label: 'Μείωση'
+    label: 'Μείωση',
+    counter: 3
 } as IconStatus;
 
 noActionIcon = {
     name: 'trending_flat',
     color: 'green',
-    label: 'Σταθερή'
+    label: 'Σταθερή',
+    counter: 1
 } as IconStatus;
 
 data: Product[] =  [
