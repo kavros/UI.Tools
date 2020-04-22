@@ -1,8 +1,8 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Product } from 'src/data/interfaces/product.interface';
-import { TableState } from './enums/table-state';
+import { Product } from 'src/app/data/interfaces/product.interface';
+import { TableState } from './enums/table-state.enum';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Product } from 'src/data/interfaces/product.interface';
-import { MockTableData } from 'src/data/mock-table-data';
+import { Product } from 'src/app/data/interfaces/product.interface';
+import { MockTableData } from 'src/app/data/mock-table-data';
 
 
 @Component({
