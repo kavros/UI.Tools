@@ -7,21 +7,23 @@
 
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Λαχανικά
+        <div style="font-weight: bold;">
+          <div style="font-size: medium;">  Λαχανικά</div>
+        </div>
       </mat-panel-title>
       
     </mat-expansion-panel-header>
     <mat-list>            
       <mat-list-item 
         class="clickable" 
-        (click)="showMainPage()">
-          <mat-icon matListIcon>home</mat-icon>
-          Αρχή
+        (click)="showMainPage()">        
+          <mat-icon matListIcon style="align-items: left;">home</mat-icon>
+          <div style="font-size: small;"> Αρχή</div>  
       </mat-list-item>
       <mat-list-item class="clickable"
          (click)="showSettings()">
         <mat-icon matListIcon>settings</mat-icon>
-        Ρυθμίσεις
+        <div style="font-size: small;"> Ρυθμίσεις</div>  
       </mat-list-item>
     </mat-list>
 

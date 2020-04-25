@@ -13,7 +13,7 @@ import { SettingsDialogComponent } from './settings-dialog/settings-dialog.compo
 
 export class RulesTableComponent implements OnInit {
     displayedColumns: string[] =
-      ['name', 'profitPercentage', 'minimumProfit', 'kefCode' , 'action'];
+      ['name', 'profitPercentage', 'minimumProfit', 'kefCode' , 'action', 'delete'];
     @Input() dataSource: MatTableDataSource<Product>;
 
     constructor(public dialog: MatDialog) {}
@@ -28,17 +28,26 @@ export class RulesTableComponent implements OnInit {
     }
 
     openDialog() {
+      var newProduct = {
+        name: '', defaultProfit: { value: undefined, class: ''},
+        purchasePrice: 0, kefalaioPrice: 0, 
+        newPrice: 0, profitInEuro: undefined,
+        status: undefined, kef5Code: ''
+      }as Product ;
+
       this.dialog.open(SettingsDialogComponent, {
         width: '250px',
-        data: {title: 'Καταχώρηση νέου κανόνα'},
+        data: {title: 'Καταχώρηση νέου κανόνα', product: newProduct},
       });
+      console.log(newProduct);
+      //TODO add data to array and refresh table
     }
 
-    editRule(product: Product){
-      console.log(product);
+    editRule(row: Product) {
+      console.log(row);
       this.dialog.open(SettingsDialogComponent, {
         width: '250px',
-        data: {title: 'Επεξεργασία κανόνα', product},
+        data: {title: 'Επεξεργασία κανόνα', product: row},
       });
     }
 
