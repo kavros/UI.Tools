@@ -1,0 +1,15 @@
+table {
+    width: 80%;
+    margin: 0 auto;
+}
+  
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;    
+    margin: 0 auto;
+}
+  
+.mat-icon {
+    transform: scale(0.7);
+    color: black;
+}

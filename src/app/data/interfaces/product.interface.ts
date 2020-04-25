@@ -9,4 +9,5 @@ export interface Product {
     newPrice: number;
     profitInEuro: number;
     status: IconStatus;
+    kef5Code: string;
 }

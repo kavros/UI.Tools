@@ -29,8 +29,10 @@
 
 
   </mat-sidenav>
-  
-  <app-stepper-component *ngIf="isMainPageVisible" >loading</app-stepper-component>
-  
+  <mat-sidenav-content>
+    <app-stepper-component *ngIf="isMainPageVisible" [dataSource]="dataSource" >loading</app-stepper-component>
+    <rules-table *ngIf="isSettingsVisible" [dataSource]="dataSource"> loading </rules-table>
+  </mat-sidenav-content>
+
 </mat-sidenav-container>
 

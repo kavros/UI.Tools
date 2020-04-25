@@ -1,4 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MockTableData } from '../data/mock-table-data';
+import { Product } from '../data/interfaces/product.interface';
 
 
 @Component({
@@ -7,15 +10,24 @@ import {Component} from '@angular/core';
   styleUrls: ['side-nav.component.css'],
 })
 
-export class SideNavComponent {
-  isMainPageVisible = true;
+export class SideNavComponent implements OnInit {
+  dataSource: MatTableDataSource<Product>;
+  mockData = new MockTableData();
+  isMainPageVisible = false;
+  isSettingsVisible = true;
+  
+  ngOnInit(): void {
+    this.dataSource = new MatTableDataSource<Product>(this.mockData.data);
+  }
 
 
   showMainPage() {
     this.isMainPageVisible = true;
+    this.isSettingsVisible = false;
   }
 
   showSettings() {
     this.isMainPageVisible = false;
+    this.isSettingsVisible = true;
   }
 }

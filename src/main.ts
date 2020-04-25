@@ -7,7 +7,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormField, MatFormFieldModule} from '@angular/material/form-field';
 import {TableComponent} from './app/table/table.component';
 import { InlineEditComponent } from './app/inline-edit/inline-edit.component';
 import { SatPopoverModule } from '@ncstate/sat-popover';
@@ -20,6 +20,8 @@ import { DialogComponent } from './app/dialog/dialog.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DemoMaterialModule } from './material-module';
 import { SideNavComponent } from './app/sidenav/side-nav.component';
+import { RulesTableComponent } from './app/settings/rules-table.component';
+import { SettingsDialogComponent } from './app/settings/settings-dialog/settings-dialog.component';
 
 
 @NgModule({
@@ -33,11 +35,12 @@ import { SideNavComponent } from './app/sidenav/side-nav.component';
     ReactiveFormsModule,
     SatPopoverModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatFormFieldModule
   ],
   entryComponents: [
     StepperComponent,
-    SideNavComponent
+    SideNavComponent,
   ],
   declarations: [
     InlineEditComponent,
@@ -47,7 +50,9 @@ import { SideNavComponent } from './app/sidenav/side-nav.component';
     ProgressComponent,
     DndDirective,
     DialogComponent,
-    SideNavComponent
+    SettingsDialogComponent,
+    SideNavComponent,
+    RulesTableComponent
   ],
   bootstrap: [
     SideNavComponent
