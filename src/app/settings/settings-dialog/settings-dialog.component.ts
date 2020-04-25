@@ -1,14 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Product } from 'src/app/data/interfaces/product.interface';
 
 
 export interface SettingsDialogData {
+    product: Product;
     title: string;
-    name: string;
-    profitPercentage: string;
-    profitInEuro: string;
-    Kef5Code: string;
-  }
+}
 
 
 @Component({
@@ -21,7 +19,7 @@ export class SettingsDialogComponent  {
 
     constructor(
         public dialogRef: MatDialogRef<SettingsDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: SettingsDialogData) {}
+        @Inject(MAT_DIALOG_DATA) public data: SettingsDialogData ) {}
 
     onNoClick(): void {
         this.dialogRef.close();

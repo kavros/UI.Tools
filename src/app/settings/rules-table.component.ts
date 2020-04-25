@@ -29,9 +29,18 @@ export class RulesTableComponent implements OnInit {
 
     openDialog() {
       this.dialog.open(SettingsDialogComponent, {
-        width: '350px',
-        data: {title: 'title'}
+        width: '250px',
+        data: {title: 'Καταχώρηση νέου κανόνα'},
       });
-  
     }
+
+    editRule(product: Product){
+      console.log(product);
+      this.dialog.open(SettingsDialogComponent, {
+        width: '250px',
+        data: {title: 'Επεξεργασία κανόνα', product},
+      });
+    }
+
+    
 }

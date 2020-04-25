@@ -26,9 +26,10 @@
     </ng-container>
 
     <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef></th>
+        <th mat-header-cell *matHeaderCellDef> Ενέργιες</th>
         <td mat-cell *matCellDef="let element">                    
-          <mat-icon> delete </mat-icon>
+          <mat-icon style="cursor: pointer;" (click)="editRule(element)"> edit </mat-icon>
+          <mat-icon style="cursor: pointer;"> delete </mat-icon>          
         </td>
       </ng-container>
   

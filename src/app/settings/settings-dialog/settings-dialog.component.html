@@ -1,24 +1,25 @@
-<h1 mat-dialog-title>{{data.title}}</h1>
+<h2 mat-dialog-title>{{data.title}}</h2>
 <div mat-dialog-content>
 <mat-form-field>
     <mat-label>Όνομα</mat-label>
-    <input matInput [(ngModel)]="data.name">
+    <input matInput [(ngModel)]="data.product.name">
 </mat-form-field>
 <mat-form-field>
-    <mat-label>Πσοστό (%)</mat-label>
-    <input matInput [(ngModel)]="data.profitPercentage">
+    <mat-label>Ποσοστό (%)</mat-label>
+    <input matInput [(ngModel)]="data.product.defaultProfit.value">
 </mat-form-field>
 <mat-form-field>
     <mat-label>Ποσοστό (€)</mat-label>
-    <input matInput [(ngModel)]="data.profitInEuro">
+    <input matInput [(ngModel)]="data.product.profitInEuro">
 </mat-form-field>
 <mat-form-field>
     <mat-label>Κωδικός</mat-label>
-    <input matInput [(ngModel)]="data.Kef5Code">
+    <input matInput [(ngModel)]="data.product.kef5Code">
 </mat-form-field>
 
   <p>{{data.content}}</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close] cdkFocusInitial>Ok</button>
+    <button mat-button [mat-dialog-close]>Άκυρο</button>
+    <button mat-button [mat-dialog-close]>Καταχώρηση</button>
 </div>
