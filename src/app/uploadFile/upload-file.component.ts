@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { StepperComponentService } from '../stepper/services/stepper.component.service';
 
 @Component({
   selector: 'upload-file',
@@ -7,11 +8,29 @@ import { Component } from '@angular/core';
 })
 export class UploadFileComponent  {
   files: any[] = [];
+  constructor(private service: StepperComponentService) { }
 
 
   onFileDropped($event) {
     this.prepareFilesList($event);
+    const selectedFile = $event[0];
+
+    const uploadImageData = new FormData();
+    uploadImageData.append('pdfFile', selectedFile, selectedFile.name);
+
+    const response = this.service.sendGetTableDataRequest(uploadImageData);
+
+    response.subscribe((res) => {
+      if (res.status === 200) {
+        console.log('Image uploaded successfully');
+      } else {
+        console.log('Image not uploaded successfully');
+      }
+    });
+
+
   }
+
 
   fileBrowseHandler(files) {
     this.prepareFilesList(files);
