@@ -11,8 +11,12 @@ export class StepperComponentService {
 
   public sendGetTableDataRequest( uploadImageData: FormData ): Observable<HttpResponse<any>> {
 
-    const response = this.httpClient.post('http://localhost:8080/upload',
-      uploadImageData, { observe: 'response' });
+    const response = this.httpClient
+    .post(
+        'http://localhost:8080/upload',
+        uploadImageData,
+        { observe: 'response' }
+      );
     return response;
   }
 

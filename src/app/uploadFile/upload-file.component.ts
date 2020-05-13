@@ -22,6 +22,7 @@ export class UploadFileComponent  {
 
     response.subscribe((res) => {
       if (res.status === 200) {
+        console.log(res.body);
         console.log('Image uploaded successfully');
       } else {
         console.log('Image not uploaded successfully');
