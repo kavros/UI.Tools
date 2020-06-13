@@ -24,7 +24,7 @@ export class StepperComponent implements OnInit {
 
     this.dataSource.data = [];
     tableData.forEach(elem => {
-      elem.defaultProfit = { value: 0, class: '' } as Profit;
+      elem.defaultProfit = { value: elem.profitPercentage, class: '' } as Profit;
       elem.kef5Code = 'unknown';
       elem.status =
       {

@@ -8,6 +8,7 @@ export interface Product {
     retailPrice: number;
     newPrice: number;
     profitInEuro: number;
+    profitPercentage: number;
     records: number[];
     status: IconStatus;
     kef5Code: string;
