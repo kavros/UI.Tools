@@ -30,7 +30,7 @@ export class RulesTableComponent implements OnInit {
     openDialog() {
       var newProduct = {
         name: '', defaultProfit: { value: undefined, class: ''},
-        purchasePrice: 0, kefalaioPrice: 0, 
+        invoicePrice: 0, retailPrice: 0, 
         newPrice: 0, profitInEuro: undefined,
         status: undefined, kef5Code: ''
       }as Product ;

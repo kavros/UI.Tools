@@ -80,14 +80,14 @@ export class TableComponent implements OnInit {
   updateNewPrice(el: Product, newPrice: string) {
     if (newPrice == null ) { return; }
     el.newPrice = Number(newPrice);
-    el.profitInEuro = el.newPrice - (el.purchasePrice * 1.13);
+    el.profitInEuro = el.newPrice - (el.invoicePrice * 1.13);
     //TODO: update Status, round number
   }
 
   updateProfit(el: Product, profit: string) {
     if (profit == null ) { return; }
     el.profitInEuro = Number(profit);
-    el.newPrice = (el.purchasePrice * 1.13) + el.profitInEuro;
+    el.newPrice = (el.invoicePrice * 1.13) + el.profitInEuro;
     //TODO: update Status, round number
   }
   setUpdatePricesState() {

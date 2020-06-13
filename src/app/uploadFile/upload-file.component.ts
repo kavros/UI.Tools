@@ -1,5 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, EventEmitter, Output } from '@angular/core';
 import { StepperComponentService } from '../stepper/services/stepper.component.service';
+import { UploadFileDTO } from './dto/upload-file-dto';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'upload-file',
@@ -9,6 +11,8 @@ import { StepperComponentService } from '../stepper/services/stepper.component.s
 export class UploadFileComponent  {
   files: any[] = [];
   constructor(private service: StepperComponentService) { }
+  @Output() eventTest =  new EventEmitter();
+
 
 
   onFileDropped($event) {
@@ -21,12 +25,8 @@ export class UploadFileComponent  {
     const response = this.service.sendGetTableDataRequest(uploadImageData);
 
     response.subscribe((res) => {
-      if (res.status === 200) {
-        console.log(res.body);
-        console.log('Image uploaded successfully');
-      } else {
-        console.log('Image not uploaded successfully');
-      }
+      //console.log(res);
+      this.eventTest.emit(res.data);
     });
 
 

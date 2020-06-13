@@ -12,10 +12,21 @@ import { MockTableData } from 'src/app/data/mock-table-data';
 
 export class StepperComponent implements OnInit {
   isLinear = false;
-  //mockData = new MockTableData();
   @Input() dataSource: MatTableDataSource<Product>;
 
   ngOnInit() {
-    //this.dataSource = new MatTableDataSource<Product>(this.mockData.data);
+
+  }
+
+  test(tableData: Product[]){
+
+    /*this.dataSource.data = [];
+    tableData.forEach(elem => {
+      console.log(elem.kef5Code);
+      
+      //this.dataSource.data.push(elem);
+    });
+    this.dataSource._updateChangeSubscription();    */
+    console.log(this.dataSource.data);
   }
 }

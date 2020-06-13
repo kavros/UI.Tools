@@ -4,10 +4,11 @@ import { IconStatus } from './icon-status.interface';
 export interface Product {
     name: string;
     defaultProfit: Profit;
-    purchasePrice: number;
-    kefalaioPrice: number;
+    invoicePrice: number;
+    retailPrice: number;
     newPrice: number;
     profitInEuro: number;
+    records: number[];
     status: IconStatus;
     kef5Code: string;
 }
