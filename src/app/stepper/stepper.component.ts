@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild, Input} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/data/interfaces/product.interface';
 import { MockTableData } from 'src/app/data/mock-table-data';
+import { Profit } from '../data/interfaces/profit.interface';
+import { IconStatus } from '../data/interfaces/icon-status.interface';
 
 
 @Component({
@@ -20,13 +22,21 @@ export class StepperComponent implements OnInit {
 
   test(tableData: Product[]){
 
-    /*this.dataSource.data = [];
+    this.dataSource.data = [];
     tableData.forEach(elem => {
-      console.log(elem.kef5Code);
-      
-      //this.dataSource.data.push(elem);
+      elem.defaultProfit = { value: 0, class: '' } as Profit;
+      elem.kef5Code = 'unknown';
+      elem.status =
+      {
+        name: 'trending_down',
+        color: 'orange',
+        label: 'Μείωση',
+        counter: 3
+      } as IconStatus;
+
+      this.dataSource.data.push(elem);
     });
-    this.dataSource._updateChangeSubscription();    */
-    console.log(this.dataSource.data);
+    this.dataSource._updateChangeSubscription();
+    console.log(tableData);
   }
 }
