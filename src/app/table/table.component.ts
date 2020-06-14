@@ -96,7 +96,7 @@ export class TableComponent implements OnInit {
     this.updateKefalaio.isDisabled = true;
     this.displayedColumns =
       [
-        'product', 'defaultProfit', 'purchasePrice',
+        'product', 'purchasePrice',
         'kefalaioPrice', 'newPrice', 'profitInEuro',
          'status', 'update'
       ];

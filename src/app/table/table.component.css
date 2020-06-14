@@ -13,9 +13,17 @@ table {
 .mat-header-cell {
     text-align: center; 
 }
+.mat-row {
+    height: auto;
+}
+.mat-row:hover {
+    background-color: beige;
+    font-weight: bold;
+}
 
 .mat-cell {   
     text-align: center;
+    padding: 1px 1px 1px 0;
 }
 
 .auto-height-class .mat-list-item {
