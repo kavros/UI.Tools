@@ -14,17 +14,17 @@
     
     <ng-container matColumnDef="profitPercentage">
       <th mat-header-cell *matHeaderCellDef> Κέρδος (%) </th>
-      <td mat-cell *matCellDef="let element"> {{element.defaultProfit.value}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.profitPercentage}} </td>
     </ng-container>
   
     <ng-container matColumnDef="minimumProfit">
       <th mat-header-cell *matHeaderCellDef> Κέρδος (€) </th>
-      <td mat-cell *matCellDef="let element"> {{element.profitInEuro}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.minimumProfit}} </td>
     </ng-container>
 
      <ng-container matColumnDef="kefCode">
       <th mat-header-cell *matHeaderCellDef> Κωδικός </th>
-      <td mat-cell *matCellDef="let element"> {{element.kef5Code}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.sCode}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">

@@ -11,5 +11,4 @@ export interface Product {
     profitPercentage: number;
     records: number[];
     status: IconStatus;
-    kef5Code: string;
 }

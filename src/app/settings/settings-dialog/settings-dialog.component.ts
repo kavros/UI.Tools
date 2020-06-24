@@ -1,10 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Product } from 'src/app/data/interfaces/product.interface';
+import { Rule } from 'src/app/data/interfaces/rule.interface';
 
 
 export interface SettingsDialogData {
-    product: Product;
+    rule: Rule;
     title: string;
 }
 
