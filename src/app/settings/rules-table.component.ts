@@ -36,8 +36,8 @@ export class RulesTableComponent implements OnInit {
     }
 
     openDialog() {
-      var newProduct = {
-        name: '', 
+      const newProduct = {
+        name: '',
         profitPercentage: 0.3,
         minimumProfit : 0.5,
         sCode: '2082'

@@ -11,13 +11,10 @@ import { Product } from '../data/interfaces/product.interface';
 })
 
 export class SideNavComponent implements OnInit {
-  dataSource: MatTableDataSource<Product>;
-  mockData = new MockTableData();
   isMainPageVisible = true;
   isSettingsVisible = false;
-  
+
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<Product>(this.mockData.data);
   }
 
 

@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/data/interfaces/product.interface';
 import { Profit } from '../data/interfaces/profit.interface';
 import { IconStatus } from '../data/interfaces/icon-status.interface';
+import { TableComponent } from '../table/table.component';
 
 
 @Component({
@@ -13,53 +14,60 @@ import { IconStatus } from '../data/interfaces/icon-status.interface';
 
 export class StepperComponent implements OnInit {
   isLinear = false;
-  @Input() dataSource: MatTableDataSource<Product>;
+  dataSource: MatTableDataSource<Product>;
+  @ViewChild('table2') tableStep2: TableComponent;
 
   ngOnInit() {
-
+    this.dataSource =  new MatTableDataSource<Product>();
   }
 
-  test(tableData: Product[]) {
+  private updateDataSource(tableData: Product[]) {
 
     this.dataSource.data = [];
     tableData.forEach(elem => {
       elem.defaultProfit = { value: elem.profitPercentage, class: '' } as Profit;
-      if (elem.newPrice > elem.retailPrice) {
-        elem.status =
-        {
-          name: 'trending_up',
-          color: 'red',
-          label: 'Αύξηση',
-          counter: 0
-        } as IconStatus;
-        elem.isUpdateRequired = true;
-      } else if ( elem.newPrice < elem.retailPrice ) {
-        elem.status =
-        {
-             name: 'trending_down',
-             color: 'orange',
-             label: 'Μείωση',
-             counter: this.getPriceDecreasesCounter(elem)
-        } as IconStatus;
-
-        if (elem.status.counter === 3) {
-          elem.isUpdateRequired = true;
-        } else {
-          elem.isUpdateRequired = false;
-        }
-      } else if ( elem.newPrice === elem.retailPrice) {
-        elem.status = {
-          name: 'trending_flat',
-          color: 'green',
-          label: 'Σταθερή',
-          counter: 0
-        } as IconStatus;
-        elem.isUpdateRequired = false;
-      }
+      this.updateTrendColumn(elem);
       this.dataSource.data.push(elem);
     });
     this.dataSource._updateChangeSubscription();
+    this.tableStep2.updateStep2CheckBoxes();
+    
     console.log(tableData);
+  }
+
+  private updateTrendColumn(elem: Product) {
+    if (elem.newPrice > elem.retailPrice) {
+      elem.status =
+      {
+        name: 'trending_up',
+        color: 'red',
+        label: 'Αύξηση',
+        counter: 0
+      } as IconStatus;
+      elem.isUpdateRequired = true;
+    } else if ( elem.newPrice < elem.retailPrice ) {
+      elem.status =
+      {
+           name: 'trending_down',
+           color: 'orange',
+           label: 'Μείωση',
+           counter: this.getPriceDecreasesCounter(elem)
+      } as IconStatus;
+
+      if (elem.status.counter === 3) {
+        elem.isUpdateRequired = true;
+      } else {
+        elem.isUpdateRequired = false;
+      }
+    } else if ( elem.newPrice === elem.retailPrice) {
+      elem.status = {
+        name: 'trending_flat',
+        color: 'green',
+        label: 'Σταθερή',
+        counter: 0
+      } as IconStatus;
+      elem.isUpdateRequired = false;
+    }
   }
 
   private getPriceDecreasesCounter(row: Product) {

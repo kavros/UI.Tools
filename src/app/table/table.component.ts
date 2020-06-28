@@ -45,13 +45,17 @@ export class TableComponent implements OnInit {
     this.print.isVisible = false;
   }
 
-  checkboxLabel(row?: Product): string {
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name}`;
+  updateStep2CheckBoxes(): void{
+    const updateSelection = this.dataSource.data.filter( x => x.isUpdateRequired === true);
+    console.log(updateSelection);
+    if (updateSelection.length > 0 ) {
+      this.updateKefalaio.isDisabled = false;
+    }
+
   }
 
-  addOrRemoveFromUpdateSelection(product: Product) {
-    this.addOrRemove(this.updateSelection, product);
-    this.enableOrDisableButton(this.updateSelection.length, this.updateKefalaio);
+  checkboxLabel(row?: Product): string {
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name}`;
   }
 
   addOrRemoveFromPrintSelection(product: Product) {
@@ -59,12 +63,17 @@ export class TableComponent implements OnInit {
     this.enableOrDisableButton(this.printSelection.length, this.print);
   }
 
-  private enableOrDisableButton( listLength: number, button: Button ){
+  private enableOrDisableButton( listLength: number, button: Button ) {
     if (listLength > 0) {
       button.isDisabled = false;
     } else {
       button.isDisabled = true;
     }
+  }
+
+  addOrRemoveFromUpdateSelection(product: Product) {
+    this.addOrRemove(this.updateSelection, product);
+    this.enableOrDisableButton(this.updateSelection.length, this.updateKefalaio);
   }
 
   private addOrRemove(products: Product[], product: Product) {

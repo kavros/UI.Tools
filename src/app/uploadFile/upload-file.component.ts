@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 export class UploadFileComponent  {
   files: any[] = [];
   constructor(private service: StepperComponentService) { }
-  @Output() eventTest =  new EventEmitter();
+  @Output() eventUpdateDataSource =  new EventEmitter();
 
 
 
@@ -26,7 +26,7 @@ export class UploadFileComponent  {
 
     response.subscribe((res) => {
       //console.log(res);
-      this.eventTest.emit(res.data);
+      this.eventUpdateDataSource.emit(res.data);
     });
 
 
