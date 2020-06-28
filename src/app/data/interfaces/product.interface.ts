@@ -11,4 +11,5 @@ export interface Product {
     profitPercentage: number;
     records: number[];
     status: IconStatus;
+    isUpdateRequired: boolean;
 }

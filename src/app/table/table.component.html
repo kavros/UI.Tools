@@ -32,7 +32,9 @@
         <td mat-cell *matCellDef="let row">
           <mat-checkbox (click)="$event.stopPropagation()"
                         (change)="($event ? selection.toggle(row) : null);addOrRemoveFromUpdateSelection(row)"
-                        [aria-label]="checkboxLabel(row)">
+                        [aria-label]="checkboxLabel(row)"
+                        [checked] = "row.isUpdateRequired">
+                
           </mat-checkbox>
         </td>
       </ng-container>
@@ -96,7 +98,8 @@
               [satPopoverAnchorFor]="p"
               (click)="(currentState === 2 ? p.open() : null)">
               <div class="clickable"> <sup> {{element.status.name}}   </sup> </div>                
-          </mat-icon> <sup>{{element.status.counter}}</sup>
+          </mat-icon> 
+          <sup *ngIf="isCounterGreaterThanZero(element)" >{{element.status.counter}}</sup> 
           
           <sat-popover #p
                   hasBackdrop

@@ -96,7 +96,7 @@ export class TableComponent implements OnInit {
     this.updateKefalaio.isDisabled = true;
     this.displayedColumns =
       [
-        'product', 'purchasePrice',
+        'product', 
         'kefalaioPrice', 'newPrice', 'profitInEuro',
          'status', 'update'
       ];
@@ -129,6 +129,10 @@ export class TableComponent implements OnInit {
       data: {title: 'title', content: 'content'}
     });
 
+  }
+
+  isCounterGreaterThanZero(element: Product){
+    return element.status.counter > 0;
   }
 }
 
