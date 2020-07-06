@@ -7,7 +7,9 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['inline-edit.component.scss'],
   template: `
     <form (ngSubmit)="onSubmit()">
-      <div >{{title}}</div>
+      <div >{{line1}}</div>
+      <div >{{line2}}</div>
+      <br>
       <mat-form-field>
         <mat-label>{{inputTitle}}</mat-label>
         <input matInput maxLength="140" name="comment" [(ngModel)]="comment">
@@ -28,7 +30,9 @@ export class InlineEditComponent implements OnInit {
   set value(x: string) {
     this.comment = this._value = x;
   }
-  @Input() title;
+  @Input() line1: string;
+  @Input() line2: string;
+
   @Input() inputTitle;
   comment = '';
 

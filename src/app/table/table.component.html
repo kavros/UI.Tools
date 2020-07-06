@@ -75,7 +75,7 @@
             (closed)="updateProfit(element, $event)">
           <inline-edit 
             [value]="element.profitInEuro" 
-            [title] = "'Δώστε το επιθυμητό κέρδος'"
+            [line2] = "'Εισάγετε το επιθυμητό κέρδος'"
             [inputTitle] = "'Κέρδος (€)'"
           ></inline-edit>
         </sat-popover>
@@ -102,15 +102,19 @@
           <sup *ngIf="isCounterGreaterThanZero(element)" >{{element.status.counter}}</sup> 
           
           <sat-popover #p
-                  hasBackdrop
-                  xAlign="start"
-                  yAlign="start"
-                  (closed)="updateNewPrice(element, $event)">
-                <inline-edit 
-                [value]="element.newPrice" 
-                [title] = "'Οι τελευταίες 3 τιμες ειναι: 1.2, 1.3, 1.4'"
-                [inputTitle] = "'Νέα τιμή'"
-                ></inline-edit>
+            hasBackdrop
+            xAlign="start"
+            yAlign="start"
+            (closed)="updateNewPrice(element, $event)">
+
+            <inline-edit 
+              [value]="element.newPrice" 
+              [line1] =  "getLine1ForTrendsColumn(element)"
+              [line2] = "getLine2ForTrendsColumn(element)"
+              [inputTitle] = "'Νέα τιμή'">
+            </inline-edit>
+
+
           </sat-popover>
           
           </td>

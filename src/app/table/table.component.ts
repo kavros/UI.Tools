@@ -46,9 +46,10 @@ export class TableComponent implements OnInit {
   }
 
   updateStep2CheckBoxes(): void{
-    const updateSelection = this.dataSource.data.filter( x => x.isUpdateRequired === true);
-    console.log(updateSelection);
-    if (updateSelection.length > 0 ) {
+    this.updateSelection =
+      this.dataSource.data.filter( x => x.isUpdateRequired === true);
+    //console.log(updateSelection);
+    if ( this.updateSelection.length > 0 ) {
       this.updateKefalaio.isDisabled = false;
     }
 
@@ -132,7 +133,6 @@ export class TableComponent implements OnInit {
   }
 
   openDialog() {
-    console.log("open dialog");
     this.dialog.open(DialogComponent, {
       width: '250px',
       data: {title: 'title', content: 'content'}
@@ -140,8 +140,16 @@ export class TableComponent implements OnInit {
 
   }
 
-  isCounterGreaterThanZero(element: Product){
+  isCounterGreaterThanZero(element: Product) {
     return element.status.counter > 0;
+  }
+
+  getLine1ForTrendsColumn(elem: Product): string {
+    return 'Σημερινή τιμη αγορας: ' + elem.records[0]
+  }
+
+  getLine2ForTrendsColumn(elem: Product): string {
+    return 'Προηγουμενες τιμές αγορας: ' + elem.records.slice(1, 3);
   }
 }
 
