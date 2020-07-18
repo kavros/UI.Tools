@@ -145,11 +145,11 @@ export class TableComponent implements OnInit {
   }
 
   getLine1ForTrendsColumn(elem: Product): string {
-    return 'Σημερινή τιμη αγορας: ' + elem.records[0]
+    return 'Προηγουμενες τιμές πώλησεις:';
   }
 
   getLine2ForTrendsColumn(elem: Product): string {
-    return 'Προηγουμενες τιμές αγορας: ' + elem.records.slice(1, 3);
+    return  elem.records.toString();
   }
 }
 
