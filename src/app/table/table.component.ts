@@ -5,6 +5,7 @@ import { Product } from 'src/app/data/interfaces/product.interface';
 import { TableState } from './enums/table-state.enum';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { StepperComponentService } from '../stepper/services/stepper.component.service';
 
 export class Button {
   public isVisible: boolean;
@@ -29,7 +30,8 @@ export class TableComponent implements OnInit {
   private print = new Button();
   private updateKefalaio = new Button();
 
-  constructor(public dialog: MatDialog) {}
+  constructor( public dialog: MatDialog, 
+               private service: StepperComponentService) {}
 
   ngOnInit(): void {
     this.printSelection = [];
@@ -100,6 +102,7 @@ export class TableComponent implements OnInit {
     el.newPrice = (el.invoicePrice * 1.13) + el.profitInEuro;
     //TODO: update Status, round number
   }
+
   setUpdatePricesState() {
     this.hideAllButtons();
     this.updateKefalaio.isVisible = true;
@@ -125,6 +128,10 @@ export class TableComponent implements OnInit {
   }
 
   updateDatabase() {
+    const response = this.service.updateRetailPrices(this.updateSelection);
+    response.subscribe(content => {
+      console.log(content);
+    });
     console.log(this.updateSelection);
   }
 

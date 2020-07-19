@@ -2,6 +2,9 @@ import { Component, Inject, EventEmitter, Output } from '@angular/core';
 import { StepperComponentService } from '../stepper/services/stepper.component.service';
 import { UploadFileDTO } from './dto/upload-file-dto';
 import { map } from 'rxjs/operators';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'upload-file',
@@ -10,28 +13,35 @@ import { map } from 'rxjs/operators';
 })
 export class UploadFileComponent  {
   files: any[] = [];
-  constructor(private service: StepperComponentService) { }
+  constructor(private service: StepperComponentService,
+              public dialog: MatDialog) { }
   @Output() eventUpdateDataSource =  new EventEmitter();
-
-
 
   onFileDropped($event) {
     this.prepareFilesList($event);
     const selectedFile = $event[0];
 
-    const uploadImageData = new FormData();
-    uploadImageData.append('pdfFile', selectedFile, selectedFile.name);
-
-    const response = this.service.sendGetTableDataRequest(uploadImageData);
-
-    response.subscribe((res) => {
-      //console.log(res);
-      this.eventUpdateDataSource.emit(res.data);
-    });
-
-
+    const uploadInvoiceData = new FormData();
+    uploadInvoiceData.append('pdfFile', selectedFile, selectedFile.name);
+    const response = this.service.importAndGetStepperData(uploadInvoiceData);
+    this.handleResponse(response);
   }
 
+  handleResponse(response: Observable < UploadFileDTO >) {
+    response.subscribe((res) => {
+      const hasWarnings = res.warnings.length > 0;
+      const hasErrors = res.errors.length > 0;
+
+      if (hasWarnings || hasErrors ) {
+          const msg =  res.warnings + '' + res.errors;
+          this.dialog.open(DialogComponent, {
+            width: '250px',
+            data: {title: 'Problems', content: msg}
+          });
+      }
+      this.eventUpdateDataSource.emit(res.data);
+    });
+  }
 
   fileBrowseHandler(files) {
     this.prepareFilesList(files);
