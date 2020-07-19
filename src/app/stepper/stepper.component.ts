@@ -72,8 +72,8 @@ export class StepperComponent implements OnInit {
 
   private getPriceDecreasesCounter(row: Product) {
     let c = 0;
-    row.records.forEach( oldInvoicePrice => {
-      if (row.invoicePrice <= oldInvoicePrice  ) {
+    row.records.forEach( oldRetailPrice => {
+      if (row.retailPrice > oldRetailPrice  ) {
         c++;
       }
     });
