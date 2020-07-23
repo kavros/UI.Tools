@@ -4,6 +4,7 @@ import { Product } from 'src/app/data/interfaces/product.interface';
 import { Profit } from '../data/interfaces/profit.interface';
 import { IconStatus } from '../data/interfaces/icon-status.interface';
 import { TableComponent } from '../table/table.component';
+import { UploadFileDTO } from '../uploadFile/dto/upload-file-dto';
 
 
 @Component({
@@ -15,24 +16,26 @@ import { TableComponent } from '../table/table.component';
 export class StepperComponent implements OnInit {
   isLinear = false;
   dataSource: MatTableDataSource<Product>;
+  invoiceDate: string;
   @ViewChild('table2') tableStep2: TableComponent;
 
   ngOnInit() {
     this.dataSource =  new MatTableDataSource<Product>();
   }
 
-  private updateDataSource(tableData: Product[]) {
+  private updateDataSource(response: UploadFileDTO) {
 
     this.dataSource.data = [];
-    tableData.forEach(elem => {
+    response.data.forEach(elem => {
       elem.defaultProfit = { value: elem.profitPercentage, class: '' } as Profit;
       this.updateTrendColumn(elem);
       this.dataSource.data.push(elem);
     });
+    this.invoiceDate = response.invoiceDate;
     this.dataSource._updateChangeSubscription();
     this.tableStep2.updateStep2CheckBoxes();
-    
-    console.log(tableData);
+
+    console.log(response);
   }
 
   private updateTrendColumn(elem: Product) {

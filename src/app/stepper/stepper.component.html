@@ -13,7 +13,8 @@
 
     <app-table #table2 
       [dataSource]="dataSource"
-      [currentState]="2" >loading</app-table>      
+      [currentState]="2"
+      [invoiceDate]="invoiceDate" >loading</app-table>      
   
     <div style="float: right;">
       <button mat-button matStepperPrevious>Προηγούμενο</button>
@@ -27,7 +28,8 @@
           
     <app-table #table3 
       [dataSource]="dataSource"
-      [currentState]="3" >loading</app-table>      
+      [currentState]="3"
+      [invoiceDate]="invoiceDate" >loading</app-table>      
     <div style="float: right;">
       <button mat-button matStepperPrevious>Προηγούμενο</button>
       <button mat-button matStepperNext>Επόμενο</button>

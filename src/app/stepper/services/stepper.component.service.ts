@@ -25,17 +25,23 @@ export class StepperComponentService {
             map( (res: UploadFileDTO ) => res));
   }
 
-  public updateRetailPrices( products: Product[]): Observable<any> {
+
+
+  public updateRetailPrices( data: Product[], date: string): Observable<any> {
+    const enpointData = data.map( function(product) {
+      return  {
+                name: product.name,
+                newPrice: product.newPrice
+              }; });
+
+    const dto = {
+      products: enpointData,
+      invoiceDate: date
+    };
     return  this.httpClient
                 .put(
-                  'http://localhost:8080/updateRetailPrices',
-
-                  products.map( function(product) { 
-                      return {
-                        name: product.name,
-                        price: product.retailPrice
-                      }
-                    })
+                  'http://localhost:8080/updatePrices',
+                  dto
                 );
   }
 

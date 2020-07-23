@@ -39,7 +39,7 @@ export class UploadFileComponent  {
             data: {title: 'Problems', content: msg}
           });
       }
-      this.eventUpdateDataSource.emit(res.data);
+      this.eventUpdateDataSource.emit(res);
     });
   }
 

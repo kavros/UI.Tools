@@ -24,6 +24,8 @@ export class TableComponent implements OnInit {
     ['product', 'defaultProfit', 'purchasePrice', 'kefalaioPrice', 'newPrice', 'profitInEuro'];
   @Input() currentState: TableState;
   @Input() dataSource: MatTableDataSource<Product>;
+  @Input() invoiceDate: string;
+
   selection = new SelectionModel<Product>(true, []);
   printSelection: Product[];
   updateSelection: Product[];
@@ -128,7 +130,11 @@ export class TableComponent implements OnInit {
   }
 
   updateDatabase() {
-    const response = this.service.updateRetailPrices(this.updateSelection);
+    const response = 
+      this.service
+          .updateRetailPrices(this.updateSelection,this.invoiceDate);
+    //console.log(this.invoiceDate);
+    
     response.subscribe(content => {
       console.log(content);
     });
