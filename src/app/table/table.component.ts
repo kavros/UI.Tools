@@ -32,7 +32,7 @@ export class TableComponent implements OnInit {
   private print = new Button();
   private updateKefalaio = new Button();
 
-  constructor( public dialog: MatDialog, 
+  constructor( public dialog: MatDialog,
                private service: StepperComponentService) {}
 
   ngOnInit(): void {
@@ -130,13 +130,14 @@ export class TableComponent implements OnInit {
   }
 
   updateDatabase() {
-    const response = 
+    const response =
       this.service
-          .updateRetailPrices(this.updateSelection,this.invoiceDate);
+          .updateRetailPrices(this.updateSelection, this.invoiceDate);
     //console.log(this.invoiceDate);
     
     response.subscribe(content => {
-      console.log(content);
+      
+      this.openDialog('επιτυχής ενημέρωση', '');
     });
     console.log(this.updateSelection);
   }
@@ -145,10 +146,10 @@ export class TableComponent implements OnInit {
     console.log(this.printSelection);
   }
 
-  openDialog() {
+  openDialog(header: string, data: string) {
     this.dialog.open(DialogComponent, {
       width: '250px',
-      data: {title: 'title', content: 'content'}
+      data: {title: header, content: data}
     });
 
   }

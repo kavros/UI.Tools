@@ -16,7 +16,7 @@ export class StepperComponentService {
   public importAndGetStepperData( uploadImageData: FormData ): Observable<UploadFileDTO> {
     return  this.httpClient
       .post<UploadFileDTO>(
-        'http://localhost:8080/upload',
+        'http://localhost:8080/import',
         uploadImageData)
           .pipe(
             catchError(err => {
