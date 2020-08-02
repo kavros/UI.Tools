@@ -1,6 +1,6 @@
 import { Component, Inject, EventEmitter, Output } from '@angular/core';
 import { StepperComponentService } from '../stepper/services/stepper.component.service';
-import { UploadFileDTO } from './dto/upload-file-dto';
+import { ImportDTO } from './dto/upload-file-dto';
 import { map } from 'rxjs/operators';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -27,7 +27,7 @@ export class UploadFileComponent  {
     this.handleResponse(response);
   }
 
-  handleResponse(response: Observable < UploadFileDTO >) {
+  handleResponse(response: Observable < ImportDTO >) {
     response.subscribe((res) => {
       const hasWarnings = res.warnings.length > 0;
       const hasErrors = res.errors.length > 0;

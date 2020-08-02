@@ -4,7 +4,7 @@ import { Product } from 'src/app/data/interfaces/product.interface';
 import { Profit } from '../data/interfaces/profit.interface';
 import { IconStatus } from '../data/interfaces/icon-status.interface';
 import { TableComponent } from '../table/table.component';
-import { UploadFileDTO } from '../uploadFile/dto/upload-file-dto';
+import { ImportDTO } from '../uploadFile/dto/upload-file-dto';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class StepperComponent implements OnInit {
     this.dataSource =  new MatTableDataSource<Product>();
   }
 
-  private updateDataSource(response: UploadFileDTO) {
+  private updateDataSource(response: ImportDTO) {
 
     this.dataSource.data = [];
     response.data.forEach(elem => {
