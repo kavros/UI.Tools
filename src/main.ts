@@ -13,7 +13,7 @@ import { InlineEditComponent } from './app/inline-edit/inline-edit.component';
 import { SatPopoverModule } from '@ncstate/sat-popover';
 import { StepperComponent } from './app/stepper/stepper.component';
 import {  MatToolbarModule } from '@angular/material/toolbar';
-import { UploadFileComponent } from './app/uploadFile/upload-file.component';
+import { ImportComponent } from './app/uploadFile/import.component';
 import { ProgressComponent } from './app/uploadFile/progress/progress.component';
 import { DndDirective } from './app/uploadFile/dnd.directive';
 import { DialogComponent } from './app/dialog/dialog.component';
@@ -46,7 +46,7 @@ import { SettingsDialogComponent } from './app/settings/settings-dialog/settings
     InlineEditComponent,
     StepperComponent,
     TableComponent,
-    UploadFileComponent,
+    ImportComponent,
     ProgressComponent,
     DndDirective,
     DialogComponent,

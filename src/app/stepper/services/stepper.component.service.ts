@@ -53,7 +53,7 @@ export class StepperComponentService {
       profitPercentage: 0,
       minimumProfit : 0,
       sCode: ''
-    }as Setting ;
+    }as Setting;
 
     this.dialog.open(SettingsDialogComponent, {
       width: '250px',

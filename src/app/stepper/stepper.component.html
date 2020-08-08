@@ -2,7 +2,7 @@
   <mat-step> 
       <ng-template matStepLabel>Φόρτωσε το αρχείο</ng-template>     
       <!--<input type="file"  />-->
-      <upload-file (eventUpdateDataSource)=updateDataSource($event)>loading</upload-file>
+      <import (eventUpdateDataSource)=updateDataSource($event)>loading</import>
       <div style="float: right;">
           <button mat-button matStepperNext>Επόμενο</button>
       </div>  

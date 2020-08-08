@@ -1,6 +1,5 @@
 import { Product } from 'src/app/data/interfaces/product.interface';
 
-
 interface Error {
     msg: string;
     code: ErrorCode;

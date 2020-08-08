@@ -6,11 +6,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'upload-file',
-  templateUrl: './upload-file.component.html',
-  styleUrls: [ './upload-file.component.scss' ]
+  selector: 'import',
+  templateUrl: './import.component.html',
+  styleUrls: [ './import.component.scss' ]
 })
-export class UploadFileComponent  {
+export class ImportComponent  {
   files: any[] = [];
   constructor(private service: StepperComponentService,
               public dialog: MatDialog) { }
