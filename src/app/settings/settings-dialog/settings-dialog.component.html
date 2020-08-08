@@ -2,19 +2,19 @@
 <div mat-dialog-content>
 <mat-form-field>
     <mat-label>Όνομα</mat-label>
-    <input matInput [(ngModel)]="data.name">
+    <input matInput [(ngModel)]="data.product.name">
 </mat-form-field>
 <mat-form-field>
     <mat-label>Ποσοστό (%)</mat-label>
-    <input matInput [(ngModel)]="data.profitPercentage">
+    <input matInput [(ngModel)]="data.product.profitPercentage">
 </mat-form-field>
 <mat-form-field>
-    <mat-label>Ποσοστό (€)</mat-label>
-    <input matInput [(ngModel)]="data.minimumProfit">
+    <mat-label>Ελάχιστο κέρδος (€)</mat-label>
+    <input matInput [(ngModel)]="data.product.minimumProfit">
 </mat-form-field>
 <mat-form-field>
     <mat-label>Κωδικός</mat-label>
-    <input matInput [(ngModel)]="data.sCode">
+    <input matInput [(ngModel)]="data.product.sCode">
 </mat-form-field>
 
   <p>{{data.content}}</p>

@@ -7,12 +7,12 @@ import { Setting } from '../data/interfaces/setting.interface';
 
 
 @Component({
-    selector: 'rules-table',
-    templateUrl: './rules-table.component.html',
-    styleUrls: ['./rules-table.component.css']
+    selector: 'settings-table',
+    templateUrl: './settings-table.component.html',
+    styleUrls: ['./settings-table.component.css']
 })
 
-export class RulesTableComponent implements OnInit {
+export class SettingsTableComponent implements OnInit {
     displayedColumns: string[] =
       ['name', 'profitPercentage', 'minimumProfit', 'kefCode' , 'action', 'delete'];
     dataSource: MatTableDataSource<Setting>;

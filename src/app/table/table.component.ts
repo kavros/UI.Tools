@@ -133,10 +133,7 @@ export class TableComponent implements OnInit {
     const response =
       this.service
           .updateRetailPrices(this.updateSelection, this.invoiceDate);
-    //console.log(this.invoiceDate);
-    
     response.subscribe(content => {
-      
       this.openDialog('επιτυχής ενημέρωση', '');
     });
     console.log(this.updateSelection);
