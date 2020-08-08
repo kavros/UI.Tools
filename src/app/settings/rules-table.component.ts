@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
-import { Rule } from '../data/interfaces/rule.interface';
+import { Setting } from '../data/interfaces/setting.interface';
 
 
 
@@ -15,19 +15,19 @@ import { Rule } from '../data/interfaces/rule.interface';
 export class RulesTableComponent implements OnInit {
     displayedColumns: string[] =
       ['name', 'profitPercentage', 'minimumProfit', 'kefCode' , 'action', 'delete'];
-    dataSource: MatTableDataSource<Rule>;
+    dataSource: MatTableDataSource<Setting>;
 
     constructor(public dialog: MatDialog) {}
 
     ngOnInit(): void {
-      this.dataSource = new MatTableDataSource<Rule>();
+      this.dataSource = new MatTableDataSource<Setting>();
       this.dataSource.data.push(
       {
         name: 'Ntomates',
         profitPercentage: 0.3,
         minimumProfit : 0.5,
         sCode: '2082'
-      }as Rule);
+      }as Setting);
     }
 
     applyFilter(event: Event) {
@@ -41,7 +41,7 @@ export class RulesTableComponent implements OnInit {
         profitPercentage: 0.3,
         minimumProfit : 0.5,
         sCode: '2082'
-      }as Rule ;
+      }as Setting ;
 
       this.dialog.open(SettingsDialogComponent, {
         width: '250px',
@@ -51,7 +51,7 @@ export class RulesTableComponent implements OnInit {
       //TODO add data to array and refresh table
     }
 
-    editRule(row: Rule) {
+    editRule(row: Setting) {
       console.log(row);
       this.dialog.open(SettingsDialogComponent, {
         width: '250px',

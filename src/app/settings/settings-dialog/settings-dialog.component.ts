@@ -1,13 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Rule } from 'src/app/data/interfaces/rule.interface';
+import { Setting } from 'src/app/data/interfaces/setting.interface';
 
 
 export interface SettingsDialogData {
-    rule: Rule;
+    rule: Setting;
     title: string;
 }
-
 
 @Component({
     selector: 'settings-dialog',
