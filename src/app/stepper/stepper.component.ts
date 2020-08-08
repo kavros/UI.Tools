@@ -4,7 +4,7 @@ import { Product } from 'src/app/data/interfaces/product.interface';
 import { Profit } from '../data/interfaces/profit.interface';
 import { IconStatus } from '../data/interfaces/icon-status.interface';
 import { TableComponent } from '../table/table.component';
-import { ImportDTO } from '../uploadFile/dto/upload-file-dto';
+import { ImportDTO } from '../uploadFile/dto/import-dto';
 
 
 @Component({

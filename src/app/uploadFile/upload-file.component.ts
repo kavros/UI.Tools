@@ -1,7 +1,6 @@
 import { Component, Inject, EventEmitter, Output } from '@angular/core';
 import { StepperComponentService } from '../stepper/services/stepper.component.service';
-import { ImportDTO } from './dto/upload-file-dto';
-import { map } from 'rxjs/operators';
+import { ImportDTO } from './dto/import-dto';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
