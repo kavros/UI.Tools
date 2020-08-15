@@ -1,5 +1,5 @@
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { ImportDTO } from 'src/app/uploadFile/dto/import-dto';
 import { catchError, map } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { Product } from 'src/app/data/interfaces/product.interface';
 import { Setting } from 'src/app/data/interfaces/setting.interface';
 import { SettingsDialogComponent } from 'src/app/settings/settings-dialog/settings-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 
 
 @Injectable({
@@ -15,7 +16,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class StepperComponentService {
 
   constructor(private httpClient: HttpClient,
-              public dialog: MatDialog) { }
+              private dialog: MatDialog,
+              private snackBar: SnackBarService) { }
 
   public importAndGetStepperData( uploadImageData: FormData ): Observable<ImportDTO> {
     return  this.httpClient
@@ -29,41 +31,38 @@ export class StepperComponentService {
             map( (res: ImportDTO ) => res));
   }
 
-  private handleImportErrors( err ): Observable<never> {
-    if (err.status === 400) {
 
+  private handleImportErrors( err: { status: number; error: ImportDTO; } ): Observable<never> {
+    if (err.status === 400) {
       const responseData = err.error as ImportDTO;
-      console.log(responseData.errors[0].code);
-      console.log(responseData.errors[0].msg);
       const productName = (responseData.errors[0].msg)
                           .split(':')[1]
                           .trim();
-      this.openAddSettingDialog(productName);
+      this.openAddSettingDialogFor(productName);
+    } else {
+      this.snackBar.showError('Αποτυχία φόρτωσης αρχείου', 'Ok');
     }
 
     return throwError('Failed to retrive main table data');
   }
 
-
-  private openAddSettingDialog(productName: string): void{
-
-    console.log(productName);
-    const newProduct = {
-      name: productName,
+  private openAddSettingDialogFor(productName: string): void {
+    const newSetting = {
+      sName: productName,
       profitPercentage: 0,
-      minimumProfit : 0,
+      minProfit : 0,
       sCode: ''
     }as Setting;
 
     this.dialog.open(SettingsDialogComponent, {
       width: '250px',
-      data: {title: 'Καταχώρηση νέου κανόνα', product: newProduct},
+      data: {title: 'Καταχώρηση νέου κανόνα', setting: newSetting},
+      disableClose: true
     });
-    console.log(newProduct);
   }
 
   public updateRetailPrices( data: Product[], date: string): Observable<any> {
-    const enpointData = data.map( function(product) {
+    const enpointData = data.map( product => {
       return  {
                 name: product.name,
                 newPrice: product.newPrice
@@ -79,6 +78,4 @@ export class StepperComponentService {
                   dto
                 );
   }
-
-
 }

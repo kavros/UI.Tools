@@ -23,7 +23,6 @@ import { SideNavComponent } from './app/sidenav/side-nav.component';
 import { SettingsTableComponent } from './app/settings/settings-table.component';
 import { SettingsDialogComponent } from './app/settings/settings-dialog/settings-dialog.component';
 
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -40,7 +39,7 @@ import { SettingsDialogComponent } from './app/settings/settings-dialog/settings
   ],
   entryComponents: [
     StepperComponent,
-    SideNavComponent,
+    SideNavComponent
   ],
   declarations: [
     InlineEditComponent,

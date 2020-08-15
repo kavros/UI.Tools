@@ -2,24 +2,24 @@
 <div mat-dialog-content>
 <mat-form-field>
     <mat-label>Όνομα</mat-label>
-    <input matInput [(ngModel)]="data.product.name">
+    <input matInput [(ngModel)]="data.setting.sName">
 </mat-form-field>
 <mat-form-field>
     <mat-label>Ποσοστό (%)</mat-label>
-    <input matInput [(ngModel)]="data.product.profitPercentage">
+    <input matInput [(ngModel)]="data.setting.profitPercentage">
 </mat-form-field>
 <mat-form-field>
     <mat-label>Ελάχιστο κέρδος (€)</mat-label>
-    <input matInput [(ngModel)]="data.product.minimumProfit">
+    <input matInput [(ngModel)]="data.setting.minProfit">
 </mat-form-field>
 <mat-form-field>
     <mat-label>Κωδικός</mat-label>
-    <input matInput [(ngModel)]="data.product.sCode">
+    <input matInput [(ngModel)]="data.setting.sCode">
 </mat-form-field>
 
   <p>{{data.content}}</p>
 </div>
 <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]>Άκυρο</button>
-    <button mat-button [mat-dialog-close]>Καταχώρηση</button>
+    <button mat-button [mat-dialog-close] (click)='saveSetting()'>Καταχώρηση</button>
 </div>

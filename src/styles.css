@@ -1,8 +1,14 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+/*@import '~@angular/material/prebuilt-themes/indigo-pink.css';*/
 
 
 /*align print and update buttons*/
 .auto-height-class .example-button-row .mat-list-item .mat-list-item-content {
   justify-content: flex-end;
+}
+
+.error-snackbar {
+  background: #a31f22;
+  color: white;
 }

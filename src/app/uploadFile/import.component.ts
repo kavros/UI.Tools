@@ -78,7 +78,6 @@ export class ImportComponent  {
     this.uploadFilesSimulator(0);
   }
 
- 
   formatBytes(bytes, decimals) {
     if (bytes === 0) {
       return '0 Bytes';

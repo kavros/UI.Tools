@@ -5,7 +5,6 @@ import { SettingsDialogComponent } from './settings-dialog/settings-dialog.compo
 import { Setting } from '../data/interfaces/setting.interface';
 
 
-
 @Component({
     selector: 'settings-table',
     templateUrl: './settings-table.component.html',
@@ -23,9 +22,9 @@ export class SettingsTableComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Setting>();
       this.dataSource.data.push(
       {
-        name: 'Ntomates',
+        sName: 'Ntomates',
         profitPercentage: 0.3,
-        minimumProfit : 0.5,
+        minProfit : 0.5,
         sCode: '2082'
       }as Setting);
     }
@@ -37,9 +36,9 @@ export class SettingsTableComponent implements OnInit {
 
     openDialog() {
       const newProduct = {
-        name: '',
+        sName: '',
         profitPercentage: 0.3,
-        minimumProfit : 0.5,
+        minProfit : 0.5,
         sCode: '2082'
       }as Setting ;
 

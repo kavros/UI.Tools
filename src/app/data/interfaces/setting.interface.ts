@@ -1,6 +1,6 @@
 export interface Setting {
-    name: string;
+    sName: string;
     profitPercentage: number;
-    minimumProfit: number;
+    minProfit: number;
     sCode: string;
 }
