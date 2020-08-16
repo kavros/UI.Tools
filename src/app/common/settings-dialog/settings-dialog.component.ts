@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Setting } from 'src/app/data/interfaces/setting.interface';
-import { SettingsService } from '../settings.service';
+import { SettingsService } from '../../settings/settings.service';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 
 
@@ -21,7 +21,7 @@ export class SettingsDialogComponent  {
         public dialogRef: MatDialogRef<SettingsDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: SettingsDialogData,
         private services: SettingsService,
-        private snackBar: SnackBarService) {}
+        private snackBar: SnackBarService ) {}
 
     onNoClick(): void {
         this.dialogRef.close();

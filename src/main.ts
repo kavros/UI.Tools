@@ -21,7 +21,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { DemoMaterialModule } from './material-module';
 import { SideNavComponent } from './app/sidenav/side-nav.component';
 import { SettingsTableComponent } from './app/settings/settings-table.component';
-import { SettingsDialogComponent } from './app/settings/settings-dialog/settings-dialog.component';
+import { SettingsDialogComponent } from './app/common/settings-dialog/settings-dialog.component';
 
 @NgModule({
   imports: [
