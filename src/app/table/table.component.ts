@@ -4,8 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/data/interfaces/product.interface';
 import { TableState } from './enums/table-state.enum';
 import { DialogComponent } from '../dialog/dialog.component';
-import { MatDialog } from '@angular/material/dialog';
 import { StepperComponentService } from '../stepper/services/stepper.component.service';
+import { SnackBarService } from '../common/snackBar/snackBar.service';
 
 export class Button {
   public isVisible: boolean;
@@ -32,8 +32,8 @@ export class TableComponent implements OnInit {
   private print = new Button();
   private updateKefalaio = new Button();
 
-  constructor( public dialog: MatDialog,
-               private service: StepperComponentService) {}
+  constructor( private service: StepperComponentService,
+               private snackBarService: SnackBarService ) {}
 
   ngOnInit(): void {
     this.printSelection = [];
@@ -133,22 +133,14 @@ export class TableComponent implements OnInit {
     const response =
       this.service
           .updateRetailPrices(this.updateSelection, this.invoiceDate);
-    response.subscribe(content => {
-      this.openDialog('επιτυχής ενημέρωση', '');
+    response.subscribe(() => {
+      this.snackBarService.showInfo('Η ενημέρωση των τιμών έγινε επιτυχώς', 'Ok');
     });
     console.log(this.updateSelection);
   }
 
   printLabels() {
     console.log(this.printSelection);
-  }
-
-  openDialog(header: string, data: string) {
-    this.dialog.open(DialogComponent, {
-      width: '250px',
-      data: {title: header, content: data}
-    });
-
   }
 
   isCounterGreaterThanZero(element: Product) {

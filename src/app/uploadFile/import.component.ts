@@ -1,9 +1,8 @@
-import { Component, Inject, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { StepperComponentService } from '../stepper/services/stepper.component.service';
 import { ImportDTO } from './dto/import-dto';
-import { DialogComponent } from '../dialog/dialog.component';
-import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { SnackBarService } from '../common/snackBar/snackBar.service';
 
 @Component({
   selector: 'import',
@@ -13,7 +12,7 @@ import { Observable } from 'rxjs';
 export class ImportComponent  {
   files: any[] = [];
   constructor(private service: StepperComponentService,
-              public dialog: MatDialog) { }
+              private snackBarService: SnackBarService) { }
   @Output() eventUpdateDataSource =  new EventEmitter();
 
   onFileDropped($event) {
@@ -33,10 +32,7 @@ export class ImportComponent  {
 
       if (hasWarnings || hasErrors ) {
           const msg =  res.warnings + '' + res.errors;
-          this.dialog.open(DialogComponent, {
-            width: '250px',
-            data: {title: 'Problems', content: msg}
-          });
+          this.snackBarService.showInfo(msg, 'Ok');
       }
       this.eventUpdateDataSource.emit(res);
     });
