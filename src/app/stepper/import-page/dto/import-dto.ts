@@ -1,4 +1,4 @@
-import { Product } from 'src/app/data/interfaces/product.interface';
+import { Product } from 'src/app/stepper/interfaces/product.interface';
 
 interface Error {
     msg: string;

@@ -1,11 +1,10 @@
 import {Component, OnInit, ViewChild, Input} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Product } from 'src/app/data/interfaces/product.interface';
-import { Profit } from '../data/interfaces/profit.interface';
-import { IconStatus } from '../data/interfaces/icon-status.interface';
-import { TableComponent } from '../table/table.component';
-import { ImportDTO } from '../uploadFile/dto/import-dto';
-
+import { Product } from 'src/app/stepper/interfaces/product.interface';
+import { Profit } from './interfaces/profit.interface';
+import { IconStatus } from './interfaces/icon-status.interface';
+import { ImportDTO } from './import-page/dto/import-dto';
+import { TableComponent } from './table/table.component';
 
 @Component({
   selector: 'app-stepper-component',

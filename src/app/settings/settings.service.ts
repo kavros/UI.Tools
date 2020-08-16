@@ -1,4 +1,4 @@
-import { Setting } from '../data/interfaces/setting.interface';
+import { Setting } from '../common/interfaces/setting.interface';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

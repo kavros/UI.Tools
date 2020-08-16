@@ -1,5 +1,5 @@
-import { IconStatus } from './interfaces/icon-status.interface';
-import { Product } from './interfaces/product.interface';
+import { IconStatus } from '../stepper/interfaces/icon-status.interface';
+import { Product } from '../stepper/interfaces/product.interface';
 
 export class MockTableData {
 

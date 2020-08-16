@@ -1,8 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MockTableData } from '../data/mock-table-data';
-import { Product } from '../data/interfaces/product.interface';
-
 
 @Component({
   selector: 'side-nav',

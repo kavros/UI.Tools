@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { SettingsDialogComponent } from '../common/settings-dialog/settings-dialog.component';
-import { Setting } from '../data/interfaces/setting.interface';
+import { Setting } from '../common/interfaces/setting.interface';
 
 
 @Component({

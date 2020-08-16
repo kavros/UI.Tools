@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Setting } from 'src/app/data/interfaces/setting.interface';
+import { Setting } from 'src/app/common/interfaces/setting.interface';
 import { SettingsService } from '../../settings/settings.service';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 

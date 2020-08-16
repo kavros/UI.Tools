@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { StepperComponentService } from '../stepper/services/stepper.component.service';
+import { StepperComponentService } from '../services/stepper.component.service';
 import { ImportDTO } from './dto/import-dto';
 import { Observable } from 'rxjs';
-import { SnackBarService } from '../common/snackBar/snackBar.service';
+import { SnackBarService } from '../../common/snackBar/snackBar.service';
 
 @Component({
   selector: 'import',

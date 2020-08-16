@@ -1,10 +1,10 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Product } from 'src/app/data/interfaces/product.interface';
+import { Product } from 'src/app/stepper/interfaces/product.interface';
 import { TableState } from './enums/table-state.enum';
-import { StepperComponentService } from '../stepper/services/stepper.component.service';
-import { SnackBarService } from '../common/snackBar/snackBar.service';
+import { SnackBarService } from '../../common/snackBar/snackBar.service';
+import { StepperComponentService } from '../services/stepper.component.service';
 
 export class Button {
   public isVisible: boolean;
