@@ -16,7 +16,6 @@ import {  MatToolbarModule } from '@angular/material/toolbar';
 import { ImportComponent } from './app/uploadFile/import.component';
 import { ProgressComponent } from './app/uploadFile/progress/progress.component';
 import { DndDirective } from './app/uploadFile/dnd.directive';
-import { DialogComponent } from './app/dialog/dialog.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DemoMaterialModule } from './material-module';
 import { SideNavComponent } from './app/sidenav/side-nav.component';
@@ -48,7 +47,6 @@ import { SettingsDialogComponent } from './app/common/settings-dialog/settings-d
     ImportComponent,
     ProgressComponent,
     DndDirective,
-    DialogComponent,
     SettingsDialogComponent,
     SideNavComponent,
     SettingsTableComponent

@@ -3,7 +3,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/data/interfaces/product.interface';
 import { TableState } from './enums/table-state.enum';
-import { DialogComponent } from '../dialog/dialog.component';
 import { StepperComponentService } from '../stepper/services/stepper.component.service';
 import { SnackBarService } from '../common/snackBar/snackBar.service';
 
