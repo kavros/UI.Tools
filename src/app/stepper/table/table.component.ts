@@ -48,10 +48,9 @@ export class TableComponent implements OnInit {
     this.print.isVisible = false;
   }
 
-  updateStep2CheckBoxes(): void{
+  updateStep2CheckBoxes(): void {
     this.updateSelection =
       this.dataSource.data.filter( x => x.isUpdateRequired === true);
-    //console.log(updateSelection);
     if ( this.updateSelection.length > 0 ) {
       this.updateKefalaio.isDisabled = false;
     }
@@ -90,18 +89,32 @@ export class TableComponent implements OnInit {
     }
   }
 
-  updateNewPrice(el: Product, newPrice: string) {
+  updateNewPrice(el: Product, newPrice: string): void {
     if (newPrice == null ) { return; }
-    el.newPrice = Number(newPrice);
+    el.newPrice = this.getNumberFromString(newPrice);
     el.profitInEuro = el.newPrice - (el.invoicePrice * 1.13);
-    //TODO: update Status, round number
+    //TODO: update Trend
   }
 
-  updateProfit(el: Product, profit: string) {
+  updateProfit(el: Product, profit: string): void {
     if (profit == null ) { return; }
-    el.profitInEuro = Number(profit);
+    el.profitInEuro = this.getNumberFromString(profit);
     el.newPrice = (el.invoicePrice * 1.13) + el.profitInEuro;
-    //TODO: update Status, round number
+    el.newPrice = this.round(el.newPrice, 2);
+
+    //TODO: update Trend
+  }
+
+  private getNumberFromString(value: string): number {
+    if ( value.search(',') !== -1 ){
+        value = value.replace(',', '.');
+    }
+    return Number(value);
+  }
+
+  private round(value: number, precision: number) {
+    const multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
   }
 
   setUpdatePricesState() {
