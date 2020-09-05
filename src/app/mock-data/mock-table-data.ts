@@ -1,8 +1,7 @@
 import { IconStatus } from '../stepper/interfaces/icon-status.interface';
-import { Product } from '../stepper/interfaces/product.interface';
+import { Product } from '../stepper/interfaces/product';
 
 export class MockTableData {
-
 raisePriceIcon = {
     name: 'trending_up',
     color: 'red',

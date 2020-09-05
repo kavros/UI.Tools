@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { ImportDTO } from 'src/app/stepper/import-page/dto/import-dto';
 import { catchError, map } from 'rxjs/operators';
-import { Product } from 'src/app/stepper/interfaces/product.interface';
+import { Product } from 'src/app/stepper/interfaces/product';
 import { Setting } from 'src/app/common/interfaces/setting.interface';
 import { SettingsDialogComponent } from 'src/app/common/settings-dialog/settings-dialog.component';
 import { MatDialog } from '@angular/material/dialog';

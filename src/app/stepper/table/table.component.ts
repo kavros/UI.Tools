@@ -1,7 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Product } from 'src/app/stepper/interfaces/product.interface';
+import { Product } from 'src/app/stepper/interfaces/product';
 import { TableState } from './enums/table-state.enum';
 import { SnackBarService } from '../../common/snackBar/snackBar.service';
 import { StepperComponentService } from '../services/stepper.component.service';
@@ -87,34 +87,6 @@ export class TableComponent implements OnInit {
       const index = products.indexOf(product, 0);
       products.splice(index, 1);
     }
-  }
-
-  updateNewPrice(el: Product, newPrice: string): void {
-    if (newPrice == null ) { return; }
-    el.newPrice = this.getNumberFromString(newPrice);
-    el.profitInEuro = el.newPrice - (el.invoicePrice * 1.13);
-    //TODO: update Trend
-  }
-
-  updateProfit(el: Product, profit: string): void {
-    if (profit == null ) { return; }
-    el.profitInEuro = this.getNumberFromString(profit);
-    el.newPrice = (el.invoicePrice * 1.13) + el.profitInEuro;
-    el.newPrice = this.round(el.newPrice, 2);
-
-    //TODO: update Trend
-  }
-
-  private getNumberFromString(value: string): number {
-    if ( value.search(',') !== -1 ){
-        value = value.replace(',', '.');
-    }
-    return Number(value);
-  }
-
-  private round(value: number, precision: number) {
-    const multiplier = Math.pow(10, precision || 0);
-    return Math.round(value * multiplier) / multiplier;
   }
 
   setUpdatePricesState() {

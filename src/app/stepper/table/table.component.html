@@ -72,7 +72,7 @@
             hasBackdrop
             xAlign="start"
             yAlign="start"
-            (closed)="updateProfit(element, $event)">
+            (closed)="element.setProfit($event)">
           <inline-edit 
             [value]="element.profitInEuro" 
             [line2] = "'Εισάγετε το επιθυμητό κέρδος'"
@@ -105,7 +105,7 @@
             hasBackdrop
             xAlign="start"
             yAlign="start"
-            (closed)="updateNewPrice(element, $event)">
+            (closed)="element.setNewPrice($event)">
 
             <inline-edit 
               [value]="element.newPrice" 
