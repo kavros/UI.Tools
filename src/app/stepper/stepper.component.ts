@@ -18,6 +18,29 @@ export class StepperComponent implements OnInit {
   invoiceDate: string;
   @ViewChild('table2') tableStep2: TableComponent;
 
+  readonly upward  = {
+    name: 'trending_up',
+    color: 'red',
+    label: 'Αύξηση',
+    counter: 0
+  } as IconStatus;
+
+  readonly stable  = {
+    name: 'trending_flat',
+    color: 'green',
+    label: 'Σταθερή',
+    counter: 0
+  } as IconStatus;
+
+  downward = (elem: Product): IconStatus  => {
+    return {
+      name: 'trending_down',
+      color: 'orange',
+      label: 'Μείωση',
+      counter: this.getPriceDecreasesCounter(elem)
+    } as IconStatus;
+  }
+
   ngOnInit() {
     this.dataSource =  new MatTableDataSource<Product>();
   }
@@ -39,36 +62,20 @@ export class StepperComponent implements OnInit {
 
   private updateTrendColumn(elem: Product) {
     if (elem.newPrice > elem.retailPrice) {
-      elem.status =
-      {
-        name: 'trending_up',
-        color: 'red',
-        label: 'Αύξηση',
-        counter: 0
-      } as IconStatus;
-      elem.isUpdateRequired = true;
-    } else if ( elem.newPrice < elem.retailPrice ) {
-      elem.status =
-      {
-           name: 'trending_down',
-           color: 'orange',
-           label: 'Μείωση',
-           counter: this.getPriceDecreasesCounter(elem)
-      } as IconStatus;
 
-      if (elem.status.counter === 3) {
-        elem.isUpdateRequired = true;
-      } else {
-        elem.isUpdateRequired = false;
-      }
+      elem.status = this.upward;
+      elem.isUpdateRequired = true;
+
+    } else if ( elem.newPrice < elem.retailPrice ) {
+
+      elem.status = this.downward(elem);
+      elem.isUpdateRequired = elem.status.counter === 3 ? true : false;
+
     } else if ( elem.newPrice === elem.retailPrice) {
-      elem.status = {
-        name: 'trending_flat',
-        color: 'green',
-        label: 'Σταθερή',
-        counter: 0
-      } as IconStatus;
+
+      elem.status = this.stable;
       elem.isUpdateRequired = false;
+
     }
   }
 
