@@ -28,10 +28,23 @@ export class SettingsDialogComponent  {
     }
 
     private saveSetting(): void {
+        const minProfit = this.data.setting.minProfit.toString();
+        const profitPercentage = this.data.setting.profitPercentage.toString();
+
+        this.data.setting.minProfit = this.fixFormat(minProfit);
+        this.data.setting.profitPercentage = this.fixFormat(profitPercentage);
+
         this.services.addSetting(this.data.setting)
         .subscribe(() => {
             this.snackBar.showInfo('Επιτυχης καταχώρηση κανόνα.', 'Ok');
             console.log('Setting has been saved successfully');
         });
+    }
+
+    private fixFormat(val: string): number {
+        if ( val.toString().indexOf(',') !== -1 ){
+          val = val.replace(',', '.');
+        }
+        return Number(val);
     }
 }
