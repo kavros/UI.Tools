@@ -12,6 +12,8 @@ export class Product {
     records: number[];
     status: IconStatus;
     isUpdateRequired: boolean;
+    number: string;
+    sCode: string;
 
     constructor(data: Product) {
       this.name = data.name;
