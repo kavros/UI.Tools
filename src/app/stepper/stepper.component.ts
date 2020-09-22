@@ -36,7 +36,4 @@ export class StepperComponent implements OnInit {
 
     console.log(response);
   }
-
- 
-
 }

@@ -3,6 +3,7 @@ import { IconStatus } from './icon-status.interface';
 
 export class Product {
     name: string;
+    origin: string;
     defaultProfit: Profit;
     invoicePrice: number;
     retailPrice: number;
@@ -26,6 +27,9 @@ export class Product {
       this.records = data.records;
       this.status = data.status;
       this.isUpdateRequired = data.isUpdateRequired;
+      this.number = data.number;
+      this.origin = data.origin;
+      this.sCode = data.sCode;
     }
 
     readonly upward  = {

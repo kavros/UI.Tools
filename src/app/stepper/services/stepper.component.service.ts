@@ -8,6 +8,7 @@ import { Setting } from 'src/app/common/interfaces/setting.interface';
 import { SettingsDialogComponent } from 'src/app/common/settings-dialog/settings-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
+import { DownloadLabelsDTO } from '../import-page/dto/download.labels.dto';
 
 
 @Injectable({
@@ -18,6 +19,17 @@ export class StepperComponentService {
   constructor(private httpClient: HttpClient,
               private dialog: MatDialog,
               private snackBar: SnackBarService) { }
+
+
+  public downloadLabels(labels: DownloadLabelsDTO) {
+    return this
+            .httpClient
+            .put(
+              'http://localhost:8080/downloadLabels',
+              labels,
+              { responseType: 'blob' }
+            );
+  }
 
   public importAndGetStepperData( uploadImageData: FormData ): Observable<ImportDTO> {
     return  this.httpClient

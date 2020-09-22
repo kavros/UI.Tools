@@ -5,6 +5,7 @@ import { Product } from 'src/app/stepper/interfaces/product';
 import { TableState } from './enums/table-state.enum';
 import { SnackBarService } from '../../common/snackBar/snackBar.service';
 import { StepperComponentService } from '../services/stepper.component.service';
+import { DownloadLabelsDTO, Label } from '../import-page/dto/download.labels.dto';
 
 export class Button {
   public isVisible: boolean;
@@ -123,7 +124,27 @@ export class TableComponent implements OnInit {
     console.log(this.updateSelection);
   }
 
-  printLabels() {
+  downloadLabels() {
+    const requestData = this.printSelection.map( (el: Product) => {
+      return  {
+        name : el.name,
+        number: el.number,
+        origin: el.origin,
+        price: el.newPrice.toString()
+      } as Label;
+    });
+
+    const dto = {
+      labels: requestData
+    } as DownloadLabelsDTO;
+
+    this.service.downloadLabels(dto).subscribe((data: Blob) => {
+      const downloadURL = window.URL.createObjectURL(data);
+      const link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = 'labels.docx';
+      link.click();
+    });
     console.log(this.printSelection);
   }
 
