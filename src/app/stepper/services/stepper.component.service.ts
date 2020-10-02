@@ -77,7 +77,8 @@ export class StepperComponentService {
     const enpointData = data.map( product => {
       return  {
                 name: product.name,
-                newPrice: product.newPrice
+                newPrice: product.getNewPrice(),
+                sCode: product.sCode
               }; });
 
     const dto = {

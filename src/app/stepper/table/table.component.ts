@@ -27,8 +27,6 @@ export class TableComponent implements OnInit {
   @Input() invoiceDate: string;
 
   selection = new SelectionModel<Product>(true, []);
-  printSelection: Product[];
-  updateSelection: Product[];
   private print = new Button();
   private updateKefalaio = new Button();
 
@@ -36,8 +34,6 @@ export class TableComponent implements OnInit {
                private snackBarService: SnackBarService ) {}
 
   ngOnInit(): void {
-    this.printSelection = [];
-    this.updateSelection = [];
     if (this.currentState === TableState.UPDATE_PRICES) {
       this.setUpdatePricesState();
     } else if (this.currentState === TableState.PRINT_LABELS) {
@@ -49,45 +45,32 @@ export class TableComponent implements OnInit {
     this.print.isVisible = false;
   }
 
-  updateStep2CheckBoxes(): void {
-    this.updateSelection =
-      this.dataSource.data.filter( x => x.isUpdateRequired === true);
-    if ( this.updateSelection.length > 0 ) {
-      this.updateKefalaio.isDisabled = false;
-    }
-
-  }
-
   checkboxLabel(row?: Product): string {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name}`;
   }
 
   addOrRemoveFromPrintSelection(product: Product) {
-    this.addOrRemove(this.printSelection, product);
-    this.enableOrDisableButton(this.printSelection.length, this.print);
+    product.printLabel = !product.printLabel;
+    const printIndex = this.dataSource.data.findIndex(x => x.printLabel === true);
+    if (printIndex === -1) {
+      this.print.isDisabled = true;
+    } else {
+      this.print.isDisabled = false;
+    }
   }
 
-  private enableOrDisableButton( listLength: number, button: Button ) {
-    if (listLength > 0) {
-      button.isDisabled = false;
+  updateDownloadButton(): void {
+    const updateIndex = this.dataSource.data.findIndex(x => x.isUpdateRequired === true);
+    if (updateIndex === -1) {
+      this.updateKefalaio.isDisabled = true;
     } else {
-      button.isDisabled = true;
+      this.updateKefalaio.isDisabled = false;
     }
   }
 
   addOrRemoveFromUpdateSelection(product: Product) {
-    this.addOrRemove(this.updateSelection, product);
-    this.enableOrDisableButton(this.updateSelection.length, this.updateKefalaio);
-  }
-
-  private addOrRemove(products: Product[], product: Product) {
-    const isProductSelected = products.includes(product);
-    if (!isProductSelected) {
-      products.push(product);
-    } else {
-      const index = products.indexOf(product, 0);
-      products.splice(index, 1);
-    }
+    product.isUpdateRequired = !product.isUpdateRequired;
+    this.updateDownloadButton();
   }
 
   setUpdatePricesState() {
@@ -115,22 +98,26 @@ export class TableComponent implements OnInit {
   }
 
   updateDatabase() {
+    const updateSelection =
+      this.dataSource.data.filter( x => x.isUpdateRequired === true);
+
     const response =
       this.service
-          .updateRetailPrices(this.updateSelection, this.invoiceDate);
+          .updateRetailPrices(updateSelection, this.invoiceDate);
     response.subscribe(() => {
       this.snackBarService.showInfo('Η ενημέρωση των τιμών έγινε επιτυχώς', 'Ok');
     });
-    console.log(this.updateSelection);
+    console.log(updateSelection);
   }
 
   downloadLabels() {
-    const requestData = this.printSelection.map( (el: Product) => {
+    const printSelection = this.dataSource.data.filter(x => x.printLabel === true);
+    const requestData = printSelection.map( (el: Product) => {
       return  {
         name : el.name,
         number: el.number,
         origin: el.origin,
-        price: el.newPrice.toString()
+        price: el.getNewPrice().toString()
       } as Label;
     });
 
@@ -145,7 +132,7 @@ export class TableComponent implements OnInit {
       link.download = 'labels.docx';
       link.click();
     });
-    console.log(this.printSelection);
+    console.log(printSelection);
   }
 
   isCounterGreaterThanZero(element: Product) {

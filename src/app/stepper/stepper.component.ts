@@ -32,7 +32,7 @@ export class StepperComponent implements OnInit {
     });
     this.invoiceDate = response.invoiceDate;
     this.dataSource._updateChangeSubscription();
-    this.tableStep2.updateStep2CheckBoxes();
+    this.tableStep2.updateDownloadButton();
 
     console.log(response);
   }

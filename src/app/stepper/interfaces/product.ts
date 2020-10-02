@@ -7,14 +7,15 @@ export class Product {
     defaultProfit: Profit;
     invoicePrice: number;
     retailPrice: number;
-    newPrice: number;
-    profitInEuro: number;
+    private newPrice: number;
+    private profitInEuro: number;
     profitPercentage: number;
     records: number[];
     status: IconStatus;
     isUpdateRequired: boolean;
     number: string;
     sCode: string;
+    printLabel: boolean;
 
     constructor(data: Product) {
       this.name = data.name;
@@ -30,6 +31,7 @@ export class Product {
       this.number = data.number;
       this.origin = data.origin;
       this.sCode = data.sCode;
+      this.printLabel = false;
     }
 
     readonly upward  = {
@@ -74,6 +76,10 @@ export class Product {
       this.profitInEuro = this.newPrice - (this.invoicePrice * 1.13);
       this.profitInEuro = this.round(this.profitInEuro, 2);
       this.updateTrendColumn();
+    }
+
+    getNewPrice(): number {
+      return this.newPrice;
     }
 
     setProfit( profit: string): void {
