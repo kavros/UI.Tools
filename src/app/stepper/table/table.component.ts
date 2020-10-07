@@ -129,7 +129,7 @@ export class TableComponent implements OnInit {
       const downloadURL = window.URL.createObjectURL(data);
       const link = document.createElement('a');
       link.href = downloadURL;
-      link.download = 'labels.docx';
+      link.download = 'labels.pdf';
       link.click();
     });
     console.log(printSelection);
