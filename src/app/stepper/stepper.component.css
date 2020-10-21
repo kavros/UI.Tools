@@ -5,3 +5,17 @@
 .mat-form-field {
   margin-top: 16px;
 }
+
+.completed-icon {
+  font-size: 50px;
+  position: relative;
+  top: 12px;
+}
+
+.completed-msg{
+  font-size: 26px;
+}
+
+.end-page-content {
+  text-align: center;
+}

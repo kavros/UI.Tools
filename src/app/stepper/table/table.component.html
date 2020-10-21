@@ -8,7 +8,9 @@
     </button>  
   <button mat-raised-button color="primary"  *ngIf="print.isVisible"
       [disabled]="print.isDisabled"
-      (click)="downloadLabels()">Εκτύπωση
+      (click)="downloadLabels()">
+      <mat-icon >cloud_download</mat-icon>
+      Ταμπέλες
   </button>    
   </mat-list-item>
 </div>

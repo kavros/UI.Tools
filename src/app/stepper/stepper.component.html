@@ -38,20 +38,24 @@
   </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel>Τέλος.</ng-template>    
-    <ul>
-      <li> 
-        Ιστορικό (με ποσοστά κέρδους).
-        (<a href> Εκτύπωση,  </a>
-        <a href> Ανοιγμα </a>)
-      </li>
-      <li>Νέες τιμές.
-          (<a href> Εκτύπωση,  </a>
-          <a href> Ανοιγμα </a>)
-      </li>      
-    </ul> 
-   
-    <div>
+    <ng-template matStepLabel>Τέλος.</ng-template>
+    <mat-list class="auto-height-class"  >
+        <div class="example-button-row">
+          <mat-list-item >
+            <button mat-raised-button color="primary"  style="float: right;"
+              (click)="downloadHistory()">
+              <mat-icon>cloud_download</mat-icon>
+              Ιστορικό
+            </button>  
+          </mat-list-item>  
+        </div>
+    </mat-list>
+     <div class="end-page-content">
+      <mat-divider></mat-divider>
+      <mat-icon class="completed-icon" [inline]="true">check_circle_outline</mat-icon>
+      <span class="completed-msg">H διαδικασία ολοκληρώθηκε.</span>
+    </div>     
+    <div style="float: right;">
       <button mat-button matStepperPrevious>Προηγούμενο</button>
       <button mat-button (click)="stepper.reset()">Αρχή</button>
     </div>

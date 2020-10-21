@@ -4,6 +4,7 @@ import { Product } from 'src/app/stepper/interfaces/product';
 import { Profit } from './interfaces/profit.interface';
 import { ImportDTO } from './import-page/dto/import-dto';
 import { TableComponent } from './table/table.component';
+import { StepperComponentService } from './services/stepper.component.service';
 
 @Component({
   selector: 'app-stepper-component',
@@ -16,6 +17,8 @@ export class StepperComponent implements OnInit {
   dataSource: MatTableDataSource<Product>;
   invoiceDate: string;
   @ViewChild('table2') tableStep2: TableComponent;
+
+  constructor( private service: StepperComponentService ) {}
 
   ngOnInit() {
     this.dataSource =  new MatTableDataSource<Product>();
@@ -35,5 +38,15 @@ export class StepperComponent implements OnInit {
     this.tableStep2.updateDownloadButton();
 
     console.log(response);
+  }
+
+  downloadHistory() {
+    this.service.downloadHistoryDoc().subscribe((data: Blob) => {
+      const downloadURL = window.URL.createObjectURL(data);
+      const link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = 'history.docx';
+      link.click();
+    });
   }
 }

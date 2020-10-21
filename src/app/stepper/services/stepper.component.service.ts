@@ -31,6 +31,19 @@ export class StepperComponentService {
             );
   }
 
+  public downloadHistoryDoc() {
+    return this
+            .httpClient
+            .get(
+              'http://localhost:8080/downloadHistoryDoc',
+              { responseType: 'blob' }
+            ).pipe(
+              catchError( () => {
+                this.snackBar.showError('Αποτυχία λήψης ιστορικού.', 'Ok') ;
+                return throwError('Failed to retrive response');
+              }));
+  }
+
   public importAndGetStepperData( uploadImageData: FormData ): Observable<ImportDTO> {
     return  this.httpClient
       .post<ImportDTO>(
