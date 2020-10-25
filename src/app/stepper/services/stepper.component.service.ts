@@ -28,6 +28,11 @@ export class StepperComponentService {
               'http://localhost:8080/downloadLabels',
               labels,
               { responseType: 'blob' }
+            ).pipe(
+              catchError( () => {
+                this.snackBar.showError('Αποτυχία λήψης ταμπελών.', 'Ok') ;
+                return throwError('Failed to retrive response');
+              })
             );
   }
 
@@ -41,7 +46,8 @@ export class StepperComponentService {
               catchError( () => {
                 this.snackBar.showError('Αποτυχία λήψης ιστορικού.', 'Ok') ;
                 return throwError('Failed to retrive response');
-              }));
+              })
+            );
   }
 
   public importAndGetStepperData( uploadImageData: FormData ): Observable<ImportDTO> {

@@ -2,7 +2,7 @@ export interface Label {
     name: string;
     number: string;
     origin: string;
-    price: string;
+    sCode: string;
 }
 
 export class DownloadLabelsDTO {

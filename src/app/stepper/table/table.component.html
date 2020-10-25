@@ -4,7 +4,9 @@
   <mat-list-item >    
   <button mat-raised-button color="primary"  *ngIf="updateKefalaio.isVisible"
       [disabled]="updateKefalaio.isDisabled"
-      (click)="updateDatabase();">Ενημέρωση
+      (click)="updateDatabase();">
+      <mat-icon >update</mat-icon>
+      Ενημέρωση
     </button>  
   <button mat-raised-button color="primary"  *ngIf="print.isVisible"
       [disabled]="print.isDisabled"

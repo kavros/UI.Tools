@@ -117,7 +117,7 @@ export class TableComponent implements OnInit {
         name : el.name,
         number: el.number,
         origin: el.origin,
-        price: el.getNewPrice().toString()
+        sCode: el.sCode
       } as Label;
     });
 
