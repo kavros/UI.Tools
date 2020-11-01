@@ -66,10 +66,14 @@ export class StepperComponentService {
   private handleImportErrors( err: { status: number; error: ImportDTO; } ): Observable<never> {
     if (err.status === 400) {
       const responseData = err.error as ImportDTO;
-      const productName = (responseData.errors[0].msg)
-                          .split(':')[1]
-                          .trim();
-      this.openAddSettingDialogFor(productName);
+      console.log(responseData);
+      const products = (responseData.errors[0].msg)
+                          .split('[')[1]
+                          .split(',');
+      products.forEach( p => {
+        p = p.replace(']', '').trim();
+        this.openAddSettingDialogFor(p);
+      });
     } else {
       this.snackBar.showError('Αποτυχία φόρτωσης αρχείου', 'Ok');
     }
