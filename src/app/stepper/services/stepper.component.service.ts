@@ -9,6 +9,7 @@ import { SettingsDialogComponent } from 'src/app/common/settings-dialog/settings
 import { MatDialog } from '@angular/material/dialog';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 import { DownloadLabelsDTO } from '../import-page/dto/download.labels.dto';
+import { MappingsDialogData, MappingsComponent } from 'src/app/mappings/mappings.component';
 
 
 @Injectable({
@@ -72,7 +73,7 @@ export class StepperComponentService {
                           .split(',');
       products.forEach( p => {
         p = p.replace(']', '').trim();
-        this.openAddSettingDialogFor(p);
+        this.openMappingsDialog(p);
       });
     } else {
       this.snackBar.showError('Αποτυχία φόρτωσης αρχείου', 'Ok');
@@ -80,6 +81,27 @@ export class StepperComponentService {
 
     return throwError('Failed to retrive main table data');
   }
+
+  private openMappingsDialog(productName: string): void {
+    this.httpClient
+        .get('http://localhost:8080/getDropdownOptions')
+        .subscribe((dropDownOptions: string[]) => {
+
+          const newMapping = {
+            pName: productName,
+            options: dropDownOptions,
+            tittle: 'Εισαγωγή αντιστοίχισης'
+          }as MappingsDialogData;
+
+
+          this.dialog.open(MappingsComponent, {
+            width: '280px',
+            data: newMapping,
+            disableClose: true
+          });
+        });
+  }
+
 
   private openAddSettingDialogFor(productName: string): void {
     const newSetting = {
