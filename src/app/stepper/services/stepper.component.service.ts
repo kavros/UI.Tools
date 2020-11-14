@@ -9,7 +9,7 @@ import { SettingsDialogComponent } from 'src/app/common/settings-dialog/settings
 import { MatDialog } from '@angular/material/dialog';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 import { DownloadLabelsDTO } from '../import-page/dto/download.labels.dto';
-import { MappingsDialogData, MappingsComponent } from 'src/app/mappings/mappings.component';
+import { MappingsDialogData, MappingsComponent, DropDownDTO } from 'src/app/mappings/mappings.component';
 
 
 @Injectable({
@@ -85,11 +85,11 @@ export class StepperComponentService {
   private openMappingsDialog(productName: string): void {
     this.httpClient
         .get('http://localhost:8080/getDropdownOptions')
-        .subscribe((dropDownOptions: string[]) => {
+        .subscribe((data: DropDownDTO[]) => {
 
           const newMapping = {
             pName: productName,
-            options: dropDownOptions,
+            options: data,
             tittle: 'Εισαγωγή αντιστοίχισης'
           }as MappingsDialogData;
 
