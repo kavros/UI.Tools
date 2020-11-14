@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { Mappings } from './mappings.component';
+import { Mappings } from './mappings.dialog.component';
 import { SnackBarService } from '../common/snackBar/snackBar.service';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
   })
-export class MappingComponentService {
+export class MappingsDialogService {
     constructor(private httpClient: HttpClient,
                 private snackBar: SnackBarService) {}
     public saveMappings(mapping: Mappings): Observable<any> {

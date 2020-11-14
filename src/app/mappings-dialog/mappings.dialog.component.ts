@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MappingComponentService } from './mappings.services';
+import { MappingsDialogService } from './mappings.dialog.services';
 
 export interface MappingsDialogData {
     pName: string;
@@ -16,15 +16,14 @@ export interface Mappings {
     sCode: string;
 }
 @Component({
-    templateUrl: './mappings.component.html',
-    styleUrls: ['./mappings.component.css']
+    templateUrl: './mappings.dialog.component.html'
 })
-export class MappingsComponent {
+export class MappingsDialogComponent {
     selectedMapping: Mappings;
     constructor(
-        public dialogRef: MatDialogRef<MappingsComponent>,
+        public dialogRef: MatDialogRef<MappingsDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: MappingsDialogData,
-        private readonly mappingsService: MappingComponentService ) {}
+        private readonly mappingsService: MappingsDialogService ) {}
 
     saveMapping(): void {
         this.mappingsService.

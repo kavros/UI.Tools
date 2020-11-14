@@ -9,7 +9,7 @@ import { SettingsDialogComponent } from 'src/app/common/settings-dialog/settings
 import { MatDialog } from '@angular/material/dialog';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 import { DownloadLabelsDTO } from '../import-page/dto/download.labels.dto';
-import { MappingsDialogData, MappingsComponent, DropDownDTO } from 'src/app/mappings/mappings.component';
+import { MappingsDialogData, MappingsDialogComponent, DropDownDTO } from 'src/app/mappings-dialog/mappings.dialog.component';
 
 
 @Injectable({
@@ -94,7 +94,7 @@ export class StepperComponentService {
           }as MappingsDialogData;
 
 
-          this.dialog.open(MappingsComponent, {
+          this.dialog.open(MappingsDialogComponent, {
             width: '280px',
             data: newMapping,
             disableClose: true
