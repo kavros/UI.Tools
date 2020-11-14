@@ -1,26 +1,28 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Setting } from 'src/app/common/interfaces/setting.interface';
-import { SettingsService } from '../../settings/settings.service';
+import { RulesService } from '../rules.service';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 
+export interface Rule {
+    profitPercentage: number;
+    minProfit: number;
+    sCode: string;
+}
 
-export interface SettingsDialogData {
-    setting: Setting;
+export interface RuleDialogData {
+    setting: Rule;
     title: string;
 }
 
 @Component({
-    selector: 'settings-dialog',
-    templateUrl: './settings-dialog.component.html',
-    styleUrls: ['./settings-dialog.component.css']
+    templateUrl: './rule-dialog.component.html'
 })
-export class SettingsDialogComponent  {
+export class RuleDialog  {
 
     constructor(
-        public dialogRef: MatDialogRef<SettingsDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: SettingsDialogData,
-        private services: SettingsService,
+        public dialogRef: MatDialogRef<RuleDialog>,
+        @Inject(MAT_DIALOG_DATA) public data: RuleDialogData,
+        private services: RulesService,
         private snackBar: SnackBarService ) {}
 
     onNoClick(): void {
@@ -33,8 +35,8 @@ export class SettingsDialogComponent  {
 
         this.data.setting.minProfit = this.fixFormat(minProfit);
         this.data.setting.profitPercentage = this.fixFormat(profitPercentage);
-
-        this.services.addSetting(this.data.setting)
+        console.log(this.data.setting)
+        this.services.addRule(this.data.setting)
         .subscribe(() => {
             this.snackBar.showInfo('Επιτυχης καταχώρηση κανόνα.', 'Ok');
             console.log('Setting has been saved successfully');

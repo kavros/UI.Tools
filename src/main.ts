@@ -17,8 +17,8 @@ import { DndDirective } from './app/stepper/import-page/dnd.directive';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DemoMaterialModule } from './material-module';
 import { SideNavComponent } from './app/sidenav/side-nav.component';
-import { SettingsTableComponent } from './app/settings/settings-table.component';
-import { SettingsDialogComponent } from './app/common/settings-dialog/settings-dialog.component';
+import { RulesComponent } from './app/rules/rules.component';
+import { RuleDialog } from './app/rules/rules-dialog/rule-dialog.component';
 import { TableComponent } from './app/stepper/table/table.component';
 import { MappingsDialogComponent } from './app/mappings-dialog/mappings.dialog.component';
 
@@ -47,10 +47,10 @@ import { MappingsDialogComponent } from './app/mappings-dialog/mappings.dialog.c
     ImportComponent,
     ProgressComponent,
     DndDirective,
-    SettingsDialogComponent,
+    RuleDialog,
     MappingsDialogComponent,
     SideNavComponent,
-    SettingsTableComponent
+    RulesComponent
   ],
   bootstrap: [
     SideNavComponent

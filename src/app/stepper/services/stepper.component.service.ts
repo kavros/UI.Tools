@@ -4,8 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { ImportDTO } from 'src/app/stepper/import-page/dto/import-dto';
 import { catchError, map } from 'rxjs/operators';
 import { Product } from 'src/app/stepper/interfaces/product';
-import { Setting } from 'src/app/common/interfaces/setting.interface';
-import { SettingsDialogComponent } from 'src/app/common/settings-dialog/settings-dialog.component';
+import { RuleDialog } from 'src/app/rules/rules-dialog/rule-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 import { DownloadLabelsDTO } from '../import-page/dto/download.labels.dto';
@@ -100,22 +99,6 @@ export class StepperComponentService {
             disableClose: true
           });
         });
-  }
-
-
-  private openAddSettingDialogFor(productName: string): void {
-    const newSetting = {
-      sName: productName,
-      profitPercentage: 0,
-      minProfit : 0,
-      sCode: ''
-    }as Setting;
-
-    this.dialog.open(SettingsDialogComponent, {
-      width: '250px',
-      data: {title: 'Καταχώρηση νέου κανόνα', setting: newSetting},
-      disableClose: true
-    });
   }
 
   public updateRetailPrices( data: Product[], date: string): Observable<any> {

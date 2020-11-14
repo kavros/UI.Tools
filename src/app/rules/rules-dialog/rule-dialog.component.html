@@ -1,10 +1,6 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
 <div mat-dialog-content>
 <mat-form-field>
-    <mat-label>Όνομα</mat-label>
-    <input matInput [(ngModel)]="data.setting.sName" readonly>
-</mat-form-field>
-<mat-form-field>
     <mat-label>Ποσοστό (%)</mat-label>
     <input matInput [(ngModel)]="data.setting.profitPercentage">
 </mat-form-field>
@@ -16,8 +12,6 @@
     <mat-label>Κωδικός</mat-label>
     <input matInput [(ngModel)]="data.setting.sCode">
 </mat-form-field>
-
-  <p>{{data.content}}</p>
 </div>
 <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]>Άκυρο</button>

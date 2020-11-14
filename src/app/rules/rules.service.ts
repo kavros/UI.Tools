@@ -1,19 +1,19 @@
-import { Setting } from '../common/interfaces/setting.interface';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { SnackBarService } from '../common/snackBar/snackBar.service';
+import { Rule } from './rules-dialog/rule-dialog.component';
 
 @Injectable({
     providedIn: 'root'
 })
-export class SettingsService {
+export class RulesService {
 
     constructor(private httpClient: HttpClient,
                 private snackBar: SnackBarService) {}
 
-    public addSetting(setting: Setting): Observable<any> {
+    public addRule(setting: Rule): Observable<any> {
 
         return  this.httpClient
                 .put(
@@ -32,11 +32,11 @@ export class SettingsService {
         return throwError('Failed to add setting');
     }
 
-    public removeSetting(sCode: string): Observable<any> {
+    public removeRule(sCode: string): Observable<any> {
         return null;
     }
 
-    public editSetting(setting: Setting): Observable<any> {
+    public editRule(setting: Rule): Observable<any> {
         return null;
     }
 }
