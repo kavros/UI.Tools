@@ -10,7 +10,7 @@ export interface Rule {
 }
 
 export interface RuleDialogData {
-    setting: Rule;
+    rule: Rule;
     title: string;
 }
 
@@ -29,18 +29,18 @@ export class RuleDialog  {
         this.dialogRef.close();
     }
 
-    private saveSetting(): void {
-        const minProfit = this.data.setting.minProfit.toString();
-        const profitPercentage = this.data.setting.profitPercentage.toString();
+    saveRule(): void {
+        const minProfit = this.data.rule.minProfit.toString();
+        const profitPercentage = this.data.rule.profitPercentage.toString();
 
-        this.data.setting.minProfit = this.fixFormat(minProfit);
-        this.data.setting.profitPercentage = this.fixFormat(profitPercentage);
-        console.log(this.data.setting)
-        this.services.addRule(this.data.setting)
-        .subscribe(() => {
-            this.snackBar.showInfo('Επιτυχης καταχώρηση κανόνα.', 'Ok');
-            console.log('Setting has been saved successfully');
-        });
+        this.data.rule.minProfit = this.fixFormat(minProfit);
+        this.data.rule.profitPercentage = this.fixFormat(profitPercentage);
+        console.log(this.data.rule);
+        this.services
+            .addRule(this.data.rule).subscribe(() => {
+                this.snackBar.showInfo('Επιτυχης καταχώρηση κανόνα.', 'Ok');
+                console.log('Setting has been saved successfully');
+            });
     }
 
     private fixFormat(val: string): number {

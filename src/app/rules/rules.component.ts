@@ -50,9 +50,10 @@ export class RulesComponent implements OnInit {
         width: '260px',
         data: {
           title: 'Καταχώρηση νέου κανόνα',
-          setting: newRule
+          rule: newRule
         } as RuleDialogData,
       });
+      //TODO: update table
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
         console.log(result);
@@ -66,7 +67,7 @@ export class RulesComponent implements OnInit {
         data:
         {
           title: 'Επεξεργασία κανόνα',
-          setting: row
+          rule: row
          } as RuleDialogData
       });
     }
