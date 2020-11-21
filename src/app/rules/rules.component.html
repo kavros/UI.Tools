@@ -1,10 +1,16 @@
-  <div style="margin-left: 10px; margin-top: 10px;">
+<div>
     <mat-form-field >
         <mat-label>Αναζήτηση</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="πχ. Ντοματες ἠ 2092 ἠ 30%">
     </mat-form-field>
-  </div>
+  
 
+  <button class="example-button-row"
+    mat-raised-button color="primary"
+    (click) = "openDialog();"> προσθήκη 
+  </button>
+</div>
+<mat-divider></mat-divider>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       
     <ng-container matColumnDef="name">
@@ -46,8 +52,4 @@
   </table>
 
   
-  <button style="margin-left: 10px; margin-top: 10px;"
-    mat-raised-button color="primary"
-    (click) = "openDialog();"> προσθήκη 
-  </button>
   

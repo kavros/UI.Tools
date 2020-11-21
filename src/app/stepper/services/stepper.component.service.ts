@@ -4,7 +4,6 @@ import { Observable, throwError } from 'rxjs';
 import { ImportDTO } from 'src/app/stepper/import-page/dto/import-dto';
 import { catchError, map } from 'rxjs/operators';
 import { Product } from 'src/app/stepper/interfaces/product';
-import { RuleDialog } from 'src/app/rules/rules-dialog/rule-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 import { DownloadLabelsDTO } from '../import-page/dto/download.labels.dto';

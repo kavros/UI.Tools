@@ -4,6 +4,15 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { SnackBarService } from '../common/snackBar/snackBar.service';
 import { Rule } from './rules-dialog/rule-dialog.component';
+import { RuleTableRow } from './rules.component';
+
+
+export interface RulesDTO {
+    profitPercentage: number;
+    minProfit: number;
+    sCode: string;
+    sName: string;
+}
 
 @Injectable({
     providedIn: 'root'
@@ -16,8 +25,8 @@ export class RulesService {
     public addRule(setting: Rule): Observable<any> {
 
         return  this.httpClient
-                .put(
-                    'http://localhost:8080/addSetting',
+                .post(
+                    'http://localhost:8080/addRule',
                     setting
                 )
                 .pipe(
@@ -38,5 +47,15 @@ export class RulesService {
 
     public editRule(setting: Rule): Observable<any> {
         return null;
+    }
+
+    public getRules(): Observable<RuleTableRow[]> {
+        return this.httpClient
+                .get<RuleTableRow[]>('http://localhost:8080/getRulesTable')
+                .pipe(
+                    catchError(() => {
+                        this.snackBar.showError('Αποτυχία φόρτωσης κανόνων.', 'Ok');
+                        return throwError('Failed to load rules');
+                    }));
     }
 }

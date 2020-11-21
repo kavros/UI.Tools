@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { RuleDialog, RuleDialogData, Rule } from './rules-dialog/rule-dialog.component';
+import { RulesService } from './rules.service';
 
 export interface RuleTableRow {
   sName: string;
@@ -20,17 +21,17 @@ export class RulesComponent implements OnInit {
       ['name', 'profitPercentage', 'minimumProfit', 'kefCode' , 'action', 'delete'];
     dataSource: MatTableDataSource<RuleTableRow>;
 
-    constructor(public dialog: MatDialog) {}
+    constructor(public dialog: MatDialog,
+                private rulesService: RulesService) {}
 
     ngOnInit(): void {
       this.dataSource = new MatTableDataSource<RuleTableRow>();
-      this.dataSource.data.push(
-      {
-        sName: 'Ntomates',
-        profitPercentage: 0.3,
-        minProfit : 0.5,
-        sCode: '2082'
-      }as RuleTableRow);
+
+      this.rulesService
+          .getRules()
+          .subscribe( (data: RuleTableRow[]) => {
+              this.dataSource.data = data;
+          });
     }
 
     applyFilter(event: Event) {
