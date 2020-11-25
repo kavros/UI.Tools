@@ -62,7 +62,6 @@ export class RulesComponent implements OnInit {
     }
 
     editRule(row: RuleTableRow) {
-      console.log(row);
       this.dialog.open(RuleDialog, {
         width: '250px',
         data:
@@ -72,4 +71,9 @@ export class RulesComponent implements OnInit {
          } as RuleDialogData
       });
     }
+
+    deleteRule(row: RuleTableRow) {
+      console.log(row);
+    }
+
 }

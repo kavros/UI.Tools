@@ -26,7 +26,7 @@ export class RulesService {
 
         return  this.httpClient
                 .post(
-                    'http://localhost:8080/addRule',
+                    'http://localhost:8080/addOrUpdateRule',
                     setting
                 )
                 .pipe(
@@ -45,9 +45,13 @@ export class RulesService {
         return null;
     }
 
-    public editRule(setting: Rule): Observable<any> {
+    /*public deleteRule(rule: Rule): Observable<any> {
+        this.httpClient
+            .delete('http://localhost:8080/deleteRule',
+                rule
+                );
         return null;
-    }
+    }*/
 
     public getRules(): Observable<RuleTableRow[]> {
         return this.httpClient
