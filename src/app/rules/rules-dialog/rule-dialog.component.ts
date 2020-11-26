@@ -35,7 +35,6 @@ export class RuleDialog  {
 
         this.data.rule.minProfit = this.fixFormat(minProfit);
         this.data.rule.profitPercentage = this.fixFormat(profitPercentage);
-        console.log(this.data.rule);
         this.services
             .addRule(this.data.rule).subscribe(() => {
                 this.snackBar.showInfo('Επιτυχης καταχώρηση κανόνα.', 'Ok');
