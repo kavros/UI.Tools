@@ -21,7 +21,21 @@ export class RulesComponent implements OnInit {
     displayedColumns: string[] =
       ['name', 'profitPercentage', 'minimumProfit', 'kefCode' , 'action', 'delete'];
     dataSource: MatTableDataSource<RuleTableRow>;
-
+    map = [
+      { eng: 'A', gr:  'Α'},
+      { eng: 'B', gr:  'Β'},
+      { eng: 'E', gr:  'Ε'},
+      { eng: 'Z', gr:  'Ζ'},
+      { eng: 'H', gr:  'Η'},
+      { eng: 'I', gr:  'Ι'},
+      { eng: 'K', gr:  'Κ'},
+      { eng: 'M', gr:  'Μ'},
+      { eng: 'N', gr:  'Ν'},
+      { eng: 'O', gr:  'Ο'},
+      { eng: 'P', gr:  'P'},
+      { eng: 'T', gr:  'Τ'},
+      { eng: 'X', gr:  'Χ'}
+    ];
     constructor(public dialog: MatDialog,
                 private rulesService: RulesService,
                 private snackBar: SnackBarService) {}
@@ -37,8 +51,15 @@ export class RulesComponent implements OnInit {
     }
 
     applyFilter(event: Event) {
-        const filterValue = (event.target as HTMLInputElement).value;
-        this.dataSource.filter = filterValue.trim().toLowerCase();
+        let filterValue = (event.target as HTMLInputElement).value;
+        //BUG: Currently snames are using both english and greek letters.
+        //TODO: Fix snames so we can filter using greek words.
+        filterValue = filterValue.trim().toUpperCase();
+        this.map.forEach(el => {
+          filterValue = filterValue.replace(el.gr, el.eng);
+        });
+        this.dataSource.filter = filterValue;
+        console.log(this.dataSource.filter);
     }
 
     openDialog(): void {
