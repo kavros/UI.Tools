@@ -50,7 +50,7 @@ export class RulesComponent implements OnInit {
           });
     }
 
-    applyFilter(event: Event) {
+    onSearch(event: Event) {
         let filterValue = (event.target as HTMLInputElement).value;
         //BUG: Currently snames are using both english and greek letters.
         //TODO: Fix snames so we can filter using greek words.
@@ -62,7 +62,7 @@ export class RulesComponent implements OnInit {
         console.log(this.dataSource.filter);
     }
 
-    openDialog(): void {
+    onAdd(): void {
       const newRule =
       {
         profitPercentage: 0.3,
@@ -71,7 +71,7 @@ export class RulesComponent implements OnInit {
       } as Rule ;
 
       const dialogRef = this.dialog.open(RuleDialog, {
-        width: '250px',
+        width: '280px',
         data: {
           title: 'Καταχώρηση νέου κανόνα',
           rule: newRule
@@ -84,9 +84,9 @@ export class RulesComponent implements OnInit {
       });
     }
 
-    editRule(row: RuleTableRow) {
+    onEdit(row: RuleTableRow) {
       this.dialog.open(RuleDialog, {
-        width: '250px',
+        width: '280px',
         data:
         {
           title: 'Επεξεργασία κανόνα',
@@ -95,7 +95,7 @@ export class RulesComponent implements OnInit {
       });
     }
 
-    deleteRule(row: RuleTableRow) {
+    onDelete(row: RuleTableRow) {
       const msg = 'Θέλετε να διαγραφεί ο κανόνας. ' + row.sName;
       if (confirm(msg)) {
         this
