@@ -1,19 +1,28 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
 <div mat-dialog-content>
-    <mat-form-field>
-        <mat-label>Κωδικός</mat-label>
-        <input matInput [(ngModel)]="data.rule.sCode">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Ποσοστό (%)</mat-label>
-        <input matInput [(ngModel)]="data.rule.profitPercentage">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Ελάχιστο κέρδος (€)</mat-label>
-        <input matInput [(ngModel)]="data.rule.minProfit">
-    </mat-form-field>
+    <div *ngIf="stepOneEnabled">        
+        <mat-form-field>
+            <mat-label>Κωδικός</mat-label>
+            <input matInput [(ngModel)]="data.rule.sCode">
+        </mat-form-field>
+    </div>
+    <div *ngIf="stepTwoEnabled">
+        <mat-form-field>
+            <mat-label>Ονομα</mat-label>
+            <input type="text" disabled="disabled" matInput [(ngModel)]="data.rule.sName">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Ποσοστό (%)</mat-label>
+            <input matInput [(ngModel)]="data.rule.profitPercentage">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Ελάχιστο κέρδος (€)</mat-label>
+            <input matInput [(ngModel)]="data.rule.minProfit">
+        </mat-form-field>
+    </div>
 </div>
 <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]>Άκυρο</button>
-    <button mat-button [mat-dialog-close] (click)='saveRule()'>Καταχώρηση</button>
+    <button mat-button  *ngIf="stepOneEnabled" (click)=onNext()>Επόμενο</button>
+    <button mat-button  *ngIf="stepTwoEnabled" [mat-dialog-close] (click)='onSave()'>Καταχώρηση</button>
 </div>

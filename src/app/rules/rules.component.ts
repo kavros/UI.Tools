@@ -63,24 +63,31 @@ export class RulesComponent implements OnInit {
     }
 
     onAdd(): void {
-      const newRule =
+      const input =
       {
-        profitPercentage: 0.3,
-        minProfit : 0.5,
+        sName: '',
+        profitPercentage: undefined,
+        minProfit : undefined,
         sCode: '2082'
-      } as Rule ;
+      } as RuleTableRow ;
 
       const dialogRef = this.dialog.open(RuleDialog, {
         width: '280px',
         data: {
           title: 'Καταχώρηση νέου κανόνα',
-          rule: newRule
+          rule: input
         } as RuleDialogData,
       });
       //TODO: update rules table
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe(() => {
         console.log('The dialog was closed');
-        console.log(result);
+        console.log(input);
+        /*this.rulesService
+            .getSName(input.sCode)
+            .subscribe(s => {
+                console.log('rererere');
+                console.log(s);
+            });*/
       });
     }
 

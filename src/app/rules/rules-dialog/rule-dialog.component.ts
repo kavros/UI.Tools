@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { RulesService } from '../rules.service';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
+import { RuleTableRow } from '../rules.component';
 
 export interface Rule {
     profitPercentage: number;
@@ -10,7 +11,7 @@ export interface Rule {
 }
 
 export interface RuleDialogData {
-    rule: Rule;
+    rule: RuleTableRow;
     title: string;
 }
 
@@ -18,28 +19,47 @@ export interface RuleDialogData {
     templateUrl: './rule-dialog.component.html'
 })
 export class RuleDialog  {
+    stepOneEnabled: boolean;
+    stepTwoEnabled: boolean;
 
     constructor(
         public dialogRef: MatDialogRef<RuleDialog>,
         @Inject(MAT_DIALOG_DATA) public data: RuleDialogData,
+        private rulesService: RulesService,
         private services: RulesService,
-        private snackBar: SnackBarService ) {}
+        private snackBar: SnackBarService ) {
+            this.stepOneEnabled = true;
+            this.stepTwoEnabled = false;
+        }
 
     onNoClick(): void {
         this.dialogRef.close();
     }
 
-    saveRule(): void {
+    onSave(): void {
         const minProfit = this.data.rule.minProfit.toString();
         const profitPercentage = this.data.rule.profitPercentage.toString();
 
         this.data.rule.minProfit = this.fixFormat(minProfit);
         this.data.rule.profitPercentage = this.fixFormat(profitPercentage);
+
         this.services
-            .addRule(this.data.rule).subscribe(() => {
+            .addOrUpdateRule(this.data.rule).subscribe(() => {
                 this.snackBar.showInfo('Επιτυχης καταχώρηση κανόνα.', 'Ok');
+                this.data.rule.sName = 'ssss';
                 console.log('Setting has been saved successfully');
             });
+    }
+
+    onNext(): void {
+        this.rulesService
+            .getSName(this.data.rule.sCode)
+            .subscribe(sName => {
+                this.data.rule.sName = sName;
+                console.log(sName);
+            });
+        this.stepOneEnabled = false;
+        this.stepTwoEnabled = true;
     }
 
     private fixFormat(val: string): number {

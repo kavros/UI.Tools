@@ -1,18 +1,10 @@
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { SnackBarService } from '../common/snackBar/snackBar.service';
 import { Rule } from './rules-dialog/rule-dialog.component';
 import { RuleTableRow } from './rules.component';
-
-
-export interface RulesDTO {
-    profitPercentage: number;
-    minProfit: number;
-    sCode: string;
-    sName: string;
-}
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +14,7 @@ export class RulesService {
     constructor(private httpClient: HttpClient,
                 private snackBar: SnackBarService) {}
 
-    public addRule(setting: Rule): Observable<any> {
+    public addOrUpdateRule(setting: RuleTableRow): Observable<any> {
 
         return  this.httpClient
                 .post(
@@ -66,4 +58,15 @@ export class RulesService {
                         return throwError('Failed to load rules');
                     }));
     }
+    public getSName(scode: string): Observable<string> {
+        return this.httpClient
+                .get<string>(
+                    'http://localhost:8080/getSName/2100')
+                .pipe(
+                    catchError(() => {
+                        return throwError('Failed to load new rule');
+                    }));
+    }
+
+
 }
