@@ -69,7 +69,7 @@ export class RulesComponent implements OnInit {
         profitPercentage: undefined,
         minProfit : undefined,
         sCode: '2082'
-      } as RuleTableRow ;
+      } as RuleTableRow;
 
       const dialogRef = this.dialog.open(RuleDialog, {
         width: '280px',
@@ -78,26 +78,29 @@ export class RulesComponent implements OnInit {
           rule: input
         } as RuleDialogData,
       });
-      //TODO: update rules table
+
       dialogRef.afterClosed().subscribe(() => {
+      //TODO: update rules table
         console.log('The dialog was closed');
         console.log(input);
-        /*this.rulesService
-            .getSName(input.sCode)
-            .subscribe(s => {
-                console.log('rererere');
-                console.log(s);
-            });*/
       });
     }
 
     onEdit(row: RuleTableRow) {
+
+      const rowCopy = {
+        minProfit : row.minProfit,
+        sCode : row.sCode,
+        profitPercentage: row.profitPercentage,
+        sName : row.sName
+      } as RuleTableRow;
+
       this.dialog.open(RuleDialog, {
         width: '280px',
         data:
         {
           title: 'Επεξεργασία κανόνα',
-          rule: row
+          rule: rowCopy
          } as RuleDialogData
       });
     }

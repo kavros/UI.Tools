@@ -58,10 +58,10 @@ export class RulesService {
                         return throwError('Failed to load rules');
                     }));
     }
-    public getSName(scode: string): Observable<string> {
+    public getSName(sCode: string): Observable<RuleTableRow> {
         return this.httpClient
-                .get<string>(
-                    'http://localhost:8080/getSName/2100')
+                .get<RuleTableRow>(
+                    'http://localhost:8080/getSName/' + sCode)
                 .pipe(
                     catchError(() => {
                         return throwError('Failed to load new rule');

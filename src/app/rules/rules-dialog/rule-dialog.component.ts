@@ -46,17 +46,14 @@ export class RuleDialog  {
         this.services
             .addOrUpdateRule(this.data.rule).subscribe(() => {
                 this.snackBar.showInfo('Επιτυχης καταχώρηση κανόνα.', 'Ok');
-                this.data.rule.sName = 'ssss';
-                console.log('Setting has been saved successfully');
             });
     }
 
     onNext(): void {
         this.rulesService
             .getSName(this.data.rule.sCode)
-            .subscribe(sName => {
-                this.data.rule.sName = sName;
-                console.log(sName);
+            .subscribe(row => {
+                this.data.rule.sName = row.sName;
             });
         this.stepOneEnabled = false;
         this.stepTwoEnabled = true;
