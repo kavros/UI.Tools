@@ -32,8 +32,8 @@ export class RuleDialog  {
             this.stepTwoEnabled = false;
         }
 
-    onNoClick(): void {
-        this.dialogRef.close();
+    onCancel(): void {
+        this.dialogRef.close({event:'Cancel'}); 
     }
 
     onSave(): void {

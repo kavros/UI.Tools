@@ -22,7 +22,7 @@
     </div>
 </div>
 <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]>Άκυρο</button>
+    <button mat-button [mat-dialog-close] (click)=onCancel()>Άκυρο</button>
     <button mat-button  *ngIf="stepOneEnabled" (click)=onNext()>Επόμενο</button>
-    <button mat-button  *ngIf="stepTwoEnabled" [mat-dialog-close] (click)='onSave()'>Καταχώρηση</button>
+    <button mat-button  *ngIf="stepTwoEnabled" [mat-dialog-close] (click)=onSave()>Καταχώρηση</button>
 </div>

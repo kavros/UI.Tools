@@ -42,7 +42,10 @@ export class RulesComponent implements OnInit {
 
     ngOnInit(): void {
       this.dataSource = new MatTableDataSource<RuleTableRow>();
+      this.loadData();
+    }
 
+    loadData() {
       this.rulesService
           .getRules()
           .subscribe( (data: RuleTableRow[]) => {
@@ -59,50 +62,54 @@ export class RulesComponent implements OnInit {
           filterValue = filterValue.replace(el.gr, el.eng);
         });
         this.dataSource.filter = filterValue;
-        console.log(this.dataSource.filter);
     }
 
     onAdd(): void {
       const input =
       {
         sName: '',
+        sCode: '2082',
         profitPercentage: undefined,
-        minProfit : undefined,
-        sCode: '2082'
+        minProfit : undefined
       } as RuleTableRow;
-
-      const dialogRef = this.dialog.open(RuleDialog, {
-        width: '280px',
-        data: {
-          title: 'Καταχώρηση νέου κανόνα',
-          rule: input
-        } as RuleDialogData,
-      });
-
-      dialogRef.afterClosed().subscribe(() => {
-      //TODO: update rules table
-        console.log('The dialog was closed');
-        console.log(input);
-      });
+      
+      this.openDialog(input, 'Καταχώρηση νέου κανόνα');      
     }
 
     onEdit(row: RuleTableRow) {
-
-      const rowCopy = {
-        minProfit : row.minProfit,
-        sCode : row.sCode,
-        profitPercentage: row.profitPercentage,
-        sName : row.sName
+      const input = {
+        sCode: row.sCode,
+        sName: row.sName,
+        minProfit: row.minProfit,
+        profitPercentage: row.profitPercentage
       } as RuleTableRow;
 
-      this.dialog.open(RuleDialog, {
+      this.openDialog(input, 'Επεξεργασία κανόνα');
+    }
+
+    openDialog(input:RuleTableRow, msg: string) {
+      const dialogRef = this.dialog.open(RuleDialog, {
         width: '280px',
         data:
         {
-          title: 'Επεξεργασία κανόνα',
-          rule: rowCopy
-         } as RuleDialogData
+          title: msg,
+          rule: input
+        } as RuleDialogData
       });
+
+      dialogRef.afterClosed().subscribe( async result => {
+        if(result?.event === 'Cancel' ) {
+          return;
+        }
+        await this.delay(2000); // ensuress that the update completed
+        this.dataSource.data = [];  
+        this.loadData();
+        
+      });
+    }
+
+    delay(ms: number) {
+      return new Promise( resolve => setTimeout(resolve, ms) );
     }
 
     onDelete(row: RuleTableRow) {
