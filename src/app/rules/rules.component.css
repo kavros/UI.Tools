@@ -1,12 +1,27 @@
 table {
     width: 70%;
-    margin-left: 10px;
+    text-align: center;
+    margin: 0 auto;
 }
   
+.searchAndAdd {
+    text-align: center;
+    margin: 0 auto;
+}
+
 .mat-form-field {
     font-size: 14px;
-    width: 40%;    
-    margin: 0 auto;
+    width: 40%;
+}
+
+.mat-header-cell {
+    text-align: center; 
+    font-weight: bold;
+}
+
+.mat-row:hover {
+    background-color: beige;
+    font-weight: bold;
 }
 
 .mat-icon {

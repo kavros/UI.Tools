@@ -3,7 +3,9 @@
 }
 
 table {
-    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    width: 70%;
 }
 
 .clickable{
@@ -12,7 +14,10 @@ table {
 
 .mat-header-cell {
     text-align: center; 
+    font-size: 20px;
+    font-weight: bold;
 }
+
 .mat-row {
     height: auto;
 }
@@ -23,6 +28,7 @@ table {
 
 .mat-cell {   
     text-align: center;
+    font-size: 18px;
     padding: 1px 1px 1px 0;
 }
 
@@ -30,6 +36,9 @@ table {
     height: auto;       
 }
 
+.mat-icon {
+    font-size: 30px;
+}
 
 .mat-icon .update {
     color: red;

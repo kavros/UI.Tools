@@ -79,8 +79,8 @@ export class TableComponent implements OnInit {
     this.updateKefalaio.isDisabled = true;
     this.displayedColumns =
       [
-        'product', 
-        'kefalaioPrice', 'newPrice', 'profitInEuro',
+        'product', 'newPrice',
+        'kefalaioPrice', 'profitInEuro',
          'status', 'update'
       ];
   }
@@ -91,8 +91,7 @@ export class TableComponent implements OnInit {
     this.print.isDisabled = true;
     this.displayedColumns =
       [
-        'product',
-        'kefalaioPrice', 'newPrice',
+        'product', 'newPrice',
         'status', 'print'
       ];
   }
