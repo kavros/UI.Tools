@@ -1,20 +1,33 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
 <div mat-dialog-content>
     <mat-form-field>
-        <mat-label>Όνομα</mat-label>
+        <mat-label>Όνομα στο τιμολόγιο</mat-label>
         <input matInput [(ngModel)]="data.pName" readonly>
     </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Επέλεξε αντιστοίχιση</mat-label>
-        <mat-select (selectionChange)="onChange($event.value)">        
-            <mat-option *ngFor="let option of data.options" [value]="option.sName">
-            {{ option.sName }}
-            </mat-option>
-        </mat-select>
-      </mat-form-field>
+    <mat-form-field *ngIf="isStepOneEnabled">
+        <mat-label>Κωδικός</mat-label>
+        <input matInput [(ngModel)]="data.sCode">
+    </mat-form-field>
+    <div *ngIf="isStepTwoEnabled">
+        <mat-form-field>
+            <mat-label>Όνομα στο kefalaio</mat-label>
+            <input matInput [(ngModel)]="data.sName" readonly>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Ποσοστό (%)</mat-label>
+            <input matInput [(ngModel)]="data.profitPercentage">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Ελάχιστο κέρδος (€)</mat-label>
+            <input matInput [(ngModel)]="data.minProfit">
+        </mat-form-field>
+    </div>  
 </div>
 
 <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]>Άκυρο</button>
-    <button mat-button [mat-dialog-close] (click)='saveMapping()'>Καταχώρηση</button>
+    <button mat-button *ngIf="isStepOneEnabled" [mat-dialog-close]>Άκυρο</button>
+    <button mat-button *ngIf="isStepOneEnabled" (click)=onNext()>Επόμενο</button>
+    
+    <button mat-button *ngIf="isStepTwoEnabled" (click)=onPrevious()>Προηγούμενο</button>    
+    <button mat-button *ngIf="isStepTwoEnabled" [mat-dialog-close] (click)='onSave()'>Καταχώρηση</button>
 </div>

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { Mappings } from './mappings.dialog.component';
 import { SnackBarService } from '../common/snackBar/snackBar.service';
 import { catchError } from 'rxjs/operators';
+import { MappingsDialogData } from './mappings.dialog.component';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,7 @@ import { catchError } from 'rxjs/operators';
 export class MappingsDialogService {
     constructor(private httpClient: HttpClient,
                 private snackBar: SnackBarService) {}
-    public saveMappings(mapping: Mappings): Observable<any> {
+    public saveMappings(mapping: MappingsDialogData): Observable<any> {
         return this
             .httpClient
             .put(
@@ -24,5 +24,10 @@ export class MappingsDialogService {
                     return throwError('Failed to retrive response', error);
                 })
             );
+    }
+    
+    public getMappingDialogData(sCode: string): Observable<any> {
+        return this.httpClient
+                .get('http://localhost:8080/getMappingDialogData/'+sCode);
     }
 }
