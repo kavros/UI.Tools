@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { InputConverterService } from '../common/functions/input.converter.service';
 import { SnackBarService } from '../common/snackBar/snackBar.service';
 import { MappingsDialogService } from './mappings.dialog.services';
 
@@ -22,10 +23,12 @@ export class MappingsDialogComponent {
         public dialogRef: MatDialogRef<MappingsDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: MappingsDialogData,
         private readonly mappingsService: MappingsDialogService,
-        private snackBar: SnackBarService) { }
+        private snackBar: SnackBarService,
+        private inputConverter: InputConverterService) { }
 
     onSave(): void {
-        // handle comman at numbers
+        this.data.minProfit = this.inputConverter.fixFormat(this.data.minProfit.toString());
+        this.data.profitPercentage = this.inputConverter.fixFormat(this.data.profitPercentage.toString());
         this.mappingsService
             .addOrUpdateMappingDialogData(this.data)
             .subscribe( () =>{

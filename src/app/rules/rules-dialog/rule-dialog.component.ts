@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { RulesService } from '../rules.service';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 import { RuleTableRow } from '../rules.component';
+import { InputConverterService } from 'src/app/common/functions/input.converter.service';
 
 export interface Rule {
     profitPercentage: number;
@@ -27,7 +28,8 @@ export class RuleDialog  {
         @Inject(MAT_DIALOG_DATA) public data: RuleDialogData,
         private rulesService: RulesService,
         private services: RulesService,
-        private snackBar: SnackBarService ) {
+        private snackBar: SnackBarService,
+        private inputConverter: InputConverterService) {
             this.stepOneEnabled = true;
             this.stepTwoEnabled = false;
         }
@@ -40,8 +42,8 @@ export class RuleDialog  {
         const minProfit = this.data.rule.minProfit.toString();
         const profitPercentage = this.data.rule.profitPercentage.toString();
 
-        this.data.rule.minProfit = this.fixFormat(minProfit);
-        this.data.rule.profitPercentage = this.fixFormat(profitPercentage);
+        this.data.rule.minProfit = this.inputConverter.fixFormat(minProfit);
+        this.data.rule.profitPercentage = this.inputConverter.fixFormat(profitPercentage);
 
         this.services
             .addOrUpdateRule(this.data.rule).subscribe(() => {
@@ -57,12 +59,5 @@ export class RuleDialog  {
             });
         this.stepOneEnabled = false;
         this.stepTwoEnabled = true;
-    }
-
-    private fixFormat(val: string): number {
-        if ( val.toString().indexOf(',') !== -1 ){
-          val = val.replace(',', '.');
-        }
-        return Number(val);
     }
 }
