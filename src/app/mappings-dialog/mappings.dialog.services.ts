@@ -11,11 +11,12 @@ import { MappingsDialogData } from './mappings.dialog.component';
 export class MappingsDialogService {
     constructor(private httpClient: HttpClient,
                 private snackBar: SnackBarService) {}
-    public saveMappings(mapping: MappingsDialogData): Observable<any> {
+
+    public addOrUpdateMappingDialogData(mapping: MappingsDialogData): Observable<any> {
         return this
             .httpClient
             .put(
-                'http://localhost:8080/addMapping',
+                'http://localhost:8080/addOrUpdateMappingDialogData',
                 mapping
             )
             .pipe(
@@ -25,7 +26,7 @@ export class MappingsDialogService {
                 })
             );
     }
-    
+
     public getMappingDialogData(sCode: string): Observable<any> {
         return this.httpClient
                 .get('http://localhost:8080/getMappingDialogData/'+sCode);

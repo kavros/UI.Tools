@@ -1,8 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SnackBarService } from '../common/snackBar/snackBar.service';
 import { MappingsDialogService } from './mappings.dialog.services';
-import { RulesService } from '../rules/rules.service';
-import { RuleTableRow } from '../rules/rules.component';
 
 export interface MappingsDialogData {
     pName: string;
@@ -23,20 +22,16 @@ export class MappingsDialogComponent {
         public dialogRef: MatDialogRef<MappingsDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: MappingsDialogData,
         private readonly mappingsService: MappingsDialogService,
-        private readonly rulesService:  RulesService) { }
+        private snackBar: SnackBarService) { }
 
     onSave(): void {
-// spike: how we handle cases where mappings exists but we miss the rule
-        this.mappingsService.saveMappings(this.data).subscribe();
-
-        var rule = {
-            sName: this.data.sName,
-            profitPercentage: this.data.profitPercentage,
-            minProfit: this.data.minProfit,
-            sCode: this.data.sCode
-        } as RuleTableRow;
-
-        this.rulesService.addOrUpdateRule(rule).subscribe();
+        // handle comman at numbers
+        this.mappingsService
+            .addOrUpdateMappingDialogData(this.data)
+            .subscribe( () =>{
+                this.snackBar
+                    .showInfo('Επιτυχής καταχώρηση κανόνα και αντιστοίχισης', 'Κλείσιμο');
+            });
     }
 
     onNext() {
