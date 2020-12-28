@@ -17,15 +17,22 @@ export class ImportComponent  {
 
   onFileDropped($event) {
     this.prepareFilesList($event);
-    const selectedFile = $event[0];
+    this.import($event[0]);
+  }
 
+  onFileBrowseHandler(files) {
+    this.prepareFilesList(files);
+    this.import(files[0]);
+  }
+
+  private import(selectedFile){
     const uploadInvoiceData = new FormData();
     uploadInvoiceData.append('pdfFile', selectedFile, selectedFile.name);
     const response = this.service.importAndGetStepperData(uploadInvoiceData);
     this.handleResponse(response);
   }
 
-  handleResponse(response: Observable < ImportDTO >) {
+  private handleResponse(response: Observable < ImportDTO >) {
     response.subscribe((res) => {
       const hasWarnings = res.warnings.length > 0;
       const hasErrors = res.errors.length > 0;
@@ -37,11 +44,6 @@ export class ImportComponent  {
       this.eventUpdateDataSource.emit(res);
     });
   }
-
-  fileBrowseHandler(files) {
-    this.prepareFilesList(files);
-  }
-
 
   deleteFile(index: number) {
     this.files.splice(index, 1);
