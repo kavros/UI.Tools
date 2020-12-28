@@ -7,7 +7,7 @@ import { Product } from 'src/app/stepper/interfaces/product';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 import { DownloadLabelsDTO } from '../import-page/dto/download.labels.dto';
-import { MappingsDialogData, MappingsDialogComponent, DropDownDTO } from 'src/app/mappings-dialog/mappings.dialog.component';
+import { MappingsDialogData, MappingsDialogComponent } from 'src/app/mappings-dialog/mappings.dialog.component';
 
 
 @Injectable({
@@ -81,22 +81,15 @@ export class StepperComponentService {
   }
 
   private openMappingsDialog(productName: string): void {
-    this.httpClient
-        .get('http://localhost:8080/getDropdownOptions')
-        .subscribe((data: DropDownDTO[]) => {
+        const newMapping = {
+          pName: productName,
+          tittle: 'Εισαγωγή αντιστοίχισης'
+        } as MappingsDialogData;
 
-          const newMapping = {
-            pName: productName,
-            options: data,
-            tittle: 'Εισαγωγή αντιστοίχισης'
-          }as MappingsDialogData;
-
-
-          this.dialog.open(MappingsDialogComponent, {
-            width: '280px',
-            data: newMapping,
-            disableClose: true
-          });
+        this.dialog.open(MappingsDialogComponent, {
+          width: '290px',
+          data: newMapping,
+          disableClose: true
         });
   }
 
