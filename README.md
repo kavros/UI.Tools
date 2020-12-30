@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/kavros/UI.Tools.svg?branch=master)](https://travis-ci.com/kavros/UI.Tools)
 # AppSuite
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.13.
