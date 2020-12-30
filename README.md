@@ -25,4 +25,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Deploy project locally
 `npm run build:prod`
 Install http-server `npm install http-server -g`
-Go to dist\app-suite and run `http-server`
+Go to dist\app-suite and run `http-server -p 4200`
