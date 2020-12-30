@@ -24,7 +24,7 @@ export class StepperComponent implements OnInit {
     this.dataSource =  new MatTableDataSource<Product>();
   }
 
-  private updateDataSource(response: ImportDTO) {
+  updateDataSource(response: ImportDTO) {
 
     this.dataSource.data = [];
     response.data.forEach( (elem: Product) => {

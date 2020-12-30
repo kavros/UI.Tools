@@ -83,7 +83,7 @@ export class StepperComponentService {
   private openMappingsDialog(productName: string): void {
         const newMapping = {
           pName: productName,
-          tittle: 'Εισαγωγή αντιστοίχισης'
+          tittle: 'Εισαγωγή κανόνα και αντιστοίχισης'
         } as MappingsDialogData;
 
         this.dialog.open(MappingsDialogComponent, {

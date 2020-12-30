@@ -27,8 +27,8 @@ export class TableComponent implements OnInit {
   @Input() invoiceDate: string;
 
   selection = new SelectionModel<Product>(true, []);
-  private print = new Button();
-  private updateKefalaio = new Button();
+  print = new Button();
+  updateKefalaio = new Button();
 
   constructor( private service: StepperComponentService,
                private snackBarService: SnackBarService ) {}
