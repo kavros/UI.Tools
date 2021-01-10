@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { ImportDTO } from 'src/app/stepper/import-page/dto/import-dto';
 import { catchError, map } from 'rxjs/operators';
 import { Product } from 'src/app/stepper/interfaces/product';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 import { DownloadLabelsDTO } from '../import-page/dto/download.labels.dto';
 import { MappingsDialogData, MappingsDialogComponent } from 'src/app/mappings-dialog/mappings.dialog.component';
@@ -69,10 +69,8 @@ export class StepperComponentService {
       const products = (responseData.errors[0].msg)
                           .split('[')[1]
                           .split(',');
-      products.forEach( p => {
-        p = p.replace(']', '').trim();
-        this.openMappingsDialog(p);
-      });
+      
+      this.getSettingsFromUser(products);
     } else {
       this.snackBar.showError('Αποτυχία φόρτωσης αρχείου', 'Ok');
     }
@@ -80,13 +78,24 @@ export class StepperComponentService {
     return throwError('Failed to retrive main table data');
   }
 
-  private openMappingsDialog(productName: string): void {
+  private getSettingsFromUser(products: string[]) {
+    if(products.length === 0){
+      this.snackBar.showAndRemain('Παρακαλώ τραβήξτε το τιμολογιο ξανα.', 'κλείσιμο');
+    }else{
+      var p = products.pop();
+      p = p.replace(']', '').trim();
+      var ref = this.openMappingsDialog(p);
+      ref.afterClosed().subscribe( ()=>{this.getSettingsFromUser(products);});
+    }
+  }
+
+  private openMappingsDialog(productName: string): MatDialogRef<any> {
         const newMapping = {
           pName: productName,
           tittle: 'Εισαγωγή κανόνα και αντιστοίχισης'
         } as MappingsDialogData;
 
-        this.dialog.open(MappingsDialogComponent, {
+        return this.dialog.open(MappingsDialogComponent, {
           width: '290px',
           data: newMapping,
           disableClose: true
