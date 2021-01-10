@@ -104,7 +104,7 @@ export class TableComponent implements OnInit {
       this.service
           .updateRetailPrices(updateSelection, this.invoiceDate);
     response.subscribe(() => {
-      this.snackBarService.showInfo('Η ενημέρωση των τιμών έγινε επιτυχώς', 'Ok');
+      this.snackBarService.showSuccessMsg('Η ενημέρωση των τιμών έγινε επιτυχώς');
     });
     console.log(updateSelection);
   }

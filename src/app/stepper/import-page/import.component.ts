@@ -36,10 +36,14 @@ export class ImportComponent  {
     response.subscribe((res) => {
       const hasWarnings = res.warnings.length > 0;
       const hasErrors = res.errors.length > 0;
-
-      if (hasWarnings || hasErrors ) {
+      // TODO: fix messages. I will need to update the back-end first.
+      if (hasErrors ) {
           const msg =  res.warnings + '' + res.errors;
-          this.snackBarService.showInfo(msg, 'Ok');
+          this.snackBarService.showAndRemain(msg, 'κλείσιμο');
+      } else if (hasWarnings) {
+        this.snackBarService.showSuccessMsg('Eπιτυχής φόρτωση αρχείου. '+ res.warnings);
+      } else {
+        this.snackBarService.showSuccessMsg('Eπιτυχής φόρτωση αρχείου.');
       }
       this.eventUpdateDataSource.emit(res);
     });

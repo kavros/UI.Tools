@@ -47,7 +47,7 @@ export class RuleDialog  {
 
         this.services
             .addOrUpdateRule(this.data.rule).subscribe(() => {
-                this.snackBar.showInfo('Επιτυχης καταχώρηση κανόνα.', 'Ok');
+                this.snackBar.showSuccessMsg('Επιτυχης καταχώρηση κανόνα.');
             });
     }
 

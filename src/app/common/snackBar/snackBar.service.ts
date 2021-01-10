@@ -16,9 +16,18 @@ export class SnackBarService {
             panelClass: ['error-snackbar']
           });
     }
-    public showInfo(msg: string, action: string): void {
-        this.snackBar.open(msg, action, {
+    public showSuccessMsg(msg: string): void {
+        this.snackBar.open(msg, null, {
             duration: 5000,
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            panelClass: ['isa_success']
+          });
+    }
+
+    public showAndRemain(msg: string, action: string): void {
+        this.snackBar.open(msg, action, {
+            duration: -1,
             horizontalPosition: 'right',
             verticalPosition: 'bottom',
           });

@@ -33,7 +33,7 @@ export class MappingsDialogComponent {
             .addOrUpdateMappingDialogData(this.data)
             .subscribe( () =>{
                 this.snackBar
-                    .showInfo('Επιτυχής καταχώρηση κανόνα και αντιστοίχισης', 'Κλείσιμο');
+                    .showSuccessMsg('Επιτυχής καταχώρηση κανόνα και αντιστοίχισης');
             });
     }
 

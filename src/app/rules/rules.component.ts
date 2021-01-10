@@ -118,7 +118,7 @@ export class RulesComponent implements OnInit {
         this
           .rulesService
           .deleteRule(row).subscribe( () => {
-            this.snackBar.showInfo('Επιτυχής διαγραφή κανόνα.', 'Ok');
+            this.snackBar.showSuccessMsg('Επιτυχής διαγραφή κανόνα.');
             this.dataSource.data =
                     this.dataSource
                     .data
