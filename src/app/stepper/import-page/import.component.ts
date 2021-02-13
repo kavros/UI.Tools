@@ -34,14 +34,11 @@ export class ImportComponent  {
 
   private handleResponse(response: Observable < ImportDTO >) {
     response.subscribe((res) => {
-      const hasWarnings = res.warnings.length > 0;
       const hasErrors = res.errors.length > 0;
       // TODO: fix messages. I will need to update the back-end first.
       if (hasErrors ) {
-          const msg =  res.warnings + '' + res.errors;
+          const msg =  res.errors.toString();
           this.snackBarService.showAndRemain(msg, 'κλείσιμο');
-      } else if (hasWarnings) {
-        this.snackBarService.showSuccessMsg('Eπιτυχής φόρτωση αρχείου. '+ res.warnings);
       } else {
         this.snackBarService.showSuccessMsg('Eπιτυχής φόρτωση αρχείου.');
       }

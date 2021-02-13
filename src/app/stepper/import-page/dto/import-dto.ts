@@ -13,6 +13,5 @@ enum ErrorCode {
 export class ImportDTO {
     data: Product[];
     errors: Error[];
-    warnings: string[];
     invoiceDate: string;
 }
