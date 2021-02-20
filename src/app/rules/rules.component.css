@@ -1,5 +1,5 @@
 table {
-    width: 70%;
+    width: 50%;
     text-align: center;
     margin: 0 auto;
 }
@@ -24,13 +24,13 @@ table {
     font-weight: bold;
 }
 
-.mat-icon {
-    transform: scale(0.7);
-    color: black;
+.rules-icons{
+        transform: scale(0.7);
+        color: black;
 }
-
-.mat-icon:hover {
+.rules-icons:hover {
     color: red;
     font-weight: bold;
     font-size: xx-large;
+    cursor: pointer;
 }

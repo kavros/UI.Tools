@@ -24,7 +24,7 @@
     </ng-container>
   
     <ng-container matColumnDef="minimumProfit">
-      <th mat-header-cell *matHeaderCellDef> Κέρδος (€) </th>
+      <th mat-header-cell *matHeaderCellDef> Ελάχιστο κέρδος (€) </th>
       <td mat-cell *matCellDef="let element"> {{element.minProfit}} </td>
     </ng-container>
 
@@ -36,14 +36,14 @@
     <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Επεξεργασία</th>
         <td mat-cell *matCellDef="let element">                    
-          <mat-icon style="cursor: pointer;" (click)="onEdit(element)"> edit </mat-icon>
+          <mat-icon class="rules-icons" (click)="onEdit(element)"> edit </mat-icon>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="delete"> 
         <th mat-header-cell *matHeaderCellDef> Διαγραφή </th>
         <td mat-cell *matCellDef="let element">                              
-          <mat-icon style="cursor: pointer;" (click)="onDelete(element)"> delete </mat-icon>          
+          <mat-icon class="rules-icons" (click)="onDelete(element)"> delete </mat-icon>          
         </td>
       </ng-container>
   
