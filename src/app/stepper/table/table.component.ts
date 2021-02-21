@@ -91,7 +91,7 @@ export class TableComponent implements OnInit {
     this.print.isDisabled = true;
     this.displayedColumns =
       [
-        'product', 'newPrice',
+        'product',
         'status', 'print'
       ];
   }
@@ -139,7 +139,7 @@ export class TableComponent implements OnInit {
   }
 
   getLine1ForTrendsColumn(elem: Product): string {
-    return 'Προηγουμενες τιμές πώλησεις:';
+    return 'Προηγουμενες προτεινόμενες τιμές:';
   }
 
   getLine2ForTrendsColumn(elem: Product): string {

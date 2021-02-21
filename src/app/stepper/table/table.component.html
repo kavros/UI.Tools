@@ -60,7 +60,7 @@
       </ng-container>
     
       <ng-container matColumnDef="newPrice">
-        <th mat-header-cell *matHeaderCellDef> Νέα τιμή </th>
+        <th mat-header-cell *matHeaderCellDef> Προτεινόμενη τιμή </th>
         <td mat-cell *matCellDef="let element" > {{element.newPrice}} </td>
       </ng-container>
     
@@ -116,7 +116,7 @@
               [value]="element.newPrice" 
               [line1] =  "getLine1ForTrendsColumn(element)"
               [line2] = "getLine2ForTrendsColumn(element)"
-              [inputTitle] = "'Νέα τιμή'">
+              [inputTitle] = "'Προτεινόμενη τιμή'">
             </inline-edit>
 
 
