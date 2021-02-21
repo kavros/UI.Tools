@@ -10,6 +10,7 @@ export interface RuleTableRow {
   profitPercentage: number;
   minProfit: number;
   sCode: string;
+  pNames: string[];
 }
 
 @Component({
@@ -19,7 +20,7 @@ export interface RuleTableRow {
 })
 export class RulesComponent implements OnInit {
     displayedColumns: string[] =
-      ['name', 'profitPercentage', 'minimumProfit', 'kefCode' , 'action', 'delete'];
+      ['name', 'profitPercentage', 'minimumProfit', 'kefCode' , 'action', 'delete','mappings'];
     dataSource: MatTableDataSource<RuleTableRow>;
     map = [
       { eng: 'A', gr:  'Α'},
@@ -125,6 +126,10 @@ export class RulesComponent implements OnInit {
                     .filter(x => x.sName !== row.sName);
           });
       }
+    }
+
+    removeMapping(pName: string){
+      console.log(pName);
     }
 
 }

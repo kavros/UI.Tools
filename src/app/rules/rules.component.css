@@ -34,3 +34,16 @@ table {
     font-size: xx-large;
     cursor: pointer;
 }
+.cancel-icon{
+    font-size:5px;
+}
+.mat-chip{
+    font-size: small;
+    padding:0px;
+    margin:0px;
+}
+
+.mat-standard-chip{
+    height: auto;
+    min-height: fit-content;
+}
