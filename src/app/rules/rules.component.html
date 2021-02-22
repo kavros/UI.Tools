@@ -53,7 +53,7 @@
           <mat-chip-list #chipList>
             <mat-chip *ngFor="let pName of element.pNames;" 
             [selectable]="false" [removable]="true"
-            (removed)="removeMapping(pName)"
+            (removed)="onDeleteMapping(element,pName)"
             >
                 {{pName}}
               <mat-icon class="cancel-icon" matChipRemove>cancel</mat-icon>

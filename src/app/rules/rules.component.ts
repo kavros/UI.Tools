@@ -128,8 +128,15 @@ export class RulesComponent implements OnInit {
       }
     }
 
-    removeMapping(pName: string){
-      console.log(pName);
+    onDeleteMapping(row:RuleTableRow, pName:string){
+      this.rulesService.deleteMapping(pName).subscribe(x=>{
+        this.snackBar.showSuccessMsg('Επιτυχής διαγραφή αντιστοίχισης.');
+        const index = row.pNames.indexOf(pName)
+
+        if (index >= 0) {
+          row.pNames.splice(index, 1);
+        }
+      })
     }
 
 }
