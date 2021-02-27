@@ -20,7 +20,7 @@ import { SideNavComponent } from './app/sidenav/side-nav.component';
 import { RulesComponent } from './app/rules/rules.component';
 import { RuleDialog } from './app/rules/rules-dialog/rule-dialog.component';
 import { TableComponent } from './app/stepper/table/table.component';
-import { MappingsDialogComponent } from './app/mappings-dialog/mappings.dialog.component';
+import { StepperDialogComponent } from './app/stepper/stepper-dialog/stepper.dialog.component';
 import { MappingsComponent } from './app/mappings/mappings/mappings.component';
 
 @NgModule({
@@ -49,7 +49,7 @@ import { MappingsComponent } from './app/mappings/mappings/mappings.component';
     ProgressComponent,
     DndDirective,
     RuleDialog,
-    MappingsDialogComponent,
+    StepperDialogComponent,
     SideNavComponent,
     RulesComponent,
     MappingsComponent

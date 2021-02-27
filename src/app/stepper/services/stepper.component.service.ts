@@ -7,7 +7,7 @@ import { Product } from 'src/app/stepper/interfaces/product';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 import { DownloadLabelsDTO } from '../import-page/dto/download.labels.dto';
-import { MappingsDialogData, MappingsDialogComponent } from 'src/app/mappings-dialog/mappings.dialog.component';
+import { StepperDialogData, StepperDialogComponent } from 'src/app/stepper/stepper-dialog/stepper.dialog.component';
 
 
 @Injectable({
@@ -93,9 +93,9 @@ export class StepperComponentService {
         const newMapping = {
           pName: productName,
           tittle: 'Εισαγωγή κανόνα και αντιστοίχισης'
-        } as MappingsDialogData;
+        } as StepperDialogData;
 
-        return this.dialog.open(MappingsDialogComponent, {
+        return this.dialog.open(StepperDialogComponent, {
           width: '290px',
           data: newMapping,
           disableClose: true
