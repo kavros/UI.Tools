@@ -10,11 +10,6 @@ export interface MappingsElement {
   pNames: string[];
 }
 
-const ELEMENT_DATA: MappingsElement[] = [
-  {sName: "1", pNames: ['Hydrogen'], sCode:"123"},
-  {sName: "2", pNames:['Helium'], sCode:"123" }
-];
-
 @Component({
   selector: 'app-mappings',
   templateUrl: './mappings.component.html',

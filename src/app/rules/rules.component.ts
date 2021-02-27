@@ -20,7 +20,7 @@ export interface RuleTableRow {
 })
 export class RulesComponent implements OnInit {
     displayedColumns: string[] =
-      ['name', 'profitPercentage', 'minimumProfit', 'kefCode' , 'action', 'delete'];
+      ['name', 'profitPercentage', 'minimumProfit', 'action', 'delete'];
     dataSource: MatTableDataSource<RuleTableRow>;
     map = [
       { eng: 'A', gr:  'Α'},

@@ -15,6 +15,11 @@ table {
     color: white;
 }
 
+.mat-standard-chip:hover{
+    background-color: red;
+    cursor: pointer;
+}
+
 .cancel-icon{
     font-size:5px;
 }
