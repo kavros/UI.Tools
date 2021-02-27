@@ -1,0 +1,20 @@
+table {
+    width: 60%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.mat-header-cell {
+    text-align: center; 
+    font-weight: bold;
+}
+
+.mat-chip{
+    font-size: small;
+    background-color: rgb(0 0 0 / 70%);
+    color: white;
+}
+
+.cancel-icon{
+    font-size:5px;
+}

@@ -21,7 +21,8 @@
         <mat-icon matListIcon style="align-items: left;">label_important</mat-icon>
         <div style="font-size: small;"> Ετικέτες</div>  
       </mat-list-item>
-      <mat-list-item >
+      <mat-list-item class="clickable"
+          (click)="showMappings()">
         <mat-icon matListIcon style="align-items: left;">settings_input_composite</mat-icon>
         <div style="font-size: small;"> Αντιστοιχίσεις</div>  
       </mat-list-item>
@@ -39,6 +40,7 @@
   <mat-sidenav-content>
     <app-stepper-component *ngIf="isMainPageVisible">loading</app-stepper-component>
     <app-rules-component *ngIf="isSettingsVisible"> loading </app-rules-component>
+    <app-mappings *ngIf="isMappingVisible">loading</app-mappings>
   </mat-sidenav-content>
 
 </mat-sidenav-container>

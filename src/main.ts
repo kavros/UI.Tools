@@ -21,6 +21,7 @@ import { RulesComponent } from './app/rules/rules.component';
 import { RuleDialog } from './app/rules/rules-dialog/rule-dialog.component';
 import { TableComponent } from './app/stepper/table/table.component';
 import { MappingsDialogComponent } from './app/mappings-dialog/mappings.dialog.component';
+import { MappingsComponent } from './app/mappings/mappings/mappings.component';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { MappingsDialogComponent } from './app/mappings-dialog/mappings.dialog.c
     RuleDialog,
     MappingsDialogComponent,
     SideNavComponent,
-    RulesComponent
+    RulesComponent,
+    MappingsComponent
   ],
   bootstrap: [
     SideNavComponent

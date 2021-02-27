@@ -20,7 +20,7 @@ export interface RuleTableRow {
 })
 export class RulesComponent implements OnInit {
     displayedColumns: string[] =
-      ['name', 'profitPercentage', 'minimumProfit', 'kefCode' , 'action', 'delete','mappings'];
+      ['name', 'profitPercentage', 'minimumProfit', 'kefCode' , 'action', 'delete'];
     dataSource: MatTableDataSource<RuleTableRow>;
     map = [
       { eng: 'A', gr:  'Α'},
@@ -127,16 +127,4 @@ export class RulesComponent implements OnInit {
           });
       }
     }
-
-    onDeleteMapping(row:RuleTableRow, pName:string){
-      this.rulesService.deleteMapping(pName).subscribe(x=>{
-        this.snackBar.showSuccessMsg('Επιτυχής διαγραφή αντιστοίχισης.');
-        const index = row.pNames.indexOf(pName)
-
-        if (index >= 0) {
-          row.pNames.splice(index, 1);
-        }
-      })
-    }
-
 }
