@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
-import { RulesService } from 'src/app/rules/rules.service';
+import { MappingsService } from './services/mappings.service';
 
 
 export interface MappingsElement {
@@ -19,7 +19,7 @@ export class MappingsComponent implements OnInit {
 
   displayedColumns: string[] = ['sName','sCode', 'pNames'];
   dataSource : MatTableDataSource<MappingsElement>;
-  constructor(private rulesService: RulesService,
+  constructor(private mappingsService: MappingsService,
               private snackBar: SnackBarService) { }
 
   ngOnInit(): void {
@@ -28,15 +28,15 @@ export class MappingsComponent implements OnInit {
   }
 
   loadData() {
-    this.rulesService
-        .getRules()
+    this.mappingsService
+        .getMappings()
         .subscribe( (data: MappingsElement[]) => {
             this.dataSource.data = data;
         });
   }
 
   onDeleteMapping(row:MappingsElement, pName:string){
-    this.rulesService.deleteMapping(pName).subscribe(x=>{
+    this.mappingsService.deleteMapping(pName).subscribe(x=>{
       this.snackBar.showSuccessMsg('Επιτυχής διαγραφή αντιστοίχισης.');
       const index = row.pNames.indexOf(pName)
 

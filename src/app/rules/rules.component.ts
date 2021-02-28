@@ -10,7 +10,6 @@ export interface RuleTableRow {
   profitPercentage: number;
   minProfit: number;
   sCode: string;
-  pNames: string[];
 }
 
 @Component({

@@ -16,7 +16,7 @@ export class MappingsDialogService {
         return this
             .httpClient
             .put(
-                'http://localhost:8080/addOrUpdateMappingDialogData',
+                'http://localhost:8080/saveStepperDialogData',
                 mapping
             )
             .pipe(
@@ -29,6 +29,6 @@ export class MappingsDialogService {
 
     public getStepperDialogData(sCode: string): Observable<any> {
         return this.httpClient
-                .get('http://localhost:8080/getMappingDialogData/'+sCode);
+                .get('http://localhost:8080/getStepperDialogData/'+sCode);
     }
 }
