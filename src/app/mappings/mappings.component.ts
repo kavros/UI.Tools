@@ -36,14 +36,17 @@ export class MappingsComponent implements OnInit {
   }
 
   onDeleteMapping(row:MappingsElement, pName:string){
-    this.mappingsService.deleteMapping(pName).subscribe(x=>{
-      this.snackBar.showSuccessMsg('Επιτυχής διαγραφή αντιστοίχισης.');
-      const index = row.pNames.indexOf(pName)
-
-      if (index >= 0) {
-        row.pNames.splice(index, 1);
-      }
-    })
+    const msg = 'Θέλετε να διαγραφεί η αντιστοίχιση. ' + pName;
+    if (confirm(msg)) {        
+      this.mappingsService.deleteMapping(pName).subscribe(x=>{
+        this.snackBar.showSuccessMsg('Επιτυχής διαγραφή αντιστοίχισης.');
+        
+        const index = row.pNames.indexOf(pName)
+        if (index >= 0) {
+          row.pNames.splice(index, 1);
+        }
+      })
+    }
   }
 
 }

@@ -17,9 +17,9 @@ table {
 
 .mat-standard-chip:hover{
     background-color: red;
-    cursor: pointer;
 }
 
 .cancel-icon{
     font-size:5px;
+    cursor: pointer;
 }
