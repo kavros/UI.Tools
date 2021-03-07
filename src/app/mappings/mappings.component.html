@@ -18,6 +18,7 @@
             <mat-chip *ngFor="let pName of element.pNames;" 
             [selectable]="false" [removable]="true"
             (removed)="onDeleteMapping(element,pName)"
+            (click) = "openDialog(element, pName)"
             >
                 {{pName}}
               <mat-icon class="cancel-icon" matChipRemove>cancel</mat-icon>

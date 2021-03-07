@@ -22,6 +22,7 @@ import { RuleDialog } from './app/rules/rules-dialog/rule-dialog.component';
 import { TableComponent } from './app/stepper/table/table.component';
 import { StepperDialogComponent } from './app/stepper/stepper-dialog/stepper.dialog.component';
 import { MappingsComponent } from './app/mappings/mappings.component';
+import { MappingsDialogComponent } from './app/mappings/mappings-dialog/mappings-dialog.component';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { MappingsComponent } from './app/mappings/mappings.component';
     ProgressComponent,
     DndDirective,
     RuleDialog,
+    MappingsDialogComponent,
     StepperDialogComponent,
     SideNavComponent,
     RulesComponent,
