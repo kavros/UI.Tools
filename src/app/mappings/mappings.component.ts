@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
-import { MappingsDialogComponent } from './mappings-dialog/mappings-dialog.component';
+import { MappingsDialogComponent, MappingsDialogData, MappingsDialogOption } from './mappings-dialog/mappings-dialog.component';
 import { MappingsService } from './services/mappings.service';
 
 
@@ -45,10 +45,14 @@ export class MappingsComponent implements OnInit {
       {
         pName: pName,
         sName: el.sName,
-        options: this.dataSource.data.map(x=>x.sName)
-      }
+        options: this.dataSource.data
+                    .map(x=>
+                      ({
+                        name: x.sName, 
+                        sCode:x.sCode
+                      })) as MappingsDialogOption[]
+      } as MappingsDialogData
     });
-    console.log(pName);
   }
 
 

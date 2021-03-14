@@ -23,6 +23,20 @@ export class MappingsService {
                     }));
     }
 
+    public updateMapping(pName: string, sCode: string): Observable<any> {
+        return this.httpClient
+        .post(
+            'http://localhost:8080/updateMapping',
+            {pName: pName, sCode: sCode}
+        )
+        .pipe(
+            catchError(() => {
+                this.snackBar.showError('Αποτυχία αλλαγής αντιστοίχισης. Προσπαθήστε ξανά', 'Ok');
+                return throwError('Failed to add setting');
+            })
+        );
+    }
+
     public deleteMapping(name: string): Observable<any> {
         const dto = {
             pName: name
