@@ -101,7 +101,7 @@ export class RulesComponent implements OnInit {
         if(result?.event === 'Cancel' ) {
           return;
         }
-        await this.delay(2000); // ensuress that the update completed
+        await this.delay(2000); // wait for update to complete
         this.dataSource.data = [];  
         this.loadData();
         

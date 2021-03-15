@@ -53,6 +53,19 @@ export class MappingsComponent implements OnInit {
                       })) as MappingsDialogOption[]
       } as MappingsDialogData
     });
+    dialogRef.afterClosed().subscribe( async result => {
+      if(result?.event === 'Cancel' ) {
+        console.log('cancel')
+        return;
+      }
+      await this.delay(2000); // wait for update to complete
+      this.dataSource.data = [];  
+      this.loadData();
+    });
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
 

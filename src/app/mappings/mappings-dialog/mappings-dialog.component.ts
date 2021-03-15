@@ -35,7 +35,6 @@ export class MappingsDialogComponent {
         .subscribe( () => {
           this.snackBar.showSuccessMsg("Επιτυχής αλλαγή αντιστοίχισης")
         });
-        //TODO: update page table
   }
 
   onSelectionChange(option) {
