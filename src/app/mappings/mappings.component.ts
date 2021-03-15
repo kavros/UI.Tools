@@ -55,7 +55,6 @@ export class MappingsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe( async result => {
       if(result?.event === 'Cancel' ) {
-        console.log('cancel')
         return;
       }
       await this.delay(2000); // wait for update to complete
