@@ -8,6 +8,19 @@
       </div>  
   </mat-step>
 
+  <mat-step>
+    <ng-template matStepLabel>Έλεγχος αντιστοιχίσεων</ng-template>
+    <app-mappings
+    [dataSource]="mappingsDataSource"
+    [isImportStep]="true"
+    >
+    </app-mappings>
+    <div style="float: right;">
+      <button mat-button matStepperPrevious>Προηγούμενο</button>
+      <button mat-button matStepperNext>Επόμενο</button>
+    </div>  
+  </mat-step>
+
   <mat-step >    
     <ng-template matStepLabel>Ενημέρωσε τις τιμές</ng-template>
 

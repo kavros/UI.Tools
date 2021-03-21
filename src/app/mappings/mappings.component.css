@@ -23,3 +23,8 @@ table {
     font-size:5px;
     cursor: pointer;
 }
+
+.mat-row:hover {
+    background-color: beige;
+    font-weight: bold;
+}

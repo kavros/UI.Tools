@@ -29,12 +29,18 @@ export class MappingsDialogComponent {
   selectedOption: MappingsDialogOption;
     
   onSave() {
-    console.log("save");
     this.mappingsService
         .updateMapping(this.data.pName, this.selectedOption.sCode)
         .subscribe( () => {
           this.snackBar.showSuccessMsg("Επιτυχής αλλαγή αντιστοίχισης")
         });
+    this.dialogRef.close(
+      {
+        event:'Save',
+        name: this.selectedOption.name,
+        sCode: this.selectedOption.sCode
+      }
+      )
   }
 
   onSelectionChange(option) {
