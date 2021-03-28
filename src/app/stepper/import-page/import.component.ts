@@ -26,16 +26,16 @@ export class ImportComponent  {
   }
 
   private import(selectedFile){
-    const uploadInvoiceData = new FormData();
-    uploadInvoiceData.append('pdfFile', selectedFile, selectedFile.name);
-    const response = this.service.importAndGetStepperData(uploadInvoiceData);
+    const invoiceData = new FormData();
+    invoiceData.append('pdfFile', selectedFile, selectedFile.name);
+    const response = this.service.importAndGetStepperData(invoiceData);
     this.handleResponse(response);
   }
 
   private handleResponse(response: Observable < ImportDTO >) {
     response.subscribe((res) => {
       const hasErrors = res.errors.length > 0;
-      // TODO: fix messages. I will need to update the back-end first.
+     
       if (hasErrors ) {
           const msg =  res.errors.toString();
           this.snackBarService.showAndRemain(msg, 'κλείσιμο');

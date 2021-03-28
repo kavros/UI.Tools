@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
-import { MappingsDialogComponent, MappingsDialogData, MappingsDialogOption } from './mappings-dialog/mappings-dialog.component';
+import { StepperDialogComponent, StepperDialogData } from '../stepper/stepper-dialog/stepper.dialog.component';
 import { MappingsService } from './services/mappings.service';
 
 
@@ -21,7 +21,8 @@ export class MappingsComponent implements OnInit {
 
   @Input() isImportStep: boolean = false;
   @Input() dataSource : MatTableDataSource<MappingsElement>;
-  selectorMappings: MappingsElement[];
+  @Output() onMappingChange =  new EventEmitter();
+
   displayedColumns: string[] = ['sName','sCode', 'pNames'];
   
   constructor(private mappingsService: MappingsService,
@@ -29,13 +30,6 @@ export class MappingsComponent implements OnInit {
               private snackBar: SnackBarService) { }
 
   ngOnInit(): void {
-    
-    this.mappingsService
-      .getMappings()
-      .subscribe( (data: MappingsElement[]) => {
-        this.selectorMappings = data;
-      });
-    
     if(!this.isImportStep){
       this.loadData();
     }
@@ -51,41 +45,48 @@ export class MappingsComponent implements OnInit {
   }
 
   openDialog(el: MappingsElement, pName: string) {
-   
-    const dialogRef = this.dialog.open(MappingsDialogComponent, {
-      width: '280px',
-      data:
-      {
-        pName: pName,
-        sName: el.sName,
-        options: this.selectorMappings
-                    .map(x=>
-                      ({
-                        name: x.sName, 
-                        sCode:x.sCode
-                      })) as MappingsDialogOption[]
-      } as MappingsDialogData
+    const newMapping = {
+      pName: pName,
+      tittle: 'Αλλαγή κανόνα και αντιστοίχισης'
+    } as StepperDialogData;
+    
+    const dialogRef = this.dialog.open(StepperDialogComponent, {
+      width: '290px',
+      data: newMapping
     });      
     
-    dialogRef.afterClosed().subscribe( async result => {
-      if(result?.event === 'Cancel' ) {
-        return;
-      }else if(result?.event === 'Save'){
-        console.log(result);
-        const index = this.dataSource.data.findIndex(x=>x.sCode === result.sCode);
-        this.dataSource.data.splice(index,1);
-        this.dataSource.data.push({
-          sCode: result.sCode,
-          sName: result.name,
-          pNames: [pName]
-        }as MappingsElement)
+
+    dialogRef.afterClosed().subscribe( result  => {    
+      if (result?.event === 'Save') {              
+        this.removeMappingLocally(el.sCode, pName); 
+        this.addMappingLocally(result.data);
         this.dataSource._updateChangeSubscription();
+        this.onMappingChange.emit();
       }
-      //await this.delay(2000); // wait for update to complete
-      //this.dataSource.data = [];  
-      //TODO: update table
-      //this.loadData();
     });
+  }
+  
+  addMappingLocally(data: StepperDialogData){
+    const index = this.dataSource.data.findIndex(x=>x.sCode === data.sCode);
+    if (index != -1) {
+      this.dataSource.data[index].pNames.push(data.pName);
+    } else {
+      this.dataSource.data.push({
+        sName: data.sName,
+        sCode: data.sCode,
+        pNames: [data.pName]
+      } as MappingsElement );
+    }
+  }
+
+  removeMappingLocally(targetScode: string, pName: string) {
+    const index = this.dataSource.data.findIndex(x=>x.sCode === targetScode);
+    if (index != -1) {
+      const i = this.dataSource.data[index].pNames.findIndex(x => x === pName);
+      if(i != -1){
+        this.dataSource.data[index].pNames.splice(i,1);
+      }
+    }
   }
 
   delay(ms: number) {

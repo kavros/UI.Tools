@@ -18,7 +18,7 @@ export class MappingsService {
                 .get<MappingsElement[]>('http://localhost:8080/getMappings')
                 .pipe(
                     catchError(() => {
-                        this.snackBar.showError('Αποτυχία φόρτωσης κανόνων.', 'Ok');
+                        this.snackBar.showError('Αποτυχία φόρτωσης αντιστοιχίσεων.', 'Ok');
                         return throwError('Failed to load rules');
                     }));
     }

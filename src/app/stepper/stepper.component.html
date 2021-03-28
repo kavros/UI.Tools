@@ -11,6 +11,7 @@
   <mat-step>
     <ng-template matStepLabel>Έλεγχος αντιστοιχίσεων</ng-template>
     <app-mappings
+    (onMappingChange) = "eraseData()"
     [dataSource]="mappingsDataSource"
     [isImportStep]="true"
     >

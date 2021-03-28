@@ -21,7 +21,7 @@
             (click) = "openDialog(element, pName)"
             >
                 {{pName}}
-              <mat-icon class="cancel-icon" matChipRemove>cancel</mat-icon>
+              <mat-icon *ngIf="!isImportStep" class="cancel-icon" matChipRemove>cancel</mat-icon>
             </mat-chip>
            
           </mat-chip-list>  

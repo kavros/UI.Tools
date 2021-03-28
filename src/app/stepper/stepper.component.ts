@@ -6,6 +6,7 @@ import { ImportDTO } from './import-page/dto/import-dto';
 import { TableComponent } from './table/table.component';
 import { StepperComponentService } from './services/stepper.component.service';
 import { MappingsElement } from '../mappings/mappings.component';
+import { SnackBarService } from '../common/snackBar/snackBar.service';
 
 @Component({
   selector: 'app-stepper-component',
@@ -20,7 +21,8 @@ export class StepperComponent implements OnInit {
   invoiceDate: string;
   @ViewChild('table2') tableStep2: TableComponent;
 
-  constructor( private service: StepperComponentService ) {}
+  constructor( private service: StepperComponentService,
+              private snackBar: SnackBarService ) {}
 
   ngOnInit() {
     this.dataSource =  new MatTableDataSource<Product>();
@@ -49,6 +51,11 @@ export class StepperComponent implements OnInit {
     this.mappingsDataSource._updateChangeSubscription();
     this.tableStep2.updateDownloadButton();
     console.log(response);
+  }
+
+  eraseData(){
+    this.dataSource.data = []
+    this.snackBar.showAndRemain('Παρακαλώ τραβήξτε το τιμολόγιο ξανά.', 'κλείσιμο');   
   }
 
   downloadHistory() {
