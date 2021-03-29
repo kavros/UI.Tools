@@ -10,6 +10,7 @@ export class MappingsElement {
   sName: string;
   sCode: string;
   pNames: string[];
+  hasValidated: boolean;
 }
 
 @Component({
@@ -22,8 +23,9 @@ export class MappingsComponent implements OnInit {
   @Input() isImportStep: boolean = false;
   @Input() dataSource : MatTableDataSource<MappingsElement>;
   @Output() onMappingChange =  new EventEmitter();
+  @Output() onValidatioCompleted = new EventEmitter();
 
-  displayedColumns: string[] = ['sName','sCode', 'pNames'];
+  displayedColumns: string[] = ['sName','sCode', 'pNames','update'];
   
   constructor(private mappingsService: MappingsService,
               public dialog: MatDialog,
@@ -44,7 +46,7 @@ export class MappingsComponent implements OnInit {
         });
   }
 
-  openDialog(el: MappingsElement, pName: string) {
+  openDialog(pName: string) {
     const newMapping = {
       pName: pName,
       tittle: 'Αλλαγή κανόνα και αντιστοίχισης'
@@ -58,42 +60,11 @@ export class MappingsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe( result  => {    
       if (result?.event === 'Save') {              
-        this.removeMappingLocally(el.sCode, pName); 
-        this.addMappingLocally(result.data);
-        this.dataSource._updateChangeSubscription();
         this.onMappingChange.emit();
       }
     });
   }
   
-  addMappingLocally(data: StepperDialogData){
-    const index = this.dataSource.data.findIndex(x=>x.sCode === data.sCode);
-    if (index != -1) {
-      this.dataSource.data[index].pNames.push(data.pName);
-    } else {
-      this.dataSource.data.push({
-        sName: data.sName,
-        sCode: data.sCode,
-        pNames: [data.pName]
-      } as MappingsElement );
-    }
-  }
-
-  removeMappingLocally(targetScode: string, pName: string) {
-    const index = this.dataSource.data.findIndex(x=>x.sCode === targetScode);
-    if (index != -1) {
-      const i = this.dataSource.data[index].pNames.findIndex(x => x === pName);
-      if(i != -1){
-        this.dataSource.data[index].pNames.splice(i,1);
-      }
-    }
-  }
-
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-  }
-
-
   onDeleteMapping(row:MappingsElement, pName:string){
     const msg = 'Θέλετε να διαγραφεί η αντιστοίχιση. ' + pName;
     if (confirm(msg)) {        
@@ -105,6 +76,16 @@ export class MappingsComponent implements OnInit {
           row.pNames.splice(index, 1);
         }
       })
+    }
+  }
+  
+  validate(element){
+    element.hasValidated = true;
+    const allChecked = this.dataSource.data.every(x=> x.hasValidated);
+    
+    if(allChecked) {
+      console.log('all checked')
+      this.onValidatioCompleted.emit();
     }
   }
 

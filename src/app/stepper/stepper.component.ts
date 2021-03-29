@@ -6,7 +6,8 @@ import { ImportDTO } from './import-page/dto/import-dto';
 import { TableComponent } from './table/table.component';
 import { StepperComponentService } from './services/stepper.component.service';
 import { MappingsElement } from '../mappings/mappings.component';
-import { SnackBarService } from '../common/snackBar/snackBar.service';
+import { ImportComponent } from './import-page/import.component';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-stepper-component',
@@ -20,9 +21,9 @@ export class StepperComponent implements OnInit {
   mappingsDataSource: MatTableDataSource<MappingsElement>;
   invoiceDate: string;
   @ViewChild('table2') tableStep2: TableComponent;
+  @ViewChild('import') import: ImportComponent;
 
-  constructor( private service: StepperComponentService,
-              private snackBar: SnackBarService ) {}
+  constructor( private service: StepperComponentService ) {}
 
   ngOnInit() {
     this.dataSource =  new MatTableDataSource<Product>();
@@ -43,6 +44,7 @@ export class StepperComponent implements OnInit {
       mappingElem.sName = elem.sName;
       mappingElem.sCode = elem.sCode;
       mappingElem.pNames = [elem.name];
+      mappingElem.hasValidated = false;
       this.mappingsDataSource.data.push(mappingElem);
 
     });
@@ -53,9 +55,13 @@ export class StepperComponent implements OnInit {
     console.log(response);
   }
 
-  eraseData(){
+  runImport(){
     this.dataSource.data = []
-    this.snackBar.showAndRemain('Παρακαλώ τραβήξτε το τιμολόγιο ξανά.', 'κλείσιμο');   
+    this.import.importAgain();
+  }
+
+  goForward(stepper: MatStepper) {
+    stepper.next();
   }
 
   downloadHistory() {

@@ -14,8 +14,10 @@ export class ImportComponent  {
   constructor(private service: StepperComponentService,
               private snackBarService: SnackBarService) { }
   @Output() eventUpdateDataSource =  new EventEmitter();
-
+  lastEvent: any;
+  
   onFileDropped($event) {
+    this.lastEvent = $event
     this.prepareFilesList($event);
     this.import($event[0]);
   }
@@ -23,6 +25,11 @@ export class ImportComponent  {
   onFileBrowseHandler(files) {
     this.prepareFilesList(files);
     this.import(files[0]);
+  }
+
+  importAgain() {
+    this.prepareFilesList(this.lastEvent);
+    this.import(this.lastEvent[0]);
   }
 
   private import(selectedFile){
