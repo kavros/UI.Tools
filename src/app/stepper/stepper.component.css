@@ -19,3 +19,7 @@
 .end-page-content {
   text-align: center;
 }
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}

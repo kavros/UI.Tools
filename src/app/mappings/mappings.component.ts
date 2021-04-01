@@ -79,14 +79,15 @@ export class MappingsComponent implements OnInit {
     }
   }
   
-  validate(element){
-    element.hasValidated = true;
-    const allChecked = this.dataSource.data.every(x=> x.hasValidated);
-    
-    if(allChecked) {
-      console.log('all checked')
+  validate(element: MappingsElement){
+    element.hasValidated = !element.hasValidated;
+
+    if(this.allChecked()) {
       this.onValidatioCompleted.emit();
     }
   }
 
+  allChecked(): boolean{
+    return this.dataSource.data.every(x=> x.hasValidated === true);
+  }
 }
