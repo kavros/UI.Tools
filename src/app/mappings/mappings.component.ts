@@ -25,7 +25,7 @@ export class MappingsComponent implements OnInit {
   @Output() onMappingChange =  new EventEmitter();
   @Output() onValidatioCompleted = new EventEmitter();
 
-  displayedColumns: string[];//= ['sName','sCode', 'pNames','update'];
+  displayedColumns: string[];
   
   constructor(private mappingsService: MappingsService,
               public dialog: MatDialog,
@@ -92,7 +92,7 @@ export class MappingsComponent implements OnInit {
     }
   }
   
-  validate(element: MappingsElement){
+  onValidate(element: MappingsElement){
     element.hasValidated = !element.hasValidated;
 
     if(this.allChecked()) {
