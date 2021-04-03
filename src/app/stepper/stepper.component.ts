@@ -40,8 +40,8 @@ export class StepperComponent implements OnInit {
       elem.updateTrendColumn();
       this.dataSource.data.push(elem);
 
-      const checked = (oldMappings.length===0) ? false : oldMappings.find(x => x.sName === elem.sName).hasValidated;
-      this.pushMapping( elem.sName,elem.name, elem.sCode, checked)
+      var checked = this.hasValidatedBefore(oldMappings,elem);      
+      this.pushMapping(elem, checked)
 
     });
     this.invoiceDate = response.invoiceDate;
@@ -51,11 +51,23 @@ export class StepperComponent implements OnInit {
     console.log(response);
   }
 
-  pushMapping(sName: string, pName: string, sCode: string, checked: boolean): void {
+  hasValidatedBefore(oldMappings: MappingsElement[], elem: Product): boolean {
+    var checked = false;
+      if (oldMappings.length===0) {
+          checked = false
+      } else {
+          var oldMapping = oldMappings.find(x => x.pNames[0] === elem.name)
+          checked = oldMapping ? oldMapping.hasValidated: false;
+      }
+      return checked;
+
+  }
+
+  pushMapping(product: Product, checked: boolean): void {
     var mappingElem  = new MappingsElement();
-    mappingElem.sName = sName;
-    mappingElem.sCode = sCode;
-    mappingElem.pNames = [pName];
+    mappingElem.sName = product.sName;
+    mappingElem.sCode = product.sCode;
+    mappingElem.pNames = [product.name];
     mappingElem.hasValidated = checked;
     this.mappingsDataSource.data.push(mappingElem);
   }

@@ -25,14 +25,17 @@ export class MappingsComponent implements OnInit {
   @Output() onMappingChange =  new EventEmitter();
   @Output() onValidatioCompleted = new EventEmitter();
 
-  displayedColumns: string[] = ['sName','sCode', 'pNames','update'];
+  displayedColumns: string[];//= ['sName','sCode', 'pNames','update'];
   
   constructor(private mappingsService: MappingsService,
               public dialog: MatDialog,
               private snackBar: SnackBarService) { }
 
   ngOnInit(): void {
-    if(!this.isImportStep){
+    if(this.isImportStep){
+      this.displayedColumns = ['sName','sCode', 'pNames','update'];
+    }else{
+      this.displayedColumns = ['sName','sCode', 'pNames'];
       this.loadData();
     }
   }
@@ -58,13 +61,23 @@ export class MappingsComponent implements OnInit {
     });      
     
 
-    dialogRef.afterClosed().subscribe( result  => {    
-      if (result?.event === 'Save') {              
-        this.onMappingChange.emit();
+    dialogRef.afterClosed().subscribe( async result  => {    
+      if (result?.event === 'Save') {   
+        if(this.isImportStep) {
+          this.onMappingChange.emit();
+        }else{
+          await this.delay(2000); // wait for update to complete
+          this.dataSource.data = [];  
+          this.loadData();
+        }
       }
     });
   }
   
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
   onDeleteMapping(row:MappingsElement, pName:string){
     const msg = 'Θέλετε να διαγραφεί η αντιστοίχιση. ' + pName;
     if (confirm(msg)) {        
