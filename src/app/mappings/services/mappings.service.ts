@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { catchError, map } from "rxjs/operators";
 import { SnackBarService } from "src/app/common/snackBar/snackBar.service";
 import { MappingsElement } from "../mappings.component";
 
@@ -17,24 +17,16 @@ export class MappingsService {
         return this.httpClient
                 .get<MappingsElement[]>('http://localhost:8080/getMappings')
                 .pipe(
+                    map(x => {
+                        x.forEach(y => y.hasValidated = false );
+                        return x;
+                    }
+                    ),
                     catchError(() => {
-                        this.snackBar.showError('Αποτυχία φόρτωσης κανόνων.', 'Ok');
+                        this.snackBar.showError('Αποτυχία φόρτωσης αντιστοιχίσεων.', 'Ok');
                         return throwError('Failed to load rules');
-                    }));
-    }
-
-    public updateMapping(pName: string, sCode: string): Observable<any> {
-        return this.httpClient
-        .post(
-            'http://localhost:8080/updateMapping',
-            {pName: pName, sCode: sCode}
-        )
-        .pipe(
-            catchError(() => {
-                this.snackBar.showError('Αποτυχία αλλαγής αντιστοίχισης. Προσπαθήστε ξανά', 'Ok');
-                return throwError('Failed to add setting');
-            })
-        );
+                    })
+                );
     }
 
     public deleteMapping(name: string): Observable<any> {

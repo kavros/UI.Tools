@@ -11,6 +11,17 @@
         <td mat-cell *matCellDef="let element"> {{element.sCode}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef>Έλεγχος</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox 
+            [checked]="element.hasValidated"
+            (change)="onValidate(element)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="pNames">
       <th mat-header-cell *matHeaderCellDef> Αντιστοιχίσεις </th>
       <td mat-cell *matCellDef="let element"> 
@@ -18,18 +29,15 @@
             <mat-chip *ngFor="let pName of element.pNames;" 
             [selectable]="false" [removable]="true"
             (removed)="onDeleteMapping(element,pName)"
-            (click) = "openDialog(element, pName)"
+            (click) = "openDialog(pName)"
             >
                 {{pName}}
-              <mat-icon class="cancel-icon" matChipRemove>cancel</mat-icon>
+              <mat-icon *ngIf="!isImportStep" class="cancel-icon" matChipRemove>cancel</mat-icon>
             </mat-chip>
            
           </mat-chip-list>  
     </td>
-    </ng-container>
-  
-
-    
+    </ng-container> 
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

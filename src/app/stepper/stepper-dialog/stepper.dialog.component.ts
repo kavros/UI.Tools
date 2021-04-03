@@ -34,6 +34,11 @@ export class StepperDialogComponent {
             .subscribe( () =>{
                 this.snackBar
                     .showSuccessMsg('Επιτυχής καταχώρηση κανόνα και αντιστοίχισης');
+                    this.dialogRef.close(
+                    {
+                        event:'Save',
+                        data: this.data
+                    });
             });
     }
 

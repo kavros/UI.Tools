@@ -14,8 +14,10 @@ export class ImportComponent  {
   constructor(private service: StepperComponentService,
               private snackBarService: SnackBarService) { }
   @Output() eventUpdateDataSource =  new EventEmitter();
-
+  lastEvent: any;
+  
   onFileDropped($event) {
+    this.lastEvent = $event
     this.prepareFilesList($event);
     this.import($event[0]);
   }
@@ -25,17 +27,22 @@ export class ImportComponent  {
     this.import(files[0]);
   }
 
+  importAgain() {
+    this.prepareFilesList(this.lastEvent);
+    this.import(this.lastEvent[0]);
+  }
+
   private import(selectedFile){
-    const uploadInvoiceData = new FormData();
-    uploadInvoiceData.append('pdfFile', selectedFile, selectedFile.name);
-    const response = this.service.importAndGetStepperData(uploadInvoiceData);
+    const invoiceData = new FormData();
+    invoiceData.append('pdfFile', selectedFile, selectedFile.name);
+    const response = this.service.importAndGetStepperData(invoiceData);
     this.handleResponse(response);
   }
 
   private handleResponse(response: Observable < ImportDTO >) {
     response.subscribe((res) => {
       const hasErrors = res.errors.length > 0;
-      // TODO: fix messages. I will need to update the back-end first.
+     
       if (hasErrors ) {
           const msg =  res.errors.toString();
           this.snackBarService.showAndRemain(msg, 'κλείσιμο');

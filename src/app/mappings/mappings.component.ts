@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
-import { MappingsDialogComponent, MappingsDialogData, MappingsDialogOption } from './mappings-dialog/mappings-dialog.component';
+import { StepperDialogComponent, StepperDialogData } from '../stepper/stepper-dialog/stepper.dialog.component';
 import { MappingsService } from './services/mappings.service';
 
 
-export interface MappingsElement {
+export class MappingsElement {
   sName: string;
   sCode: string;
   pNames: string[];
+  hasValidated: boolean;
 }
 
 @Component({
@@ -19,18 +20,28 @@ export interface MappingsElement {
 })
 export class MappingsComponent implements OnInit {
 
-  displayedColumns: string[] = ['sName','sCode', 'pNames'];
-  dataSource : MatTableDataSource<MappingsElement>;
+  @Input() isImportStep: boolean = false;
+  @Input() dataSource : MatTableDataSource<MappingsElement>;
+  @Output() onMappingChange =  new EventEmitter();
+  @Output() onValidatioCompleted = new EventEmitter();
+
+  displayedColumns: string[];
+  
   constructor(private mappingsService: MappingsService,
               public dialog: MatDialog,
               private snackBar: SnackBarService) { }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<MappingsElement>();
-    this.loadData();
+    if(this.isImportStep){
+      this.displayedColumns = ['sName','sCode', 'pNames','update'];
+    }else{
+      this.displayedColumns = ['sName','sCode', 'pNames'];
+      this.loadData();
+    }
   }
 
   loadData() {
+    this.dataSource = new MatTableDataSource<MappingsElement>();
     this.mappingsService
         .getMappings()
         .subscribe( (data: MappingsElement[]) => {
@@ -38,35 +49,34 @@ export class MappingsComponent implements OnInit {
         });
   }
 
-  openDialog(el: MappingsElement, pName: string) {
-    const dialogRef = this.dialog.open(MappingsDialogComponent, {
-      width: '280px',
-      data:
-      {
-        pName: pName,
-        sName: el.sName,
-        options: this.dataSource.data
-                    .map(x=>
-                      ({
-                        name: x.sName, 
-                        sCode:x.sCode
-                      })) as MappingsDialogOption[]
-      } as MappingsDialogData
-    });
-    dialogRef.afterClosed().subscribe( async result => {
-      if(result?.event === 'Cancel' ) {
-        return;
+  openDialog(pName: string) {
+    const newMapping = {
+      pName: pName,
+      tittle: 'Αλλαγή κανόνα και αντιστοίχισης'
+    } as StepperDialogData;
+    
+    const dialogRef = this.dialog.open(StepperDialogComponent, {
+      width: '290px',
+      data: newMapping
+    });      
+    
+
+    dialogRef.afterClosed().subscribe( async result  => {    
+      if (result?.event === 'Save') {   
+        if(this.isImportStep) {
+          this.onMappingChange.emit();
+        }else{
+          await this.delay(2000); // wait for update to complete
+          this.dataSource.data = [];  
+          this.loadData();
+        }
       }
-      await this.delay(2000); // wait for update to complete
-      this.dataSource.data = [];  
-      this.loadData();
     });
   }
-
+  
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
-
 
   onDeleteMapping(row:MappingsElement, pName:string){
     const msg = 'Θέλετε να διαγραφεί η αντιστοίχιση. ' + pName;
@@ -81,5 +91,16 @@ export class MappingsComponent implements OnInit {
       })
     }
   }
+  
+  onValidate(element: MappingsElement){
+    element.hasValidated = !element.hasValidated;
 
+    if(this.allChecked()) {
+      this.onValidatioCompleted.emit();
+    }
+  }
+
+  allChecked(): boolean{
+    return this.dataSource.data.every(x=> x.hasValidated === true);
+  }
 }
