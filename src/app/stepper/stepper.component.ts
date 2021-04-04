@@ -64,12 +64,20 @@ export class StepperComponent implements OnInit {
   }
 
   pushMapping(product: Product, checked: boolean): void {
-    var mappingElem  = new MappingsElement();
-    mappingElem.sName = product.sName;
-    mappingElem.sCode = product.sCode;
-    mappingElem.pNames = [product.name];
-    mappingElem.hasValidated = checked;
-    this.mappingsDataSource.data.push(mappingElem);
+    var existing = this.mappingsDataSource.data.find(x=> x.sCode === product.sCode);
+
+    if(existing){
+        existing.pNames.push(product.name);
+    }else{
+        var mappingElem  = new MappingsElement();
+        mappingElem.sName = product.sName;
+        mappingElem.sCode = product.sCode;
+        mappingElem.pNames = [product.name];
+        mappingElem.hasValidated = checked;
+        this.mappingsDataSource.data.push(mappingElem);
+    }
+
+    
   }
 
   runImport(){

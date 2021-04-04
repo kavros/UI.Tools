@@ -28,3 +28,9 @@ table {
     background-color: beige;
     font-weight: bold;
 }
+
+.mat-header-cell {
+    text-align: center; 
+    font-size: 20px;
+    font-weight: bold;
+}
