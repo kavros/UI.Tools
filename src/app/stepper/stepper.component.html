@@ -22,6 +22,7 @@
     </app-mappings>
     <div style="float: right;">
       <button mat-button matStepperPrevious>Προηγούμενο</button>
+      <button *ngIf="allMappingsChecked" mat-button matStepperNext>Επόμενο</button>
     </div>  
   </mat-step>
 

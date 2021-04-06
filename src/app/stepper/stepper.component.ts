@@ -24,6 +24,7 @@ export class StepperComponent implements OnInit {
   @ViewChild('import') import: ImportComponent;
 
   constructor( private service: StepperComponentService ) {}
+  allMappingsChecked: boolean = false;
 
   ngOnInit() {
     this.dataSource =  new MatTableDataSource<Product>();
@@ -76,16 +77,15 @@ export class StepperComponent implements OnInit {
         mappingElem.hasValidated = checked;
         this.mappingsDataSource.data.push(mappingElem);
     }
-
-    
   }
 
   runImport(){
-    this.dataSource.data = []
+    this.dataSource.data = [];
     this.import.importAgain();
   }
 
   goForward(stepper: MatStepper) {
+    this.allMappingsChecked = true;
     stepper.next();
   }
 
