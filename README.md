@@ -25,7 +25,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Build and deploy project locally
 * Run `npm run build:prod`
-* Install http-server `npm install http-server -g`
+* Install http-server globaly `npm install http-server -g`
 * Run scripts to create the SQL database.
 * Copy the jar and fonts folder inside dist.
 * Run the `runApp.bat`
