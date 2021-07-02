@@ -1,15 +1,3 @@
-# Node.js with Angular
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Free Trial(58140652-2e7a-4404-aa9d-c289ff6fc691)'
-    appType: 'webAppLinux'
-    WebAppName: 'app-suite'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-# Build a Node.js project that uses Angular.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
 - master
 
@@ -27,3 +15,14 @@ steps:
     npm install
     ng build --prod
   displayName: 'npm install and build'
+# Node.js with Angular
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial(58140652-2e7a-4404-aa9d-c289ff6fc691)'
+    appType: 'webAppLinux'
+    WebAppName: 'app-suite'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+# Build a Node.js project that uses Angular.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
