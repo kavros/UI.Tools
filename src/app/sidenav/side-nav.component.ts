@@ -6,31 +6,30 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['side-nav.component.css'],
 })
 
-export class SideNavComponent implements OnInit {
+export class SideNavComponent {
   isMainPageVisible: boolean = true;
   isSettingsVisible: boolean = false;
   isMappingVisible: boolean = false;
   isLabelsPageVisible: boolean = false;
-  
-  ngOnInit(): void {
-  }
-
 
   showMainPage() {
     this.isMainPageVisible = true;
     this.isSettingsVisible = false;
     this.isMappingVisible = false;
+    this.isLabelsPageVisible = false;
   }
 
   showSettings() {
     this.isMainPageVisible = false;
     this.isSettingsVisible = true;
     this.isMappingVisible = false;
+    this.isLabelsPageVisible = false;
   }
 
   showMappings() {
     this.isMainPageVisible = false;
     this.isSettingsVisible = false;
+    this.isLabelsPageVisible = false;
     this.isMappingVisible = true;
   }
 
