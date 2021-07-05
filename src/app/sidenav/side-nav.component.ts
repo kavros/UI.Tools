@@ -7,10 +7,11 @@ import {Component, OnInit} from '@angular/core';
 })
 
 export class SideNavComponent implements OnInit {
-  isMainPageVisible = true;
-  isSettingsVisible = false;
-  isMappingVisible = false;
-
+  isMainPageVisible: boolean = true;
+  isSettingsVisible: boolean = false;
+  isMappingVisible: boolean = false;
+  isLabelsPageVisible: boolean = false;
+  
   ngOnInit(): void {
   }
 
@@ -27,10 +28,17 @@ export class SideNavComponent implements OnInit {
     this.isMappingVisible = false;
   }
 
-  showMappings(){
+  showMappings() {
     this.isMainPageVisible = false;
     this.isSettingsVisible = false;
     this.isMappingVisible = true;
+  }
+
+  showLabelsPage() {
+    this.isMainPageVisible = false;
+    this.isSettingsVisible = false;
+    this.isMappingVisible = false;
+    this.isLabelsPageVisible = true;
   }
 
 }

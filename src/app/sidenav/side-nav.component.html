@@ -12,22 +12,19 @@
     </mat-expansion-panel-header>
     <mat-list>            
       <mat-list-item 
-        class="clickable" 
-        (click)="showMainPage()">        
+        class="clickable" (click)="showMainPage()">        
           <mat-icon matListIcon style="align-items: left;">import_export</mat-icon>
           <div style="font-size: small;"> Εισαγωγή</div>  
       </mat-list-item>
-      <mat-list-item >
+      <mat-list-item class="clickable" (click)="showLabelsPage()">
         <mat-icon matListIcon style="align-items: left;">label_important</mat-icon>
         <div style="font-size: small;"> Ετικέτες</div>  
       </mat-list-item>
-      <mat-list-item class="clickable"
-          (click)="showMappings()">
+      <mat-list-item class="clickable" (click)="showMappings()">
         <mat-icon matListIcon style="align-items: left;">multiple_stop</mat-icon>
         <div style="font-size: small;"> Αντιστοιχίσεις</div>  
       </mat-list-item>
-      <mat-list-item class="clickable"
-         (click)="showSettings()">
+      <mat-list-item class="clickable" (click)="showSettings()">
         <mat-icon matListIcon>gavel</mat-icon>
         <div style="font-size: small;"> Κανόνες</div>  
       </mat-list-item>
@@ -41,6 +38,7 @@
     <app-stepper-component *ngIf="isMainPageVisible">loading</app-stepper-component>
     <app-rules-component *ngIf="isSettingsVisible"> loading </app-rules-component>
     <app-mappings *ngIf="isMappingVisible">loading</app-mappings>
+    <app-labels *ngIf="isLabelsPageVisible"> loading </app-labels>
   </mat-sidenav-content>
 
 </mat-sidenav-container>
