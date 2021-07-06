@@ -9,9 +9,48 @@
     <button mat-raised-button
     class="extra-margins "
        color="primary" 
-      (click)="downloadLabels()">
+      (click)="onDownloadLabels()">
       <mat-icon >cloud_download</mat-icon>
       Κατέβασμα
   </button>   
 </div>
 <mat-divider></mat-divider>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>΄Ονομα </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="origin">
+    <th mat-header-cell *matHeaderCellDef>Προέλευση </th>
+    <td mat-cell *matCellDef="let element"> {{element.origin}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="number">
+    <th mat-header-cell *matHeaderCellDef>Κωδικός ταμπέλας </th>
+    <td mat-cell *matCellDef="let element"> {{element.number}} </td>
+  </ng-container>
+
+   <ng-container matColumnDef="sCode">
+    <th mat-header-cell *matHeaderCellDef> Κωδικός kefalaio </th>
+    <td mat-cell *matCellDef="let element"> {{element.sCode}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Επεξεργασία</th>
+      <td mat-cell *matCellDef="let element">                    
+        <mat-icon class="manage-label-icons" (click)="onEdit(element)"> edit </mat-icon>
+      </td>
+  </ng-container>
+
+    <ng-container matColumnDef="delete"> 
+      <th mat-header-cell *matHeaderCellDef> Διαγραφή </th>
+      <td mat-cell *matCellDef="let element">                              
+        <mat-icon class="manage-label-icons" (click)="onDelete(element)"> delete </mat-icon>          
+      </td>
+    </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

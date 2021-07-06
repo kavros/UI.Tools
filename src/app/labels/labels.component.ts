@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Label } from '../stepper/import-page/dto/download.labels.dto';
+import { StepperComponentService } from '../stepper/services/stepper.component.service';
+import { LabelsDialogComponent } from './labels-dialog/labels-dialog.component';
 
-export interface LabelsTableRow {
-  pName: string;
-  origin: string;
-  number: string;
-  sCode: string;
-}
 
 @Component({
   selector: 'app-labels',
@@ -15,45 +12,63 @@ export interface LabelsTableRow {
   styleUrls: ['./labels.component.css']
 })
 export class LabelsComponent implements OnInit {
-  dataSource: MatTableDataSource<LabelsTableRow>;
+  dataSource: MatTableDataSource<Label>;
+  displayedColumns: string[] =
+  ['name', 'origin', 'number', 'sCode', 'action', 'delete'];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,
+    private service: StepperComponentService) { }
 
   ngOnInit(): void {
+    this.dataSource = new MatTableDataSource<Label>();
   }
   
   onAdd(): void {
     const input =
     {
-      pName: '',
+      name: '',
       sCode: '',
       origin: '',
       number : ''
-    } as LabelsTableRow;
+    } as Label;
     
-    this.openDialog(input, 'Δημιουργία νέας ετικέτας');      
+    this.openDialog(input);      
   }
 
-  openDialog(input:LabelsTableRow, msg: string) {
-    /*const dialogRef = this.dialog.open(RuleDialog, {
+  private openDialog(input: Label) {
+    const dialogRef = this.dialog.open(LabelsDialogComponent, {
       width: '280px',
-      data:
-      {
-        title: msg,
-        rule: input
-      } as RuleDialogData
-    });*/
+      data: input
+    });
 
-    /*dialogRef.afterClosed().subscribe( async result => {
+    dialogRef.afterClosed().subscribe( async result => {
       if(result?.event === 'Cancel' ) {
         return;
       }
-      await this.delay(2000); // wait for update to complete
-      this.dataSource.data = [];  
-      this.loadData();
+      const data = this.dataSource.data;
+      data.push(result.event);
+      this.dataSource.data = data;
       
-    });*/
+    });
+  }
+  
+  onDownloadLabels(){
+    this.service
+        .downloadLabels({labels: this.dataSource.data})
+        .subscribe( (data: Blob) => {
+          const downloadURL = window.URL.createObjectURL(data);
+          const link = document.createElement('a');
+          link.href = downloadURL;
+          link.download = 'labels.pdf';
+          link.click();
+        }); 
   }
 
+  onDelete(label: Label) {
 
+  }
+
+  onEdit(label: Label) {
+
+  }
 }

@@ -23,6 +23,7 @@ import { TableComponent } from './app/stepper/table/table.component';
 import { StepperDialogComponent } from './app/stepper/stepper-dialog/stepper.dialog.component';
 import { MappingsComponent } from './app/mappings/mappings.component';
 import { LabelsComponent } from './app/labels/labels.component';
+import { LabelsDialogComponent } from './app/labels/labels-dialog/labels-dialog.component';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { LabelsComponent } from './app/labels/labels.component';
     ProgressComponent,
     DndDirective,
     RuleDialog,
+    LabelsDialogComponent,
     StepperDialogComponent,
     SideNavComponent,
     RulesComponent,
