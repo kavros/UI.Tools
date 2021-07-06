@@ -3,12 +3,14 @@
 <div class="example-button-row">
   <mat-list-item >    
   <button mat-raised-button color="primary"  *ngIf="updateKefalaio.isVisible"
+      class="margin-bottom"
       [disabled]="updateKefalaio.isDisabled"
       (click)="updateDatabase();">
       <mat-icon >update</mat-icon>
       Ενημέρωση
     </button>  
   <button mat-raised-button color="primary"  *ngIf="print.isVisible"
+      class="margin-bottom"
       [disabled]="print.isDisabled"
       (click)="downloadLabels()">
       <mat-icon >cloud_download</mat-icon>

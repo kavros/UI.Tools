@@ -1,0 +1,28 @@
+.extra-margins {
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.align-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+table {
+    width: 70%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.mat-header-cell {
+    text-align: center; 
+    font-weight: bold;
+}
+
+.manage-label-icons:hover {
+    color: red;
+    font-weight: bold;
+    font-size: xx-large;
+    cursor: pointer;
+}
