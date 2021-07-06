@@ -68,7 +68,7 @@ export class RulesComponent implements OnInit {
       const input =
       {
         sName: '',
-        sCode: '2082',
+        sCode: '',
         profitPercentage: undefined,
         minProfit : undefined
       } as RuleTableRow;

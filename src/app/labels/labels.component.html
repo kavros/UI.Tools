@@ -1,1 +1,17 @@
-<p>labels works!</p>
+<div class="align-right">
+    <button class="extra-margins"
+    mat-raised-button color="primary"
+    (click) = "onAdd();"> 
+    <mat-icon>library_add</mat-icon>
+    Δημιουργία
+    </button>
+    
+    <button mat-raised-button
+    class="extra-margins "
+       color="primary" 
+      (click)="downloadLabels()">
+      <mat-icon >cloud_download</mat-icon>
+      Κατέβασμα
+  </button>   
+</div>
+<mat-divider></mat-divider>
