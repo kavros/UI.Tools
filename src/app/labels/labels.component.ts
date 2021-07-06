@@ -14,7 +14,7 @@ import { LabelsDialogComponent } from './labels-dialog/labels-dialog.component';
 export class LabelsComponent implements OnInit {
   dataSource: MatTableDataSource<Label>;
   displayedColumns: string[] =
-  ['name', 'origin', 'number', 'sCode', 'action', 'delete'];
+    ['name', 'origin', 'number', 'sCode', 'action', 'delete'];
 
   constructor(public dialog: MatDialog,
     private service: StepperComponentService) { }
@@ -45,10 +45,17 @@ export class LabelsComponent implements OnInit {
       if(result?.event === 'Cancel' ) {
         return;
       }
-      const data = this.dataSource.data;
-      data.push(result.event);
-      this.dataSource.data = data;
-      
+      const label = result.event;
+      const isExistingLabel = this.dataSource.data.filter(x => 
+          x.name === label.name 
+          && x.number === label.number
+          && x.origin === label.origin
+          && x.sCode === label.sCode).length;
+      if(!isExistingLabel){
+        const data = this.dataSource.data;
+        data.push(result.event);
+        this.dataSource.data = data;
+      }
     });
   }
   
@@ -65,10 +72,10 @@ export class LabelsComponent implements OnInit {
   }
 
   onDelete(label: Label) {
-
+    this.dataSource.data = this.dataSource.data.filter(x => x !== label);
   }
 
   onEdit(label: Label) {
-
+    this.openDialog(label);
   }
 }

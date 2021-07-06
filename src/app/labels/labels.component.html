@@ -7,7 +7,8 @@
     </button>
     
     <button mat-raised-button
-    class="extra-margins "
+    class="extra-margins"
+      [disabled]="dataSource.data.length === 0"
        color="primary" 
       (click)="onDownloadLabels()">
       <mat-icon >cloud_download</mat-icon>
@@ -15,7 +16,7 @@
   </button>   
 </div>
 <mat-divider></mat-divider>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table *ngIf="dataSource.data.length>0" [dataSource]="dataSource" class="mat-elevation-z8">
       
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>΄Ονομα </th>
