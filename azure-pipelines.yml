@@ -35,10 +35,3 @@ steps:
     appType: 'webAppLinux'
     WebAppName: 'app-suite'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Free Trial(1)(58140652-2e7a-4404-aa9d-c289ff6fc691)'
-    appType: 'webApp'
-    WebAppName: 'price-management'
-    packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
