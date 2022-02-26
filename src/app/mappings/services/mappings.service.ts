@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { SnackBarService } from "src/app/common/snackBar/snackBar.service";
+import { APIs } from "src/app/common/urls";
 import { MappingsElement } from "../mappings.component";
 
 @Injectable({
@@ -15,7 +16,7 @@ export class MappingsService {
 
     public getMappings(): Observable<MappingsElement[]> {
         return this.httpClient
-                .get<MappingsElement[]>('http://localhost:8080/getMappings')
+                .get<MappingsElement[]>(APIs.getMappings)
                 .pipe(
                     map(x => {
                         x.forEach(y => y.hasValidated = false );
@@ -41,7 +42,7 @@ export class MappingsService {
         };
         return this.httpClient
                 .delete(
-                    'http://localhost:8080/deleteMapping',
+                    APIs.deleteMapping,
                     options
                 ).pipe(catchError(() => {
                     this.snackBar.showError('Αποτυχία διαγραφής αντιστοίχισης.', 'Ok');

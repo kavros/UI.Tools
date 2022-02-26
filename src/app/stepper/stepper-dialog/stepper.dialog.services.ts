@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { SnackBarService } from '../../common/snackBar/snackBar.service';
 import { catchError } from 'rxjs/operators';
 import { StepperDialogData } from './stepper.dialog.component';
+import { APIs } from 'src/app/common/urls';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,7 @@ export class MappingsDialogService {
         return this
             .httpClient
             .put(
-                'http://localhost:8080/saveStepperDialogData',
+                APIs.saveStepperDialogData,
                 mapping
             )
             .pipe(
@@ -29,6 +30,6 @@ export class MappingsDialogService {
 
     public getStepperDialogData(sCode: string): Observable<any> {
         return this.httpClient
-                .get('http://localhost:8080/getStepperDialogData/'+sCode);
+                .get(APIs.getStepperDialogData + sCode);
     }
 }

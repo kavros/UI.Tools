@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SnackBarService } from 'src/app/common/snackBar/snackBar.service';
 import { DownloadLabelsDTO } from '../import-page/dto/download.labels.dto';
 import { StepperDialogData, StepperDialogComponent } from 'src/app/stepper/stepper-dialog/stepper.dialog.component';
+import { APIs } from 'src/app/common/urls';
 
 
 @Injectable({
@@ -24,7 +25,7 @@ export class StepperComponentService {
     return this
             .httpClient
             .put(
-              'http://localhost:8080/downloadLabels',
+              APIs.downloadLabels,
               labels,
               { responseType: 'blob' }
             ).pipe(
@@ -39,7 +40,7 @@ export class StepperComponentService {
     return this
             .httpClient
             .get(
-              'http://localhost:8080/downloadHistoryDoc',
+              APIs.downloadHistoryDoc,
               { responseType: 'blob' }
             ).pipe(
               catchError( () => {
@@ -52,7 +53,7 @@ export class StepperComponentService {
   public importAndGetStepperData( uploadImageData: FormData ): Observable<ImportDTO> {
     return  this.httpClient
       .post<ImportDTO>(
-        'http://localhost:8080/import',
+        APIs.import,
         uploadImageData)
           .pipe(
             catchError(err => {
@@ -116,7 +117,7 @@ export class StepperComponentService {
     };
     return  this.httpClient
                 .put(
-                  'http://localhost:8080/updatePrices',
+                  APIs.updatePrices,
                   dto
                 );
   }

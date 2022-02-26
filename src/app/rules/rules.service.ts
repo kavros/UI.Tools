@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { SnackBarService } from '../common/snackBar/snackBar.service';
 import { Rule } from './rules-dialog/rule-dialog.component';
 import { RuleTableRow } from './rules.component';
+import { APIs } from '../common/urls';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +19,7 @@ export class RulesService {
 
         return  this.httpClient
                 .post(
-                    'http://localhost:8080/addOrUpdateRule',
+                    APIs.addOrUpdateRule,
                     setting
                 )
                 .pipe(
@@ -38,7 +39,7 @@ export class RulesService {
           };
         return this.httpClient
             .delete(
-                'http://localhost:8080/deleteRule',
+                APIs.deleteRule,
                 options
             )
             .pipe(
@@ -51,7 +52,7 @@ export class RulesService {
 
     public getRules(): Observable<RuleTableRow[]> {
         return this.httpClient
-                .get<RuleTableRow[]>('http://localhost:8080/getRulesTable')
+                .get<RuleTableRow[]>(APIs.getRulesTable)
                 .pipe(
                     catchError(() => {
                         this.snackBar.showError('Αποτυχία φόρτωσης κανόνων.', 'Ok');
@@ -61,7 +62,7 @@ export class RulesService {
     public getSName(sCode: string): Observable<RuleTableRow> {
         return this.httpClient
                 .get<RuleTableRow>(
-                    'http://localhost:8080/getSName/' + sCode)
+                    APIs.getSName + sCode)
                 .pipe(
                     catchError(() => {
                         return throwError('Failed to load new rule');
