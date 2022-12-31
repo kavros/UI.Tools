@@ -2,6 +2,7 @@ import { Product } from 'src/app/stepper/interfaces/product';
 
 interface Error {
     msg: string;
+    items: string[];
     code: ErrorCode;
 }
 

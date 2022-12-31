@@ -66,10 +66,7 @@ export class StepperComponentService {
   private handleImportErrors( err: { status: number; error: ImportDTO; } ): Observable<never> {
     if (err.status === 400) {
       const responseData = err.error as ImportDTO;
-      console.log(responseData);
-      const products = (responseData.errors[0].msg)
-                          .split('[')[1]
-                          .split(',');
+      const products = responseData.errors[0].items;
       
       this.getSettingsFromUser(products);
     } else {
