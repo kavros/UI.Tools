@@ -1,0 +1,135 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Παραμετροποίηση</ng-template>
+      <div class="center">
+        <mat-form-field class="supplier-dropdown">
+          <mat-label>Προμηθευτής</mat-label>
+          <input
+            type="text"
+            matInput
+            [formControl]="myControl"
+            [matAutocomplete]="auto"
+            required
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let option of filteredOptions | async"
+              [value]="option"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <br />
+        <mat-form-field>
+          <mat-label>Ημέρες</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="nextOrderAfter"
+            required
+          />
+          <mat-hint align="end">Μερες μεχρι την επομενη παραγγελια ^</mat-hint>
+        </mat-form-field>
+
+        <br /><br />
+        <mat-form-field>
+          <mat-label>Παράθυρο</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="strnDateWindow"
+            required
+          />
+          <mat-hint align="end"
+            >Παραθυρο για υπολογισμό πωλησεων ανα μερα ^</mat-hint
+          >
+        </mat-form-field>
+        <br /><br />
+      </div>
+      <div class="right-aligned-button">
+        <button (click)="loadOrder()" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Επεξεργασία παραγγελίας</ng-template>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+            >
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox
+              (click)="$event.stopPropagation()"
+              (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)"
+            >
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef>Προϊόν</th>
+          <td mat-cell *matCellDef="let element">{{ element.product }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>Απόθεμα</th>
+          <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="avgSalesPerDay">
+          <th mat-header-cell *matHeaderCellDef>Πωλήσεις ανα μέρα</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.avgSalesPerDay }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="suggestedQuantity">
+          <th mat-header-cell *matHeaderCellDef>Ποσότητα αγοράς</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.suggestedQuantity }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator
+        [pageSizeOptions]="[12, 20]"
+        showFirstLastButtons
+      ></mat-paginator>
+      <div>
+        <button class="right-aligned-button" mat-button matStepperNext>
+          Next
+        </button>
+        <button class="right-aligned-button" mat-button matStepperPrevious>
+          Back
+        </button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Αποθήκευση και εξαγωγή</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button class="right-aligned-button" mat-button matStepperPrevious>
+        Back
+      </button>
+      <button class="right-aligned-button" mat-button (click)="stepper.reset()">
+        Reset
+      </button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

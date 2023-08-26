@@ -1,0 +1,37 @@
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.supplier-dropdown {
+  width: 30%;
+}
+
+.right-aligned-button {
+  float: right;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+table {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mat-column-select {
+  overflow: initial;
+}

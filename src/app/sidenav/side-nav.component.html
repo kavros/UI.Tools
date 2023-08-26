@@ -1,45 +1,67 @@
-<mat-sidenav-container class="example-container" >
-  <mat-sidenav opened mode="side">    
-  <mat-expansion-panel [expanded]="true">
+<mat-sidenav-container class="example-container">
+  <mat-sidenav opened mode="side">
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div style="font-weight: bold">
+            <div style="font-size: medium">Price Manager</div>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item class="clickable" (click)="showMainPage()">
+          <mat-icon matListIcon style="align-items: left"
+            >import_export</mat-icon
+          >
+          <div style="font-size: small">Εισαγωγή</div>
+        </mat-list-item>
+        <mat-list-item class="clickable" (click)="showLabelsPage()">
+          <mat-icon matListIcon style="align-items: left"
+            >label_important</mat-icon
+          >
+          <div style="font-size: small">Ετικέτες</div>
+        </mat-list-item>
+        <mat-list-item class="clickable" (click)="showMappings()">
+          <mat-icon matListIcon style="align-items: left"
+            >multiple_stop</mat-icon
+          >
+          <div style="font-size: small">Αντιστοιχίσεις</div>
+        </mat-list-item>
+        <mat-list-item class="clickable" (click)="showSettings()">
+          <mat-icon matListIcon>gavel</mat-icon>
+          <div style="font-size: small">Κανόνες</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
 
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <div style="font-weight: bold;">
-          <div style="font-size: medium;"> Price Manager</div>
-        </div>
-      </mat-panel-title>
-      
-    </mat-expansion-panel-header>
-    <mat-list>            
-      <mat-list-item 
-        class="clickable" (click)="showMainPage()">        
-          <mat-icon matListIcon style="align-items: left;">import_export</mat-icon>
-          <div style="font-size: small;"> Εισαγωγή</div>  
-      </mat-list-item>
-      <mat-list-item class="clickable" (click)="showLabelsPage()">
-        <mat-icon matListIcon style="align-items: left;">label_important</mat-icon>
-        <div style="font-size: small;"> Ετικέτες</div>  
-      </mat-list-item>
-      <mat-list-item class="clickable" (click)="showMappings()">
-        <mat-icon matListIcon style="align-items: left;">multiple_stop</mat-icon>
-        <div style="font-size: small;"> Αντιστοιχίσεις</div>  
-      </mat-list-item>
-      <mat-list-item class="clickable" (click)="showSettings()">
-        <mat-icon matListIcon>gavel</mat-icon>
-        <div style="font-size: small;"> Κανόνες</div>  
-      </mat-list-item>
-    </mat-list>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div style="font-weight: bold">
+            <div style="font-size: medium">Orders Manager</div>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
 
-  </mat-expansion-panel>
-
-
+      <mat-list>
+        <mat-list-item class="clickable" (click)="showCreateOrderPage()">
+          <mat-icon matListIcon style="align-items: left"
+            >create_order</mat-icon
+          >
+          <div style="font-size: small">Δημιουργία</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-stepper-component *ngIf="isMainPageVisible">loading</app-stepper-component>
-    <app-rules-component *ngIf="isSettingsVisible"> loading </app-rules-component>
+    <app-stepper-component *ngIf="isMainPageVisible"
+      >loading</app-stepper-component
+    >
+    <app-rules-component *ngIf="isSettingsVisible">
+      loading
+    </app-rules-component>
     <app-mappings *ngIf="isMappingVisible">loading</app-mappings>
     <app-labels *ngIf="isLabelsPageVisible"> loading </app-labels>
+    <orders-stepper *ngIf="isOrdersPageVisible"> loading</orders-stepper>
   </mat-sidenav-content>
-
 </mat-sidenav-container>
-
