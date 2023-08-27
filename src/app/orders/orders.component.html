@@ -58,47 +58,85 @@
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Επεξεργασία παραγγελίας</ng-template>
+      <button (click)="exportPdf()" class="right-aligned-button">
+        Eξαγωγή όλων (pdf)
+      </button>
+      <!-- <button (click)="sendEmail()" class="right-aligned-button">
+        Αποστολή Email
+      </button> -->
+
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="select">
+        <ng-container
+          [matColumnDef]="col.key"
+          *ngFor="let col of columnsSchema"
+        >
           <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox
-              (change)="$event ? masterToggle() : null"
-              [checked]="selection.hasValue() && isAllSelected()"
-              [indeterminate]="selection.hasValue() && !isAllSelected()"
-            >
-            </mat-checkbox>
+            <div [ngSwitch]="col.type">
+              <div *ngSwitchCase="'select'">
+                <mat-checkbox
+                  (change)="$event ? masterToggle() : null"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()"
+                >
+                </mat-checkbox>
+              </div>
+              <span *ngSwitchDefault>
+                {{ col.label }}
+              </span>
+            </div>
           </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-checkbox
-              (click)="$event.stopPropagation()"
-              (change)="$event ? selection.toggle(row) : null"
-              [checked]="selection.isSelected(row)"
-            >
-            </mat-checkbox>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="product">
-          <th mat-header-cell *matHeaderCellDef>Προϊόν</th>
-          <td mat-cell *matCellDef="let element">{{ element.product }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="quantity">
-          <th mat-header-cell *matHeaderCellDef>Απόθεμα</th>
-          <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="avgSalesPerDay">
-          <th mat-header-cell *matHeaderCellDef>Πωλήσεις ανα μέρα</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.avgSalesPerDay }}
-          </td>
-        </ng-container>
+            <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
+              <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                <button mat-button (click)="element.isEdit = !element.isEdit">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-button
+                  class="button-remove"
+                  (click)="removeRow(element.product)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
 
-        <ng-container matColumnDef="suggestedQuantity">
-          <th mat-header-cell *matHeaderCellDef>Ποσότητα αγοράς</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.suggestedQuantity }}
+              <div *ngSwitchCase="'select'">
+                <mat-checkbox
+                  (click)="$event.stopPropagation()"
+                  (change)="$event ? selection.toggle(element) : null"
+                  [checked]="selection.isSelected(element)"
+                ></mat-checkbox>
+              </div>
+              <span *ngSwitchDefault>
+                {{ element[col.key] }}
+              </span>
+            </div>
+
+            <div *ngIf="element.isEdit">
+              <div
+                class="btn-edit"
+                *ngIf="col.key === 'isEdit'; else dataField"
+              >
+                <button mat-button (click)="element.isEdit = !element.isEdit">
+                  <mat-icon>done</mat-icon>
+                </button>
+              </div>
+              <ng-template [ngSwitch]="col.key" #dataField>
+                <div *ngSwitchDefault>
+                  {{ element[col.key] }}
+                </div>
+                <div *ngSwitchCase="'suggestedQuantity'">
+                  <mat-form-field>
+                    <input
+                      [type]="col.type"
+                      matInput
+                      [(ngModel)]="element[col.key]"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                  </mat-form-field>
+                </div>
+              </ng-template>
+            </div>
           </td>
         </ng-container>
 

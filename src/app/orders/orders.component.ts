@@ -11,6 +11,8 @@ import { OrdersService } from "./services/orders.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { SelectionModel } from "@angular/cdk/collections";
 import { MatPaginator } from "@angular/material/paginator";
+import jsPDF from "jspdf";
+import { PdfService } from "./pdfService";
 
 export class OrderParam {
   nextOrderAfter: number;
@@ -29,29 +31,38 @@ export class Item {
   suggestedQuantity?: number;
 }
 
-const COLUMNS_SCHEMA =
-[
+const COLUMNS_SCHEMA = [
+  {
+    key: "select",
+    type: "select",
+    label: "",
+  },
   {
     key: "product",
     type: "text",
-    label: "Προϊόν"
+    label: "Προϊόν",
   },
   {
     key: "quantity",
     type: "number",
-    label: "Απόθεμα"
+    label: "Απόθεμα",
   },
   {
     key: "avgSalesPerDay",
     type: "number",
-    label: "Πωλήσεις ανα μέρα"
+    label: "Πωλήσεις ανα μέρα",
   },
   {
     key: "suggestedQuantity",
     type: "number",
-    label: "Ποσότητα αγοράς"
+    label: "Ποσότητα αγοράς",
   },
-]
+  {
+    key: "isEdit",
+    type: "isEdit",
+    label: "",
+  },
+];
 @Component({
   selector: "orders-stepper",
   templateUrl: "orders.component.html",
@@ -66,15 +77,9 @@ export class OrdersComponent implements OnInit {
 
   //second step
   secondFormGroup: FormGroup;
-  displayedColumns: string[] = [
-    "select",
-    "product",
-    "quantity",
-    "avgSalesPerDay",
-    "suggestedQuantity",
-  ];
+  displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
   dataSource: MatTableDataSource<Item> = new MatTableDataSource<Item>();
-  columnsSchema: any = COLUMNS_SCHEMA ;
+  columnsSchema: any = COLUMNS_SCHEMA;
 
   //checkbox
   initialSelection = [];
@@ -84,12 +89,16 @@ export class OrdersComponent implements OnInit {
     this.initialSelection
   );
 
+  //export
+  doc = new jsPDF();
+
   //paginator
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
     private _formBuilder: FormBuilder,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private pdfService: PdfService
   ) {}
 
   ngOnInit() {
@@ -118,7 +127,6 @@ export class OrdersComponent implements OnInit {
     };
     this.ordersService.getOrder(param).subscribe((res) => {
       this.dataSource.data = res;
-      console.log(res);
     });
   }
 
@@ -134,6 +142,18 @@ export class OrdersComponent implements OnInit {
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.data.forEach((row) => this.selection.select(row));
+  }
+
+  exportPdf() {
+    const title = 'Order';
+    this.pdfService.generatePdf(this.dataSource.data, ["Προϊόν", "Ποσότητα αγοράς"], title);
+  }
+
+  // sendEmail(){
+  //   window.location.href = "mailto:?subject=Subject&body=message%20goes%20here"; 
+  // }
+  removeRow(product: string) {
+    this.dataSource.data = this.dataSource.data.filter((u) => u.product !== product);
   }
 
   private _filter(value: string): string[] {
