@@ -27,5 +27,12 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 * Run `npm run build:prod`
 * Install http-server globaly `npm install http-server -g`
 * Run scripts to create the SQL database.
-* Copy the jar and fonts folder inside dist.
+* Run `mvn package` 
+* Copy and paste the jar file and fonts folder inside dist.
+* Run `dotnet publish -c Release -r win10-x64 -p:PublishSingleFile=true --self-contained true -o .`
+* Copy and paste inside dist the following files:
+    * Api.Kefalaio.exe
+    * Microsoft.Data.SqlClient.SNI.dll
+    * appsettings.json
+    * aspnetcorev2_inprocess.dll
 * Run the `runApp.bat`
