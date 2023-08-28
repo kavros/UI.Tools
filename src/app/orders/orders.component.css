@@ -35,3 +35,6 @@ table {
 .mat-column-select {
   overflow: initial;
 }
+.padding-paginator{
+  padding-right: 23rem;
+}

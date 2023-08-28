@@ -11,7 +11,6 @@ import { OrdersService } from "./services/orders.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { SelectionModel } from "@angular/cdk/collections";
 import { MatPaginator } from "@angular/material/paginator";
-import jsPDF from "jspdf";
 import { PdfService } from "./pdfService";
 
 export class OrderParam {
@@ -88,9 +87,6 @@ export class OrdersComponent implements OnInit {
     this.allowMultiSelect,
     this.initialSelection
   );
-
-  //export
-  doc = new jsPDF();
 
   //paginator
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
