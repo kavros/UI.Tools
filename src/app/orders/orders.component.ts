@@ -25,7 +25,7 @@ export class Supplier {
 
 export class Item {
   product: string;
-  quantity?: number;
+  stock?: number;
   avgSalesPerDay?: number;
   suggestedQuantity?: number;
 }
@@ -42,7 +42,7 @@ const COLUMNS_SCHEMA = [
     label: "Προϊόν",
   },
   {
-    key: "quantity",
+    key: "stock",
     type: "number",
     label: "Απόθεμα",
   },
@@ -142,14 +142,16 @@ export class OrdersComponent implements OnInit {
 
   exportPdf() {
     const title = 'Order';
-    this.pdfService.generatePdf(this.dataSource.data, ["Προϊόν", "Ποσότητα αγοράς"], title);
+    this.pdfService.generatePdf(this.selection.selected, ["Προϊόν", "Ποσότητα αγοράς"], title);
   }
 
-  // sendEmail(){
-  //   window.location.href = "mailto:?subject=Subject&body=message%20goes%20here"; 
-  // }
   removeRow(product: string) {
-    this.dataSource.data = this.dataSource.data.filter((u) => u.product !== product);
+    this.dataSource.data = this.dataSource.data.filter(u => u.product !== product);
+
+    // remove item from selected items list
+    var selectedItem = this.selection.selected.find(x => x.product === product);
+    if(selectedItem)
+      this.selection.toggle(selectedItem);
   }
 
   private _filter(value: string): string[] {

@@ -59,12 +59,8 @@
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Επεξεργασία παραγγελίας</ng-template>
       <button (click)="exportPdf()" class="right-aligned-button">
-        Eξαγωγή όλων (pdf)
+        Eξαγωγή (pdf)
       </button>
-      <!-- <button (click)="sendEmail()" class="right-aligned-button">
-        Αποστολή Email
-      </button> -->
-
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container
           [matColumnDef]="col.key"
@@ -160,7 +156,7 @@
   </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel>Αποθήκευση και εξαγωγή</ng-template>
+    <ng-template matStepLabel>Τέλος</ng-template>
     <p>You are now done.</p>
     <div>
       <button class="right-aligned-button" mat-button matStepperPrevious>
