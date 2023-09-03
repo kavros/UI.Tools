@@ -17,6 +17,6 @@ export const APIs = {
 };
 
 export const OrdersAPIs = {
-    getSuppliers: ORDERS_URI + "/Kefalaio/GetSuppliers",
-    getOrder:  ORDERS_URI + "/Kefalaio/GetOrder"
+    getSuppliers: ORDERS_URI + "/Orders/GetSuppliers",
+    getOrder:  ORDERS_URI + "/Orders/GetOrder"
 };
