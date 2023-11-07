@@ -31,11 +31,6 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 * Copy and paste 
     * the jar file
     * fonts folder inside dist.
-* Run `dotnet publish -c Release -r win10-x64 -p:PublishSingleFile=true --self-contained true -o .`
-* Copy and paste inside dist the following files:
-    * Api.Kefalaio.exe
-    * Microsoft.Data.SqlClient.SNI.dll
-    * appsettings.json
-    * aspnetcorev2_inprocess.dll
-    * runApp.bat
-Run `runApp.bat`
+* Run `dotnet publish -c Release -r win10-x64`
+* Copy `publish` folder and paste it inside app-suite folder:
+* Run `runApp.bat`
