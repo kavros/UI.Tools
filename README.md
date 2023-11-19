@@ -32,5 +32,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
     * the jar file
     * fonts folder inside dist.
 * Run `dotnet publish -c Release -r win10-x64`
-* Copy `publish` folder and paste it inside app-suite folder:
+* Copy `publish` folder and paste it inside app-suite folder:+
+
+## Run project locally
+* Set local ip to `192.168.1.249`
 * Run `runApp.bat`
