@@ -1,5 +1,7 @@
-const URI = "http://localhost:8080";
-const ORDERS_URI = "https://localhost:44341"
+import { environment } from "src/environments/environment";
+
+const URI = environment.URI;
+const ORDERS_URI =  environment.ORDERS_URI;
 
 export const APIs = {
   getMappings: URI + "/getMappings",
