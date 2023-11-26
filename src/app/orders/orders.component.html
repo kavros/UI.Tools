@@ -61,6 +61,8 @@
       <button (click)="exportPdf()" class="right-aligned-button">
         Eξαγωγή (pdf)
       </button>
+      <button (click)="showRow()" class="right-aligned-button">
+        Αναίρεση</button>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container
           [matColumnDef]="col.key"
@@ -90,7 +92,7 @@
                 <button
                   mat-button
                   class="button-remove"
-                  (click)="removeRow(element.product)"
+                  (click)="hideRow(element.product)"
                 >
                   <mat-icon>delete</mat-icon>
                 </button>
@@ -137,7 +139,7 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr mat-row [class.hidden]="row.isHidden" *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
       <mat-paginator
         [pageSizeOptions]="[12, 20]"
@@ -146,10 +148,10 @@
       ></mat-paginator>
       <div>
         <button class="right-aligned-button" mat-button matStepperNext>
-          Next
+          Επόμενο
         </button>
         <button class="right-aligned-button" mat-button matStepperPrevious>
-          Back
+          Πίσω
         </button>
       </div>
     </form>
@@ -160,10 +162,10 @@
     <p>You are now done.</p>
     <div>
       <button class="right-aligned-button" mat-button matStepperPrevious>
-        Back
+        Πίσω
       </button>
       <button class="right-aligned-button" mat-button (click)="stepper.reset()">
-        Reset
+        Επαναφορά
       </button>
     </div>
   </mat-step>

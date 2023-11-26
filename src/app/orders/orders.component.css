@@ -38,3 +38,6 @@ table {
 .padding-paginator{
   padding-right: 23rem;
 }
+.hidden {
+  display: none;
+}

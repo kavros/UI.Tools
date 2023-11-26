@@ -12,6 +12,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { SelectionModel } from "@angular/cdk/collections";
 import { MatPaginator } from "@angular/material/paginator";
 import { PdfService } from "./pdfService";
+import { Stack } from "../common/stack"; 
 
 export class OrderParam {
   nextOrderAfter: number;
@@ -28,6 +29,7 @@ export class Item {
   stock?: number;
   avgSalesPerDay?: number;
   suggestedQuantity?: number;
+  isHidden?: boolean; 
 }
 
 const COLUMNS_SCHEMA = [
@@ -73,6 +75,7 @@ export class OrdersComponent implements OnInit {
   options: string[] = [];
   filteredOptions: Observable<string[]>;
   myControl = new FormControl("");
+  stack = new Stack<Item>();
 
   //second step
   secondFormGroup: FormGroup;
@@ -123,6 +126,8 @@ export class OrdersComponent implements OnInit {
     };
     this.ordersService.getOrder(param).subscribe((res) => {
       this.dataSource.data = res;
+      this.dataSource.data.forEach(x => x.isHidden = false);
+      
     });
   }
 
@@ -145,13 +150,32 @@ export class OrdersComponent implements OnInit {
     this.pdfService.generatePdf(this.selection.selected, ["Προϊόν", "Ποσότητα αγοράς"], title);
   }
 
-  removeRow(product: string) {
-    this.dataSource.data = this.dataSource.data.filter(u => u.product !== product);
+  showRow() {
+    if(this.stack.size()){
+      const latestDeletedItem = this.stack.pop();
+      const item = this.dataSource.data.find( x => x.product === latestDeletedItem.product);
+      item.isHidden = false;
+      this.paginator._changePageSize(this.paginator.pageSize);
+    }
+  }
+
+  hideRow(product: string) {
+    //hide item
+    var item = this.dataSource.data.find(u => u.product === product);
+    item.isHidden = true;
+
+    //add item to the stack so we can undo later
+    this.stack.push(item);
 
     // remove item from selected items list
+    this.toggleSelection(product);
+  }
+
+  private toggleSelection(product: string) {
     var selectedItem = this.selection.selected.find(x => x.product === product);
-    if(selectedItem)
+    if (selectedItem) {
       this.selection.toggle(selectedItem);
+    }
   }
 
   private _filter(value: string): string[] {
