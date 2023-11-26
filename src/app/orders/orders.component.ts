@@ -142,7 +142,12 @@ export class OrdersComponent implements OnInit {
   masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()
-      : this.dataSource.data.forEach((row) => this.selection.select(row));
+      : this.dataSource.data.forEach((row) => {
+          if(!row.isHidden) 
+          { 
+            this.selection.select(row)
+          }
+        });
   }
 
   exportPdf() {
@@ -169,6 +174,11 @@ export class OrdersComponent implements OnInit {
 
     // remove item from selected items list
     this.toggleSelection(product);
+  }
+
+  roundQuantity(product: string) {
+    var item = this.dataSource.data.find(u => u.product === product);
+    item.suggestedQuantity =item.suggestedQuantity + (5 - (item.suggestedQuantity % 5));;
   }
 
   private toggleSelection(product: string) {
