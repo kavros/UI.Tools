@@ -153,7 +153,7 @@
         <button class="right-aligned-button" mat-button matStepperNext>
           Επόμενο
         </button>
-        <button class="right-aligned-button" mat-button matStepperPrevious>
+        <button class="right-aligned-button" mat-button (click)="clearSelections()" matStepperPrevious>
           Πίσω
         </button>
       </div>
@@ -167,7 +167,7 @@
       <button class="right-aligned-button" mat-button matStepperPrevious>
         Πίσω
       </button>
-      <button class="right-aligned-button" mat-button (click)="stepper.reset()">
+      <button class="right-aligned-button" mat-button (click)="stepper.reset(); clearSelections()">
         Επαναφορά
       </button>
     </div>
