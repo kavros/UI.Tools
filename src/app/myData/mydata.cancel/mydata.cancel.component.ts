@@ -13,7 +13,7 @@ export class MydataCancelComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   myControl = new FormControl("");
   options: string[] = [];
-  successfulCancelation = false;
+  successfulCancelation = null;
   constructor(private mydataService: MydataService) {}
 
   ngOnInit(): void {
