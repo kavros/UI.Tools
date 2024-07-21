@@ -13,7 +13,7 @@ import {
 import { PdfService } from "../orders/pdfService";
 
 @Component({
-  selector: "app-mydata",
+  selector: "app-mydata-send",
   templateUrl: "./mydata.send.component.html",
   styleUrls: ["./mydata.send.component.css"],
 })

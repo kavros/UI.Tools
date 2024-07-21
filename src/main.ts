@@ -30,6 +30,7 @@ import { LabelsDialogComponent } from "./app/labels/labels-dialog/labels-dialog.
 import { OrdersComponent } from "./app/orders/orders.component";
 import { MydataSendComponent } from "./app/myData/mydata.send.component";
 import { QRCodeModule } from "angularx-qrcode";
+import { MydataCancelComponent } from "./app/myData/mydata.cancel/mydata.cancel.component";
 
 @NgModule({
   imports: [
@@ -63,6 +64,7 @@ import { QRCodeModule } from "angularx-qrcode";
     LabelsComponent,
     OrdersComponent,
     MydataSendComponent,
+    MydataCancelComponent,
   ],
   bootstrap: [SideNavComponent],
   providers: [

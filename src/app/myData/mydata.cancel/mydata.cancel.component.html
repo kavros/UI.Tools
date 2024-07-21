@@ -1,0 +1,70 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step>
+    <form>
+      <ng-template matStepLabel>Επιλογή Τιμολόγιου</ng-template>
+      <div class="d-flex justify-content-center">
+        <mat-form-field class="supplier-dropdown">
+          <mat-label>Τιμολόγιο</mat-label>
+          <input
+            type="text"
+            matInput
+            [formControl]="myControl"
+            [matAutocomplete]="auto"
+            required
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let option of filteredOptions | async"
+              [value]="option"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <br /><br />
+      </div>
+      <div class="d-flex justify-content-end">
+        <button (click)="cancelInvoice()" mat-button matStepperNext>
+          Επόμενο
+        </button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <form>
+      <ng-template matStepLabel>Ακύρωση MyData</ng-template>
+      <div
+        *ngIf="successfulCancelation"
+        class="d-flex justify-content-center pt-5"
+      >
+        Επιτυχής Ακύρωση Τιμολογίου
+      </div>
+      <div class="d-flex justify-content-end">
+        <button
+          class="float-right"
+          (click)="ngOnInit()"
+          mat-button
+          matStepperPrevious
+        >
+          Πίσω
+        </button>
+        <button class="float-right" mat-button matStepperNext>Επόμενο</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Τέλος</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button class="right-aligned-button" mat-button matStepperPrevious>
+        Πίσω
+      </button>
+      <button class="right-aligned-button" mat-button (click)="stepper.reset()">
+        Επαναφορά
+      </button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

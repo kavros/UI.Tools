@@ -86,6 +86,9 @@
     <app-mappings *ngIf="isMappingVisible">loading</app-mappings>
     <app-labels *ngIf="isLabelsPageVisible"> loading </app-labels>
     <orders-stepper *ngIf="isOrdersPageVisible"> loading</orders-stepper>
-    <app-mydata *ngIf="isMydataImportPageVisible"></app-mydata>
+    <app-mydata-send *ngIf="isMydataImportPageVisible">loading</app-mydata-send>
+    <app-mydata-cancel *ngIf="isMyDataCancelPageVisible"
+      >loading</app-mydata-cancel
+    >
   </mat-sidenav-content>
 </mat-sidenav-container>

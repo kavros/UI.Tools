@@ -1,7 +1,7 @@
 import { environment } from "src/environments/environment";
 
 const URI = environment.URI;
-const ORDERS_URI =  environment.ORDERS_URI;
+const ORDERS_URI = environment.ORDERS_URI;
 
 export const APIs = {
   getMappings: URI + "/getMappings",
@@ -19,8 +19,10 @@ export const APIs = {
 };
 
 export const KefalaioAPI = {
-    getSuppliers: ORDERS_URI + "/Orders/GetSuppliers",
-    getOrder:  ORDERS_URI + "/Orders/GetOrder",
-    sendInvoice : ORDERS_URI + "/MyData/SendInvoice",
-    getAllInvoices : ORDERS_URI + "/MyData/GetAllInvoices"
+  getSuppliers: ORDERS_URI + "/Orders/GetSuppliers",
+  getOrder: ORDERS_URI + "/Orders/GetOrder",
+  sendInvoice: ORDERS_URI + "/MyData/SendInvoice",
+  getAllInvoices: ORDERS_URI + "/MyData/GetAllInvoices",
+  cancelInvoice: ORDERS_URI + "/Mydata/CancelInvoice",
+  getMyDataInvoices: ORDERS_URI + "/Mydata/GetMyDataInvoices",
 };
