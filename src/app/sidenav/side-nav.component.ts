@@ -11,6 +11,7 @@ export class SideNavComponent {
   isMappingVisible: boolean = false;
   isLabelsPageVisible: boolean = false;
   isOrdersPageVisible: boolean = false;
+  isMydataImportPageVisible: boolean = false;
 
   showMainPage() {
     this.isMainPageVisible = true;
@@ -18,6 +19,7 @@ export class SideNavComponent {
     this.isMappingVisible = false;
     this.isLabelsPageVisible = false;
     this.isOrdersPageVisible = false;
+    this.isMydataImportPageVisible = false;
   }
 
   showSettings() {
@@ -26,6 +28,7 @@ export class SideNavComponent {
     this.isMappingVisible = false;
     this.isLabelsPageVisible = false;
     this.isOrdersPageVisible = false;
+    this.isMydataImportPageVisible = false;
   }
 
   showMappings() {
@@ -34,6 +37,7 @@ export class SideNavComponent {
     this.isLabelsPageVisible = false;
     this.isMappingVisible = true;
     this.isOrdersPageVisible = false;
+    this.isMydataImportPageVisible = false;
   }
 
   showLabelsPage() {
@@ -42,6 +46,7 @@ export class SideNavComponent {
     this.isMappingVisible = false;
     this.isLabelsPageVisible = true;
     this.isOrdersPageVisible = false;
+    this.isMydataImportPageVisible = false;
   }
 
   showCreateOrderPage() {
@@ -49,6 +54,16 @@ export class SideNavComponent {
     this.isSettingsVisible = false;
     this.isMappingVisible = false;
     this.isLabelsPageVisible = false;
+    this.isMydataImportPageVisible = false;
     this.isOrdersPageVisible = true;
+  }
+
+  showMydataImportPage() {
+    this.isMainPageVisible = false;
+    this.isSettingsVisible = false;
+    this.isMappingVisible = false;
+    this.isLabelsPageVisible = false;
+    this.isOrdersPageVisible = false;
+    this.isMydataImportPageVisible = true;
   }
 }

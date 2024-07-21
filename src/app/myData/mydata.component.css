@@ -1,0 +1,17 @@
+
+.right-aligned-button {
+    float: right;
+  }
+  
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  table {
+    width: 100%;
+  }
+  .bussinessDetails{
+    width: 80%;
+  }

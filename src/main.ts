@@ -25,6 +25,8 @@ import { MappingsComponent } from './app/mappings/mappings.component';
 import { LabelsComponent } from './app/labels/labels.component';
 import { LabelsDialogComponent } from './app/labels/labels-dialog/labels-dialog.component';
 import { OrdersComponent } from './app/orders/orders.component';
+import { MydataComponent } from './app/myData/mydata.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   imports: [
@@ -38,7 +40,8 @@ import { OrdersComponent } from './app/orders/orders.component';
     SatPopoverModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    QRCodeModule
   ],
   entryComponents: [
     StepperComponent,
@@ -59,6 +62,7 @@ import { OrdersComponent } from './app/orders/orders.component';
     MappingsComponent,
     LabelsComponent,
     OrdersComponent,
+    MydataComponent
   ],
   bootstrap: [
     SideNavComponent

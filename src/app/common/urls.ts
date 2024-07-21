@@ -18,7 +18,9 @@ export const APIs = {
   updatePrices: URI + "/updatePrices",
 };
 
-export const OrdersAPIs = {
+export const KefalaioAPI = {
     getSuppliers: ORDERS_URI + "/Orders/GetSuppliers",
-    getOrder:  ORDERS_URI + "/Orders/GetOrder"
+    getOrder:  ORDERS_URI + "/Orders/GetOrder",
+    sendInvoice : ORDERS_URI + "/MyData/SendInvoice",
+    getAllInvoices : ORDERS_URI + "/MyData/GetAllInvoices"
 };

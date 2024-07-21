@@ -52,6 +52,25 @@
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div style="font-weight: bold">
+            <div style="font-size: medium">MyData Import</div>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-list>
+        <mat-list-item class="clickable" (click)="showMydataImportPage()">
+          <mat-icon matListIcon style="align-items: left"
+            >send</mat-icon
+          >
+          <div style="font-size: small"> Αποστολή</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
   </mat-sidenav>
   <mat-sidenav-content>
     <app-stepper-component *ngIf="isMainPageVisible"
@@ -63,5 +82,7 @@
     <app-mappings *ngIf="isMappingVisible">loading</app-mappings>
     <app-labels *ngIf="isLabelsPageVisible"> loading </app-labels>
     <orders-stepper *ngIf="isOrdersPageVisible"> loading</orders-stepper>
+    <app-mydata *ngIf="isMydataImportPageVisible"></app-mydata>
   </mat-sidenav-content>
+
 </mat-sidenav-container>

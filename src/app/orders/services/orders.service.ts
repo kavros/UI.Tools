@@ -3,7 +3,7 @@ import { Observable, throwError } from "rxjs";
 import { Item, Supplier } from "../orders.component";
 import { HttpClient } from "@angular/common/http";
 import { SnackBarService } from "src/app/common/snackBar/snackBar.service";
-import { OrdersAPIs } from "src/app/common/urls";
+import { KefalaioAPI } from "src/app/common/urls";
 import { catchError } from "rxjs/operators";
 
 @Injectable({
@@ -15,12 +15,12 @@ export class OrdersService {
         
     public getSuppliers(): Observable<Supplier[]>{
         return this.httpClient
-                .get<Supplier[]>(OrdersAPIs.getSuppliers);   
+                .get<Supplier[]>(KefalaioAPI.getSuppliers);   
     }
 
     public getOrder(settings: any): Observable<Item[]>{
         return this.httpClient
-                    .post<Item[]>(OrdersAPIs.getOrder, settings)
+                    .post<Item[]>(KefalaioAPI.getOrder, settings)
                     .pipe(
                         catchError(() => {
                             this.snackBar.showError('Αποτυχία φόρτωσης παραγγελίας.', 'Ok');

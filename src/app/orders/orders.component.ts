@@ -102,13 +102,15 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
-    this.ordersService.getSuppliers().subscribe((x: Supplier[]) => {
-      this.options = x.map((y) => y.name + " (" + y.code + ")");
-      this.filteredOptions = this.myControl.valueChanges.pipe(
-        startWith(""),
-        map((value) => this._filter(value || ""))
-      );
-    });
+    this.ordersService.getSuppliers()
+                      .subscribe((x: Supplier[]) => 
+                      {
+                        this.options = x.map((y) => y.name + " (" + y.code + ")");
+                        this.filteredOptions = this.myControl.valueChanges.pipe(
+                          startWith(""),
+                          map((value) => this._filter(value || ""))
+                        );
+                      });
 
     this.firstFormGroup = this._formBuilder.group({
       nextOrderAfter: ["", Validators.required],
