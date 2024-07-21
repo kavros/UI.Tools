@@ -25,6 +25,14 @@ export class SnackBarService {
           });
     }
 
+    public showWarningMsg(msg: string): void {
+        this.snackBar.open(msg, null, {
+            duration: 10000,
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            panelClass: ['isa_warning']
+          });
+    }
     public showAndRemain(msg: string, action: string): void {
         this.snackBar.open(msg, action, {
             duration: -1,

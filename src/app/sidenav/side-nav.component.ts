@@ -12,6 +12,7 @@ export class SideNavComponent {
   isLabelsPageVisible: boolean = false;
   isOrdersPageVisible: boolean = false;
   isMydataImportPageVisible: boolean = false;
+  isMyDataCancelPageVisible: boolean = false;
 
   showMainPage() {
     this.isMainPageVisible = true;
@@ -20,6 +21,7 @@ export class SideNavComponent {
     this.isLabelsPageVisible = false;
     this.isOrdersPageVisible = false;
     this.isMydataImportPageVisible = false;
+    this.isMyDataCancelPageVisible = false;
   }
 
   showSettings() {
@@ -29,6 +31,7 @@ export class SideNavComponent {
     this.isLabelsPageVisible = false;
     this.isOrdersPageVisible = false;
     this.isMydataImportPageVisible = false;
+    this.isMyDataCancelPageVisible = false;
   }
 
   showMappings() {
@@ -38,6 +41,7 @@ export class SideNavComponent {
     this.isMappingVisible = true;
     this.isOrdersPageVisible = false;
     this.isMydataImportPageVisible = false;
+    this.isMyDataCancelPageVisible = false;
   }
 
   showLabelsPage() {
@@ -47,6 +51,7 @@ export class SideNavComponent {
     this.isLabelsPageVisible = true;
     this.isOrdersPageVisible = false;
     this.isMydataImportPageVisible = false;
+    this.isMyDataCancelPageVisible = false;
   }
 
   showCreateOrderPage() {
@@ -56,6 +61,7 @@ export class SideNavComponent {
     this.isLabelsPageVisible = false;
     this.isMydataImportPageVisible = false;
     this.isOrdersPageVisible = true;
+    this.isMyDataCancelPageVisible = false;
   }
 
   showMydataImportPage() {
@@ -64,6 +70,16 @@ export class SideNavComponent {
     this.isMappingVisible = false;
     this.isLabelsPageVisible = false;
     this.isOrdersPageVisible = false;
+    this.isMyDataCancelPageVisible = false;
     this.isMydataImportPageVisible = true;
+  }
+  showMyDataCancelPage() {
+    this.isMainPageVisible = false;
+    this.isSettingsVisible = false;
+    this.isMappingVisible = false;
+    this.isLabelsPageVisible = false;
+    this.isOrdersPageVisible = false;
+    this.isMydataImportPageVisible = false;
+    this.isMyDataCancelPageVisible = true;
   }
 }

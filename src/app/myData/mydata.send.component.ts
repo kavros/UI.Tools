@@ -14,10 +14,10 @@ import { PdfService } from "../orders/pdfService";
 
 @Component({
   selector: "app-mydata",
-  templateUrl: "./mydata.component.html",
-  styleUrls: ["./mydata.component.css"],
+  templateUrl: "./mydata.send.component.html",
+  styleUrls: ["./mydata.send.component.css"],
 })
-export class MydataComponent implements OnInit {
+export class MydataSendComponent implements OnInit {
   options: string[] = [];
   filteredOptions: Observable<string[]>;
   firstFormGroup: FormGroup;

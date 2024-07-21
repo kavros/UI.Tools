@@ -57,17 +57,21 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <div style="font-weight: bold">
-            <div style="font-size: medium">MyData Import</div>
+            <div style="font-size: medium">MyData</div>
           </div>
         </mat-panel-title>
       </mat-expansion-panel-header>
 
       <mat-list>
         <mat-list-item class="clickable" (click)="showMydataImportPage()">
+          <mat-icon matListIcon style="align-items: left">send</mat-icon>
+          <div style="font-size: small">Αποστολή</div>
+        </mat-list-item>
+        <mat-list-item class="clickable" (click)="showMyDataCancelPage()">
           <mat-icon matListIcon style="align-items: left"
-            >send</mat-icon
+            >cancel_schedule_send</mat-icon
           >
-          <div style="font-size: small"> Αποστολή</div>
+          <div style="font-size: small">Ακύρωση</div>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
@@ -84,5 +88,4 @@
     <orders-stepper *ngIf="isOrdersPageVisible"> loading</orders-stepper>
     <app-mydata *ngIf="isMydataImportPageVisible"></app-mydata>
   </mat-sidenav-content>
-
 </mat-sidenav-container>
