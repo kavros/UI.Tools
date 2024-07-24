@@ -20,7 +20,7 @@ export class MyDataDetails {
   public qrUrl: string;
   public invoiceMark?: number;
   public paymentMethod: string;
-  public createdDate: Date;
+  public createdDate: string;
 }
 export class SendInvoiceResponse {
   public customerDetails: CustomerDetails;

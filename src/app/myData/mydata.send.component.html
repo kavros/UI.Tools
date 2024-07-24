@@ -87,7 +87,7 @@
                 <ng-container
                   *ngIf="column === 'createdDate'; else otherColumns"
                 >
-                  {{ element.createdDate | date : "dd/MM/yyyy" }}
+                  {{ element.createdDate }}
                 </ng-container>
                 <ng-template #otherColumns>
                   {{ element[column] }}

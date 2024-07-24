@@ -44,7 +44,7 @@ export class MydataSendComponent implements OnInit {
     "vatAmount",
     "amount",
   ];
-  myDataGridHeaders: string[] = ["Ημερομηνία", "ΜΑΡΚ", "Τρόπος Πληρωμής"];
+  myDataGridHeaders: string[] = ["ΜΑΡΚ", "Ημερομηνία", "Τρόπος Πληρωμής"];
   customerDetailsGridColumns: string[] = ["vatNumber", "name", "address"];
   mydataGridColumns: string[] = ["invoiceMark", "createdDate", "paymentMethod"];
   mydataGrid = new MatTableDataSource();
