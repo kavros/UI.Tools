@@ -91,7 +91,7 @@ export class PdfService {
     ];
     var sum = data.invoiceRows.reduce((acc, val) => acc + val.amount || 0, 0);
     const docDefinition = {
-      pageOrientation: "landscape",
+      pageOrientation: "portrait",
       content: [
         { qr: data.myDataDetails.qrUrl, fit: 100, margin: [0, 0, 0, 10] },
         {
@@ -115,7 +115,7 @@ export class PdfService {
           },
         },
         ,
-        { text: "", margin: [0, 0, 0, 10] },
+        { text: "", margin: [0, 0, 0, 80] },
         {
           table: {
             headerRows: 1,
