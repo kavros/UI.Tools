@@ -9,13 +9,14 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   providedIn: "root",
 })
 export class PdfService {
-  generatePdf(data: any[], headers: string[], title: string) {
+  generatePdf(data: any[], headers: string[], fileName: string) {
     const tableBody = data.map((x) => {
       return [x.product, x.suggestedQuantity] as string[];
     });
+
     const docDefinition = {
       content: [
-        { text: title, style: "header" },
+        { text: "", style: "heaer" },
         {
           table: {
             headerRows: 1,
@@ -32,7 +33,7 @@ export class PdfService {
       },
     };
 
-    pdfMake.createPdf(docDefinition).download(`${title}.pdf`);
+    pdfMake.createPdf(docDefinition).download(`${fileName}.pdf`);
   }
 
   generateInvoice(data: SendInvoiceResponse) {

@@ -61,8 +61,7 @@
       <button (click)="exportPdf()" class="right-aligned-button">
         Eξαγωγή (pdf)
       </button>
-      <button (click)="showRow()" class="right-aligned-button">
-        Αναίρεση</button>
+      <button (click)="showRow()" class="right-aligned-button">Αναίρεση</button>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container
           [matColumnDef]="col.key"
@@ -86,20 +85,33 @@
           <td mat-cell *matCellDef="let element">
             <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
               <div class="btn-edit" *ngSwitchCase="'isEdit'">
-                <button mat-button (click)="roundQuantity(element.product)">
-                  <mat-icon>arrow_upward</mat-icon>
-                </button>
-                <button mat-button (click)="element.isEdit = !element.isEdit">
-                  <mat-icon>edit</mat-icon>
+                <button
+                  mat-icon-button
+                  (click)="increaseQuantity(element.product)"
+                >
+                  <mat-icon style="font-size: medium">exposure_plus_1</mat-icon>
                 </button>
                 <button
-                  mat-button
+                  mat-icon-button
+                  (click)="decreaseQuantity(element.product)"
+                >
+                  <mat-icon style="font-size: medium"
+                    >exposure_minus_1</mat-icon
+                  >
+                </button>
+                <button
+                  mat-icon-button
+                  (click)="element.isEdit = !element.isEdit"
+                >
+                  <mat-icon style="font-size: medium">edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
                   class="button-remove"
                   (click)="hideRow(element.product)"
                 >
-                  <mat-icon>delete</mat-icon>
+                  <mat-icon style="font-size: medium">delete</mat-icon>
                 </button>
-
               </div>
               <div *ngSwitchCase="'select'">
                 <mat-checkbox
@@ -142,7 +154,11 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row [class.hidden]="row.isHidden" *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr
+          mat-row
+          [class.hidden]="row.isHidden"
+          *matRowDef="let row; columns: displayedColumns"
+        ></tr>
       </table>
       <mat-paginator
         [pageSizeOptions]="[12, 20]"
@@ -153,7 +169,12 @@
         <button class="right-aligned-button" mat-button matStepperNext>
           Επόμενο
         </button>
-        <button class="right-aligned-button" mat-button (click)="clearSelections()" matStepperPrevious>
+        <button
+          class="right-aligned-button"
+          mat-button
+          (click)="reset()"
+          matStepperPrevious
+        >
           Πίσω
         </button>
       </div>
@@ -167,7 +188,11 @@
       <button class="right-aligned-button" mat-button matStepperPrevious>
         Πίσω
       </button>
-      <button class="right-aligned-button" mat-button (click)="stepper.reset(); clearSelections()">
+      <button
+        class="right-aligned-button"
+        mat-button
+        (click)="stepper.reset(); clearSelections()"
+      >
         Επαναφορά
       </button>
     </div>

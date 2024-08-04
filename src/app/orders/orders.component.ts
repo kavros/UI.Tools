@@ -12,7 +12,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { SelectionModel } from "@angular/cdk/collections";
 import { MatPaginator } from "@angular/material/paginator";
 import { PdfService } from "./pdfService";
-import { Stack } from "../common/stack"; 
+import { Stack } from "../common/stack";
 
 export class OrderParam {
   nextOrderAfter: number;
@@ -29,7 +29,7 @@ export class Item {
   stock?: number;
   avgSalesPerDay?: number;
   suggestedQuantity?: number;
-  isHidden?: boolean; 
+  isHidden?: boolean;
 }
 
 const COLUMNS_SCHEMA = [
@@ -128,13 +128,13 @@ export class OrdersComponent implements OnInit {
     };
     this.ordersService.getOrder(param).subscribe((res) => {
       this.dataSource.data = res;
-      this.dataSource.data.forEach(x => x.isHidden = false);
-      
+      this.dataSource.data.forEach((x) => (x.isHidden = false));
     });
   }
 
-  clearSelections(){
+  reset() {
     this.selection.clear();
+    this.paginator.pageIndex = 0;
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -148,22 +148,29 @@ export class OrdersComponent implements OnInit {
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.data.forEach((row) => {
-          if(!row.isHidden) 
-          { 
-            this.selection.select(row)
+          if (!row.isHidden) {
+            this.selection.select(row);
           }
         });
   }
 
   exportPdf() {
-    const title = 'Order';
-    this.pdfService.generatePdf(this.selection.selected, ["Προϊόν", "Ποσότητα αγοράς"], title);
+    let dateTime = new Date();
+
+    const fileName = "Order-" + dateTime.toString();
+    this.pdfService.generatePdf(
+      this.selection.selected,
+      ["Προϊόν", "Ποσότητα αγοράς"],
+      fileName
+    );
   }
 
   showRow() {
-    if(this.stack.size()){
+    if (this.stack.size()) {
       const latestDeletedItem = this.stack.pop();
-      const item = this.dataSource.data.find( x => x.product === latestDeletedItem.product);
+      const item = this.dataSource.data.find(
+        (x) => x.product === latestDeletedItem.product
+      );
       item.isHidden = false;
       this.paginator._changePageSize(this.paginator.pageSize);
     }
@@ -171,7 +178,7 @@ export class OrdersComponent implements OnInit {
 
   hideRow(product: string) {
     //hide item
-    var item = this.dataSource.data.find(u => u.product === product);
+    var item = this.dataSource.data.find((u) => u.product === product);
     item.isHidden = true;
 
     //add item to the stack so we can undo later
@@ -181,13 +188,18 @@ export class OrdersComponent implements OnInit {
     this.toggleSelection(product);
   }
 
-  roundQuantity(product: string) {
-    var item = this.dataSource.data.find(u => u.product === product);
-    item.suggestedQuantity =item.suggestedQuantity + (5 - (item.suggestedQuantity % 5));;
+  increaseQuantity(product: string) {
+    var item = this.dataSource.data.find((u) => u.product === product);
+    item.suggestedQuantity++;
   }
-
+  decreaseQuantity(product: string) {
+    var item = this.dataSource.data.find((u) => u.product === product);
+    item.suggestedQuantity--;
+  }
   private toggleSelection(product: string) {
-    var selectedItem = this.selection.selected.find(x => x.product === product);
+    var selectedItem = this.selection.selected.find(
+      (x) => x.product === product
+    );
     if (selectedItem) {
       this.selection.toggle(selectedItem);
     }
