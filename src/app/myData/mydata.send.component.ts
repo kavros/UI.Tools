@@ -73,7 +73,7 @@ export class MydataSendComponent implements OnInit {
   }
 
   exportToPdf(): void {
-    this._pdfService.generateInvoice(this.invoiceData);
+    this._pdfService.generateInvoice(this.invoiceData, this.myControl.value);
   }
 
   sendInvoice() {

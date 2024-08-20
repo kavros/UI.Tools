@@ -36,7 +36,7 @@ export class PdfService {
     pdfMake.createPdf(docDefinition).download(`${fileName}.pdf`);
   }
 
-  generateInvoice(data: SendInvoiceResponse) {
+  generateInvoice(data: SendInvoiceResponse, invoiceId: string) {
     const productsHeaders: string[] = [
       "Κωδ.",
       "Περιγραφή",
@@ -63,7 +63,7 @@ export class PdfService {
         x.amount,
       ] as string[];
     });
-    console.log(...productsGrid);
+
     var businessDetailsHeaders = [
       "Επωνυμία",
       "Α.Φ.Μ.",
@@ -78,11 +78,19 @@ export class PdfService {
       "ΧΑΝΙΩΝ",
       "ΣΕΛΙΝΟΥ 122 - ΧΑΝΙΑ, T.K: 73131",
     ];
-    var myDataGridHeaders: string[] = ["Ημερομηνία", "ΜΑΡΚ", "Τρόπος Πληρωμής"];
+    var myDataGridHeaders: string[] = [
+      "Ημερομηνία",
+      "ΜΑΡΚ",
+      "Τρόπος Πληρωμής",
+      "Κωδικός τιμολογίου",
+      "Είδος παραστατικού",
+    ];
     var myDataGridContent = [
       data.myDataDetails.createdDate,
       data.myDataDetails.invoiceMark,
       data.myDataDetails.paymentMethod,
+      invoiceId,
+      "Τιμολόγιο - Δελτίο Αποστολής",
     ];
     var customerDetailsHeaders = ["Α.Φ.Μ", "Επωνυμία", "Διεύθυνση"];
     var customerDetailsGrid = [

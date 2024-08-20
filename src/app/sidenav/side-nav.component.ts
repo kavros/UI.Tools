@@ -6,13 +6,13 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["side-nav.component.css"],
 })
 export class SideNavComponent {
-  isMainPageVisible: boolean = false;
+  isMainPageVisible: boolean = true;
   isSettingsVisible: boolean = false;
   isMappingVisible: boolean = false;
   isLabelsPageVisible: boolean = false;
   isOrdersPageVisible: boolean = false;
   isMydataImportPageVisible: boolean = false;
-  isMyDataCancelPageVisible: boolean = true;
+  isMyDataCancelPageVisible: boolean = false;
 
   showMainPage() {
     this.isMainPageVisible = true;
